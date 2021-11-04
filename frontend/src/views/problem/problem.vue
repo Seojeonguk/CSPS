@@ -7,7 +7,9 @@
 <script>
 import LeftPage from "./leftpage.vue";
 import RightPage from "./rightpage.vue";
-
+import { onBeforeMount } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "problem",
   components: {
