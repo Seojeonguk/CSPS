@@ -8,6 +8,10 @@ export function setCategories(state, categories) {
   state.categories = categories;
 }
 
+export function setAllProblemNum(state, problemNum) {
+  state.problemNum = problemNum;
+}
+
 export function setSelctedProblems(state, selectedProblems) {
   state.selectedProblems = selectedProblems;
 }

@@ -1,12 +1,42 @@
 <template lang="">
-  <div>
-    <div>{{ name }}</div>
-    <q-btn flat @click="selectProblem">시작하기</q-btn>
+  <div class="problem-right-wrap">
+    <div>
+      <h2 data-aos="fade-left">
+        <b>
+          {{ name }}
+        </b>
+      </h2>
+    </div>
+    <div>
+      <h4 data-aos="fade-right">
+        <b>
+          전체 문제 개수:
+          <vue3-autocounter
+            ref="counter"
+            :startAmount="0"
+            :endAmount="size"
+            :duration="0.3"
+            :autoinit="true"
+          />
+        </b>
+      </h4>
+      <h4 data-aos="fade-left">
+        <b>{{ description }}</b>
+      </h4>
+    </div>
+    <q-badge color="secondary">풀 문제 갯수: {{ standard }}</q-badge>
+    <q-slider v-model="standard" :min="0" :max="size" markers label />
+    <q-btn
+      @click="selectProblem"
+      q-btn
+      color="deep-orange"
+      glossy
+      label="시작하기"
+    ></q-btn>
   </div>
 </template>
 <script>
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import Vue3autocounter from "vue3-autocounter";
 
 export default {
   name: "problem-description",
@@ -14,18 +44,33 @@ export default {
     id: String,
     description: String,
     name: String,
+    size: Number,
   },
-  setup(props) {
-    const store = useStore();
-    const router = useRouter();
+  data() {
+    return {
+      standard: 0,
+    };
+  },
+  components: {
+    "vue3-autocounter": Vue3autocounter,
+  },
 
-    const selectProblem = () => {
-      store
-        .dispatch("root/requestProblemList", props.id)
+  setup() {},
+
+  methods: {
+    selectProblem() {
+      console.log(this.standard);
+      console.log(this.id);
+      const payload = {
+        id: this.id,
+        page: this.standard,
+      };
+      this.$store
+        .dispatch("root/requestProblemList", payload)
         .then((response) => {
-          store.commit("root/setProblemResultsInit");
-          store.commit("root/setSelctedProblems", response.data);
-          router.push({
+          this.$store.commit("root/setProblemResultsInit");
+          this.$store.commit("root/setSelctedProblems", response.data);
+          this.$router.push({
             name: "problem-solve",
             query: { num: 0, id: response.data[0].id },
           });
@@ -33,11 +78,12 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    };
-    return {
-      selectProblem,
-    };
+    },
   },
 };
 </script>
-<style lang=""></style>
+<style scoped>
+body {
+  justify-content: center;
+}
+</style>

@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h4>
-      <b>{{ state.problems[$route.query.num].description }}</b>
+  <div class="problem-right-wrap">
+    <h4 data-aos="fade-up">
+      <b>
+        {{ parseInt($route.query.num) + 1 }}.
+        {{ state.problems[$route.query.num].description }}
+      </b>
     </h4>
+
     <q-btn
-      unelevated
-      flat
       id="menuBtn1"
       icon="mic_outline"
       class="speech-to-text"
@@ -14,14 +16,29 @@
       @click="startSpeechToTxt"
     ></q-btn>
 
-    <p>{{ lastTranscription }}</p>
-    <!-- <img class="profile-img" src="@/assets/malang.png" /> -->
+    <br />
+    <b>
+      <vue3-autocounter
+        ref="counter"
+        :startAmount="0"
+        :endAmount="300"
+        :duration="300"
+        separator=","
+        decimalSeparator="."
+        :decimals="2"
+        :autoinit="false"
+      />
+    </b>
+
+    <p>
+      <b>{{ lastTranscription }}</b>
+    </p>
 
     <q-btn
       unelevated
       flat
       @click="checkAnswer($route.query.id, $route.query.num, lastTranscription)"
-      ><b>제출하기</b></q-btn
+      ><b>Next</b></q-btn
     >
   </div>
 </template>
@@ -29,6 +46,8 @@
 <script>
 import { useStore } from "vuex";
 import { computed, reactive } from "vue";
+import Vue3autocounter from "vue3-autocounter";
+
 export default {
   name: "login-nav",
   data() {
@@ -39,6 +58,9 @@ export default {
       lang_: "ko-KR",
       img: "mic_outline",
     };
+  },
+  components: {
+    "vue3-autocounter": Vue3autocounter,
   },
   setup() {
     const store = useStore();
@@ -57,6 +79,7 @@ export default {
   methods: {
     startSpeechToTxt() {
       // initialisation of voicereco
+      this.$refs.counter.start();
       this.recordFlag = false;
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
@@ -77,6 +100,7 @@ export default {
         this.lastTranscription = this.runtimeTranscription_;
         this.runtimeTranscription_ = "";
         recognition.stop();
+        this.$refs.counter.pause();
       });
       recognition.start();
     },
@@ -109,9 +133,9 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .speech-to-text {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   z-index: 10;
 }
 .speech-to-text:hover {

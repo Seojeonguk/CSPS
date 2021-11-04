@@ -65,6 +65,7 @@ export default {
           console.log(error);
         });
     };
+
     const mvBoard = () => {
       removeColor();
       addColor("menuBtn3");
@@ -76,7 +77,7 @@ export default {
       router.push({ name: "mypage-profile" });
     };
     const mvLogout = () => {
-      let flag = confirm("로그아웃 될거에요");
+      let flag = confirm("로그아웃하시겠습니까?");
       if (flag) {
         router.push({ name: "logout-cover" });
         emit("logout");

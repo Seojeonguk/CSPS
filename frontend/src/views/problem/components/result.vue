@@ -1,5 +1,5 @@
 <template lang="">
-  <div style="overflow: auto; width: 100%">
+  <div style="overflow: auto; width: 100%; height: 100%">
     <teamplate
       v-for="(category, index) in state.problemResults"
       :key="index"
@@ -8,27 +8,33 @@
       <h4>
         <b>{{ index + 1 }}. {{ state.problems[index].description }}</b>
       </h4>
-      <div style="display: inline-block">
-        <h6 style="magin: 0px"><b>정답율</b></h6>
-        <apexchart
-          width="350"
-          :options="chartOptions"
-          type="donut"
-          :series="state.series[index]"
-        />
-      </div>
-      &nbsp;&nbsp;&nbsp;
-      <div style="display: inline-block">
-        <h6 style="color: red"><b>미언급 단어</b></h6>
-        <li v-for="item in category.wrong" v-bind:key="item">
-          {{ item }}
-        </li>
+      <div class="row">
+        <div class="col" style="margin-left: 155px">
+          <h6><b>정답율</b></h6>
+          <apexchart
+            width="340"
+            :options="chartOptions"
+            type="donut"
+            :series="state.series[index]"
+          />
+        </div>
+        <div class="col" style="margin: 85px">
+          <h5 style="color: blue"><b>언급 단어</b></h5>
+          <teamplate v-for="item in category.proper" v-bind:key="item">
+            <b>{{ item }}</b>
+            &nbsp;
+          </teamplate>
+          <h5 style="color: green"><b>미언급 단어</b></h5>
+          <teamplate v-for="item in category.wrong" v-bind:key="item">
+            <b>{{ item }}</b>
+            &nbsp;
+          </teamplate>
+        </div>
       </div>
     </teamplate>
     <br />
-    <q-btn unelevated flat @click="check()">체크</q-btn>
-
-    <q-btn unelevated flat @click="backToInfo()">뒤로가기</q-btn>
+    <!-- <q-btn unelevated flat @click="check()">체크</q-btn> -->
+    <q-btn unelevated flat @click="check()">뒤로가기</q-btn>
   </div>
 </template>
 <script>
@@ -85,9 +91,9 @@ export default {
   },
   methods: {
     check() {
-      console.log(this.state.series);
+      this.$router.push({ name: "problem-info" });
     },
   },
 };
 </script>
-<style lang=""></style>
+<style></style>
