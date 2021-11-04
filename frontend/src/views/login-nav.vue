@@ -74,7 +74,7 @@ export default {
     const mvMypage = () => {
       removeColor();
       addColor("menuBtn4");
-      router.push({ name: "mypage-profile" });
+      router.push({ name: "mypage-chart" });
     };
     const mvLogout = () => {
       let flag = confirm("로그아웃하시겠습니까?");

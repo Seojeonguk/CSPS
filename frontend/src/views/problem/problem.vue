@@ -5,11 +5,9 @@
   </div>
 </template>
 <script>
-import { onBeforeMount } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
 import LeftPage from "./leftpage.vue";
 import RightPage from "./rightpage.vue";
+
 export default {
   name: "problem",
   components: {

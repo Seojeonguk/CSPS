@@ -52,11 +52,13 @@
       ></find-pw-dialog>
       <email-check-dialog
         v-model="state.dialog.emailcheck"
-        :email="state.emailcheck"
+        :email="state.emailcheck.email"
+        :authNumber="state.emailcheck.authNumber"
         @openupdatepw="openUpdatePwDialog"
       ></email-check-dialog>
       <update-pw-dialog
         v-model="state.dialog.updatepw"
+        :email="state.emailcheck.email"
         @mvlogin="mvLogin"
       ></update-pw-dialog>
     </div>
@@ -106,7 +108,10 @@ export default {
         updatepw: false,
         emailcheck: false,
       },
-      emailcheck: "",
+      emailcheck: {
+        email: "",
+        authNumber: "",
+      },
     });
     /*ㅡㅡㅡㅡㅡ 검증 ㅡㅡㅡㅡㅡ*/
     const isValidEmail = (val) => {
@@ -139,6 +144,7 @@ export default {
             .then((response) => {
               console.log("requestUserLogin", response.data);
               getUserInfo(response.data.token);
+              saveProblemCategory();
             })
             .catch((error) => {
               alert(error.response.data.message);
@@ -179,9 +185,9 @@ export default {
       state.form.pass = null;
     };
     /*ㅡㅡㅡㅡㅡ 비밀번호 찾기 모달 제어 ㅡㅡㅡㅡㅡ*/
-    const openEmailCheckDialog = (email) => {
+    const openEmailCheckDialog = (data) => {
       state.dialog.findpw = false;
-      state.emailcheck = email;
+      state.emailcheck = data;
       state.dialog.emailcheck = true;
     };
     const openUpdatePwDialog = () => {
@@ -191,6 +197,17 @@ export default {
     const mvLogin = () => {
       state.dialog.updatepw = false;
       router.push({ name: "login" });
+    };
+
+    const saveProblemCategory = () => {
+      store
+        .dispatch("root/requsetCategoryList")
+        .then((response) => {
+          store.commit("root/setCategories", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     return {
