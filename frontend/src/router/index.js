@@ -124,6 +124,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: "/home/approve",
+        name: "approve",
+        component: () => import("../views/approve/approve.vue"),
+      },
     ],
   },
 ];
