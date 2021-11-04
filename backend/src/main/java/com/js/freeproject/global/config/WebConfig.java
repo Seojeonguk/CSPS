@@ -1,4 +1,4 @@
-package com.js.freeproject.global.jwt;
+package com.js.freeproject.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
