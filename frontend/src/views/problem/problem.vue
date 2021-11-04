@@ -24,6 +24,9 @@ export default {
         .dispatch("root/requsetCategoryList")
         .then((response) => {
           store.commit("root/setCategories", response.data);
+          store.dispatch("root/requestAllProblem").then((response) => {
+            store.commit("root/setAllProblemNum", response.data);
+          });
           router.push({ name: "problem-info" });
         })
         .catch((error) => {

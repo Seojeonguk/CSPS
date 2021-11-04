@@ -40,15 +40,30 @@ public class ProblemController {
         return ResponseEntity.status(HttpStatus.OK).body("저장이 완료되었습니다 문제 Id : "+ saveId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/{page}")
     @ApiOperation(value = "카테고리별로 문제 가지고 오기(현재 3개이하)")
-    public ResponseEntity categoryProblems(@PathVariable("id") Long id) {
+    public ResponseEntity categoryProblems(@PathVariable("id") Long id, @PathVariable("page") int page) {
         Category category = categoryService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("관련 카테고리가 없습니다."));
-        List<ProblemResponse> problems = problemService.findByCategory(category);
+        List<ProblemResponse> problems = problemService.findByCategory(category, page);
         if(problems.isEmpty()){
             throw new IllegalStateException("관련 카테고리에 존재하는 문제가 없습니다.");
         }
+        return ResponseEntity.status(HttpStatus.OK).body(problems);
+    }
+
+    @GetMapping("/all")
+    @ApiOperation(value = "전체 문제 개수 전달")
+    public ResponseEntity allProblems() {
+        return ResponseEntity.status(HttpStatus.OK).body(problemService.findProblems());
+    }
+
+    @GetMapping("category/{id}")
+    @ApiOperation(value = "해당 카테고리 문제 개수 가져오기")
+    public ResponseEntity categoryProblemNum(@PathVariable("id") Long id) {
+        Category category = categoryService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("관련 카테고리가 없습니다."));
+        long problems = problemService.findByCategorySize(category);
         return ResponseEntity.status(HttpStatus.OK).body(problems);
     }
 

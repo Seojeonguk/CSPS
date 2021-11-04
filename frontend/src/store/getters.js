@@ -15,9 +15,13 @@ export function getProblemResults(state) {
 }
 
 export function getProblemNum(state) {
-  return state.problem_num;
+  return state.problemNum;
 }
 
 export function getSeries(state) {
+  return state.series;
+}
+
+export function getProblem(state) {
   return state.series;
 }
