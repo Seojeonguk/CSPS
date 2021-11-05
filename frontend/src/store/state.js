@@ -6,4 +6,5 @@ export default {
   selectedProblems: [], //카테고리에서 선택된 문제들
   problemResults: [], //정답 결과
   series: [], //그래프 결과
+  problemNum: "",
 };

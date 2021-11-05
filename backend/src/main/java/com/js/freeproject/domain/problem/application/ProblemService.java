@@ -49,26 +49,32 @@ public class ProblemService {
         return newProblem.getId();
     }
 
-    public List<Problem> findProblems() {
-        return problemRepository.findAll();
+    public int findProblems() {
+        return problemRepository.findAll().size();
     }
 
     public Optional<Problem> findProblem(Long id) {
         return problemRepository.findById(id);
     }
 
-    public List<ProblemResponse> findByCategory(Category category) {
-        PageRequest pageRequest = PageRequest.of(0, 10);
+    public List<ProblemResponse> findByCategory(Category category, int page) {
+        PageRequest pageRequest = PageRequest.of(0, page);
         List<Problem> problems = problemRepository.findByCategory(category.getName(), pageRequest);
         Collections.shuffle(problems);
-        int size = problems.size();
-        return problems.subList(0, size<3? size:3).stream().map(ProblemResponse::new).collect(toList());
+        return problems.stream().map(ProblemResponse::new).collect(toList());
     }
 
-    public List<ProblemResponse> findByStatus(ProblemStatus problemStatus) {
+    public Long findByCategorySize(Category category) {
+        PageRequest pageRequest = PageRequest.of(0, 1000);
+        List<Problem> problems = problemRepository.findByCategory(category.getName(), pageRequest);
+        long size = problems.size();
+        return size;
+    }
+
+    public List<ProblemStatusResponse> findByStatus(ProblemStatus problemStatus) {
         List<Problem> problems = problemRepository.findByStatus(problemStatus);
-        List<ProblemResponse> problemResponses = problems.stream()
-                .map(ProblemResponse::new).collect(toList());
+        List<ProblemStatusResponse> problemResponses = problems.stream()
+                .map(ProblemStatusResponse::new).collect(toList());
         return problemResponses;
     }
 

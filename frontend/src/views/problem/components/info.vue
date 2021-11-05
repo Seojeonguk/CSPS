@@ -1,9 +1,38 @@
 <template lang="">
-  <div></div>
+  <div class="problem-right-wrap">
+    <h3 data-aos="fade-up"><b>왼쪽 카테고리에서 문제를 선택해주세요.</b></h3>
+    <h4>
+      <b>전체 카테고리 : {{ state.categories.length }}</b>
+    </h4>
+    <h4>
+      <b>CSPS의 총 문제 개수 : {{ state.problemNum }}</b>
+    </h4>
+  </div>
 </template>
 <script>
+import { useStore } from "vuex";
+import { computed, reactive } from "vue";
+
 export default {
-  name: "problem-info",
+  name: "login-nav",
+  data() {
+    return {};
+  },
+  setup() {
+    const store = useStore();
+    const state = reactive({
+      categories: computed(() => store.getters["root/getCategories"]),
+      problemNum: computed(() => store.getters["root/getProblemNum"]),
+    });
+    return {
+      state,
+    };
+  },
+  methods: {
+    check() {
+      console.log(this.state.problemNum);
+    },
+  },
 };
 </script>
 <style lang=""></style>
