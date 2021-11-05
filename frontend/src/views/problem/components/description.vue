@@ -59,8 +59,10 @@ export default {
 
   methods: {
     selectProblem() {
-      console.log(this.standard);
-      console.log(this.id);
+      if (this.standard == 0) {
+        alert("문제가 선택되지 않았습니다.");
+        return;
+      }
       const payload = {
         id: this.id,
         page: this.standard,

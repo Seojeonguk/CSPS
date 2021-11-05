@@ -3,7 +3,7 @@
     <div class="open-left-wrap">
       <div class="mypage-left">
         <div class="profile-wrap">
-          <img class="profile-img" src="../../assets/malang.png" />
+          <img class="profile-img" :src="state.user.image" />
           <span class="user-name text-h4 text-bold">{{ state.user.name }}</span>
         </div>
         <div class="mypage-menu text-h6">

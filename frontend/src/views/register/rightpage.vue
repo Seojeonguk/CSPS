@@ -195,7 +195,6 @@ export default {
     };
 
     const emailCheck = () => {
-      alert("hi");
       state.form.email_success = true;
     };
 
