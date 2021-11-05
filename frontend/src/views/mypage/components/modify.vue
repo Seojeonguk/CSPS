@@ -68,16 +68,13 @@
 </template>
 <script>
 import { ref, reactive } from "vue";
-<<<<<<< HEAD
-import { useStore } from "vuex";
 import { useQuasar } from "quasar";
-=======
->>>>>>> front-1105
 
 export default {
   name: "modify",
   setup() {
     const modify_form = ref(null);
+    const quasar = useQuasar();
     const state = reactive({
       user: JSON.parse(localStorage.getItem("userInfo")),
       imageurl: require("../../../assets/malang.png"),
