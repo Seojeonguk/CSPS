@@ -1,7 +1,7 @@
 <template>
   <div class="left-wrap">
     <div class="open-left-wrap">
-      <div class="board-nav" ref="scrollTargetRef">
+      <div class="board-nav">
         <div class="board-btn-info">
           <div @click="mvInfo">게시판소개</div>
         </div>
@@ -20,10 +20,10 @@
             </template>
           </q-input>
         </div>
-        <div class="board-title-list">
+        <div class="board-title-list" ref="scrollTargetRef">
           <q-infinite-scroll
             @load="load"
-            :offset="300"
+            :offset="100"
             :scroll-target="scrollTargetRef"
           >
             <question-list
@@ -93,8 +93,8 @@ export default {
         .then(
           (response) => {
             state.question_list = response.data;
-            question_list.value.push(...state.question_list.slice(0, 10));
-            state.question_size = 10;
+            // question_list.value.push(...state.question_list.slice(0, 10));
+            // state.question_size = 10;
           },
           (error) => {
             console.log(error.response.data);
