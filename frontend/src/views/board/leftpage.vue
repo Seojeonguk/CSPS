@@ -1,25 +1,33 @@
 <template>
   <div class="left-wrap">
-    <div class="column justify-evenly">
-      <div id="searchWrap" classs="col-4">
-        <input type="text" name="word" v-model="state.word" />
-      </div>
-      <div class="q-list column justify-evenly" style="height: 150px">
-        <div id="listItemMargin">
-          <list-item
-            v-for="(item, index) in state.questionList"
-            :key="index"
-            :item="item"
-          />
+    <div class="open-left-wrap">
+      <div class="board-nav">
+        <div class="board-btn-info">게시판소개</div>
+        <div class="board-search">게시판검색</div>
+        <div class="board-title-list">
+          <q-infinite-scroll @load="load" :offset="300">
+            <list-item
+              class="board-title-list-item"
+              v-for="(item, index) in question_list"
+              :key="index"
+              :item="item"
+            />
+            <template v-slot:loading>
+              <div class="row justify-center q-my-md">
+                <q-spinner-dots color="primary" size="40px" />
+              </div>
+            </template>
+          </q-infinite-scroll>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { useRouter } from "vue-router";
+import "@/styles/board.scss";
+import { ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
-import { reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import ListItem from "./components/ListItem.vue";
 
 export default {
@@ -28,46 +36,48 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const question_list = ref([]);
     const state = reactive({
       word: "",
-      // questionList: computed(() => store.getters["root/requestBoardList"]),
-      questionList: [],
+      question_list: [],
     });
-    const mvBoardInfo = () => {
+    const mvInfo = () => {
       router.push({ name: "board-info" });
     };
     const mvQuestion = () => {
       router.push({ name: "board-question" });
     };
 
-    // computed(() => {
-    // const filtered = () => {
-    //   var title = state.word.trim();
-    //   return this.BoardList.filter(function (item) {
-    //     if (item.title.indexOf(title) > -1) {
-    //       return true;
-    //     }
-    //   });
-    // };
-    // console.log(filtered());
-    // filtered() {
-    //       // var cname = word.trim();
-    //       var title = state.word.trim();
-    //       return this.BoardList.filter(function (item) {
-    //           if (item.title.indexOf(title) > -1) {
-    //               return true;
-    //           }
-    //       });
-    //   },
-    // }),
+    const load = (index, done) => {
+      setTimeout(() => {
+        var size = question_list.value.length;
+        var max_size = state.question_list.length;
+        if (size + 5 <= max_size) {
+          console.log("나 아직 작아 맥스보다", size, max_size);
+          question_list.value.push(
+            ...state.question_list.slice(size, size + 5)
+          );
+        } else {
+          console.log("난 존나큰데 ㅋㅋ");
+          for (var i = size; i < max_size; i++) {
+            question_list.value.push(state.question_list[i]);
+          }
+
+          done(true);
+        }
+
+        done();
+      }, 2000);
+    };
+
     onMounted(() => {
       store
         .dispatch("root/requestBoardList")
         .then(
           (response) => {
-            console.log("success");
-            state.questionList = response.data;
-            console.log(state.questionList);
+            state.question_list = response.data;
+            question_list.value.push(...state.question_list.slice(0, 5));
+            console.log(question_list.value);
           },
           (error) => {
             console.log(error.response.data);
@@ -108,103 +118,16 @@ export default {
     };
 
     return {
-      mvBoardInfo,
+      question_list,
+      state,
+
+      mvInfo,
       mvQuestion,
+      load,
       questionList,
       questionItems,
-      // filtered,
-      state,
     };
   },
 };
 </script>
-<style>
-#listItemMargin {
-  margin-top: 100px;
-}
-#mapWrap,
-#infoWrap {
-  position: absolute;
-  top: 80px;
-  bottom: 0;
-}
-#mapWrap {
-  position: absolute;
-  left: 30%;
-  right: 0;
-  overflow: hidden;
-}
-#infoWrap {
-  left: 0;
-  right: 70%;
-}
-#infoSide {
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-}
-#infoList {
-  overflow: auto;
-  height: 90%;
-  overflow-x: hidden;
-}
-#searchWrap {
-  width: 60%;
-  margin: 20px auto 40px;
-}
-#searchWrap > input {
-  border: none;
-  outline: none;
-  border-bottom: 1px solid black;
-  width: 100%;
-  /* background-image: url(../assets/search.png); */
-  background-position: 0px 2px;
-  background-repeat: no-repeat;
-  background-size: 22px;
-  padding-left: 32px;
-  box-sizing: border-box;
-}
-#msg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 400px;
-  height: 440px;
-  border-radius: 8px;
-  display: none;
-  z-index: 100;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-#mark:hover > #msg {
-  /* color: tomato; */
-  display: block;
-}
-#mark:hover > #ques {
-  display: none;
-}
-#ques {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: block;
-  font-size: 1.6em;
-  font-weight: 900;
-  color: black;
-  border: 1px solid black;
-  background-color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  line-height: 60px;
-}
-#msg > h2 {
-  font-weight: 700;
-  color: black;
-  font-size: 1.4em;
-  margin-top: 32px;
-  text-align: center;
-}
-#legendTemplate1 {
-  position: absolute !important;
-  left: 50%;
-  transform: translateX(-50%);
-}
-</style>
+<style></style>

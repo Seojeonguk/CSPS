@@ -9,7 +9,7 @@ import LeftPage from "./leftpage.vue";
 import RightPage from "./rightpage.vue";
 
 export default {
-  name: "board",
+  name: "approve",
   components: {
     LeftPage,
     RightPage,

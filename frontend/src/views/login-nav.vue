@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!state.admin">
     <q-btn
       unelevated
       flat
@@ -29,17 +29,34 @@
     >
     <q-btn unelevated flat class="menu-btn" @click="mvLogout">로그아웃</q-btn>
   </div>
+  <div v-else>
+    <q-btn unelevated flat class="menu-btn menus click-menu">문제승인</q-btn>
+    <q-btn unelevated flat class="menu-btn" @click="mvLogout">로그아웃</q-btn>
+  </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { reactive, onBeforeMount } from "vue";
 
 export default {
   name: "login-nav",
   setup(props, { emit }) {
     const router = useRouter();
     const store = useStore();
+
+    const state = reactive({
+      user: null,
+      admin: false,
+    });
+
+    onBeforeMount(() => {
+      state.user = store.getters["root/getUser"];
+      if (state.user.email == "admin@naver.com") {
+        state.admin = true;
+      }
+    });
 
     const mvLoginInfo = () => {
       removeColor();
@@ -94,6 +111,8 @@ export default {
       btn.classList.add("click-menu");
     };
     return {
+      state,
+      onBeforeMount,
       mvLoginInfo,
       mvProblem,
       mvBoard,

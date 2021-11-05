@@ -10,7 +10,9 @@
           <div id="leftBtn1" class="myleft click-myleft" @click="mvChart">
             차트
           </div>
-          <div id="leftBtn2" class="myleft" @click="mvModify">프로필 수정</div>
+          <div id="leftBtn2" class="myleft" @click="mvModify">
+            프로필사진 수정
+          </div>
           <div id="leftBtn3" class="myleft" @click="mvBoard">나의 게시글</div>
           <div id="leftBtn4" class="myleft" @click="mvProb">문제 작성</div>
           <div id="leftBtn5" class="myleft" @click="mvAlarm">알림</div>

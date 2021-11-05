@@ -187,24 +187,23 @@ export default {
       var file = document.getElementById("chooseFile");
       state.imageurl = URL.createObjectURL(file.files[0]);
     };
+
+    const modifyImg = () => {
+      alert("프로필사진수정요청");
+    };
+
     return {
       modify_form,
       state,
-      onSubmit,
-      onReset,
       loadf,
+      modifyImg,
       nickNameCheck,
-      nickNameSuccess,
-      nickNameError,
+      onReset,
+      onSubmit,
     };
   },
   methods: {
     check() {
-      console.log(this.state.user.email);
-      console.log(this.state.user.name);
-      console.log(this.state.form.nickName);
-      console.log(this.state.form.pass);
-      console.log(this.state.user.image);
       console.log(document.getElementById("chooseFile").files[0]);
     },
     modify() {

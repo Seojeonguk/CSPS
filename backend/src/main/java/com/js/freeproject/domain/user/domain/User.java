@@ -61,7 +61,6 @@ public class User {
 
     public void updateUser(final User user, String imageUrl) {
         this.email = user.getEmail();
-        this.image = user.getImage();
         this.nickName = user.getNickName();
         this.name = user.getName();
         this.pass = user.getPass();
