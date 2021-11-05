@@ -68,12 +68,14 @@
 </template>
 <script>
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 import { useQuasar } from "quasar";
 
 export default {
   name: "modify",
   setup() {
     const modify_form = ref(null);
+    const store = useStore();
     const quasar = useQuasar();
     const state = reactive({
       user: JSON.parse(localStorage.getItem("userInfo")),
