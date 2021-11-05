@@ -5,7 +5,7 @@
         <div class="board-btn-info">게시판소개</div>
         <div class="board-search">게시판검색</div>
         <div class="board-title-list">
-          <q-infinite-scroll @load="load" :offset="250">
+          <q-infinite-scroll @load="load" :offset="300">
             <list-item
               class="board-title-list-item"
               v-for="(item, index) in question_list"
@@ -53,14 +53,19 @@ export default {
         var size = question_list.value.length;
         var max_size = state.question_list.length;
         if (size + 5 <= max_size) {
+          console.log("나 아직 작아 맥스보다", size, max_size);
           question_list.value.push(
             ...state.question_list.slice(size, size + 5)
           );
         } else {
+          console.log("난 존나큰데 ㅋㅋ");
           for (var i = size; i < max_size; i++) {
             question_list.value.push(state.question_list[i]);
           }
+
+          done(true);
         }
+
         done();
       }, 2000);
     };
