@@ -26,11 +26,10 @@
             <q-input
               filled
               class="nickinput"
-              v-model="state.form.nickname"
-              :rules="state.rules.nickname"
-              lazy-rules
+              v-model="state.form.nickName"
+              :rules="state.rules.nickName"
               label="닉네임 *"
-              :placeholder="state.user.nickname"
+              :placeholder="state.form.nickName"
             />
             <q-btn
               class="nickcheck"
@@ -62,14 +61,13 @@
       </div>
     </div>
     <div class="submit-wrap">
-      <q-btn color="primary" type="submit" label="수정하기" />
+      <q-btn color="primary" type="submit" @click="modify" label="수정하기" />
       <q-btn class="q-ml-sm" flat color="primary" type="reset" label="초기화" />
     </div>
   </div>
 </template>
 <script>
 import { ref, reactive } from "vue";
-// import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useQuasar } from "quasar";
 
@@ -79,13 +77,12 @@ export default {
     const modify_form = ref(null);
     const store = useStore();
     const quasar = useQuasar();
-    // const router = useRouter();
     const state = reactive({
       user: store.getters["root/getUser"],
-      imageurl: require("../../../assets/malang.png"),
+      imageurl: store.getters["root/getUser"].image,
       file: null,
       form: {
-        nickName: "",
+        nickName: store.getters["root/getUser"].nickname,
         nickName_check: false,
         pass: "",
         passcheck: "",
@@ -120,7 +117,7 @@ export default {
     };
     const isValidPassCheck = (val) => {
       if (state.form.pass != val) {
-        console.log(state.form.pass, val);
+        //console.log(state.form.pass, val);
         return false;
       } else {
         return true;
@@ -128,7 +125,6 @@ export default {
     };
 
     const nickNameCheck = () => {
-      console.log(state.form.nickName);
       store
         .dispatch("root/requestUserNickNameCheck", state.form.nickName)
         .then(
@@ -189,7 +185,6 @@ export default {
 
     const loadf = () => {
       var file = document.getElementById("chooseFile");
-      console.log(file.files[0]);
       state.imageurl = URL.createObjectURL(file.files[0]);
     };
     return {
@@ -202,6 +197,40 @@ export default {
       nickNameSuccess,
       nickNameError,
     };
+  },
+  methods: {
+    check() {
+      console.log(this.state.user.email);
+      console.log(this.state.user.name);
+      console.log(this.state.form.nickName);
+      console.log(this.state.form.pass);
+      console.log(this.state.user.image);
+      console.log(document.getElementById("chooseFile").files[0]);
+    },
+    modify() {
+      const formData = new FormData();
+      const tmp = document.getElementById("chooseFile").files[0];
+
+      formData.append("email", this.state.user.email);
+      formData.append("name", this.state.user.name);
+      formData.append("nickName", this.state.form.nickName);
+      formData.append("pass", this.state.form.pass);
+      if (tmp != null) {
+        formData.append("image", tmp);
+      }
+      this.$store
+        .dispatch("root/requestUserModify", formData)
+        .then((response) => {
+          console.log(response.data.message);
+          if (response.data.message === "Success") {
+            alert("변경이 완료되었습니다.");
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

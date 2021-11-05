@@ -36,35 +36,35 @@ public class User {
     private String nickName;
     private String name;
     private String pass;
-    
+
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'ROLE_USER'")
     private UserRole role;
-    
+
     private String image;
-    
+
     @OneToMany(mappedBy = "user")
     private List<ScoreHistory> scorehistorys;
 
-	@Builder
+    @Builder
     public User(String email, String nickName, String name, String pass, String image) {
-    	this.email = email;
-    	this.nickName = nickName;
-    	this.name = name;
-    	this.pass = pass;
-    	this.image = image;
+        this.email = email;
+        this.nickName = nickName;
+        this.name = name;
+        this.pass = pass;
+        this.image = image;
     }
-	
+
     public void setPass(String pass) {
-		this.pass = pass;
-	}
-    
-    public User updateUser(final User user) {
-    	this.email = user.getEmail();
-    	this.image = user.getImage();
-    	this.nickName = user.getNickName();
-    	this.name = user.getName();
-    	this.pass = user.getPass();
-    	return this;
+        this.pass = pass;
+    }
+
+    public void updateUser(final User user, String imageUrl) {
+        this.email = user.getEmail();
+        this.image = user.getImage();
+        this.nickName = user.getNickName();
+        this.name = user.getName();
+        this.pass = user.getPass();
+        this.image = imageUrl;
     }
 }

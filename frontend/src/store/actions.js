@@ -55,6 +55,14 @@ export async function requestUserFixPw({ state }, payload) {
   return await axios.post(url, body);
 }
 
+// 사용자 정보 변경하기
+export async function requestUserModify({ state }, payload) {
+  console.log("requestUserModify", state, payload);
+  const url = "/user/modify";
+  const body = payload;
+  return await axios.post(url, body);
+}
+
 // 유저정보 리스트 가져오기
 export async function requestUserList() {
   const url = "/user/all";
