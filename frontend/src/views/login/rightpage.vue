@@ -159,7 +159,6 @@ export default {
         .dispatch("root/requsetUserInfo", jwt_token)
         .then(
           (response) => {
-            console.log("getUserInfo", response.data);
             var userinfo = {
               id: response.data.id,
               name: response.data.name,
@@ -168,8 +167,7 @@ export default {
               image: response.data.image,
               token: jwt_token,
             };
-            store.commit("root/setUser", userinfo);
-            console.log(userinfo.email);
+            localStorage.setItem("userInfo", JSON.stringify(userinfo));
             if (userinfo.email == "admin@naver.com") {
               router.push({ name: "approve" });
             } else {

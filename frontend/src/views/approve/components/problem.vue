@@ -1,9 +1,22 @@
 <template>
-  <div>
-    {{ prob.description }}
-    {{ prob.user }}
-    <button @click="sendAccept">승인</button>
-    <button @click="sendRevoke">거절</button>
+  <div class="approve-wrap">
+    <div class="approve-problem">
+      <div class="top-wrap">
+        <span>{{ prob.description }}</span>
+        <span> {{ prob.user }}</span>
+      </div>
+      <div class="bottom-wrap">
+        <div class="ans-wrap">
+          <span v-for="(an, idx) in prob.answers" :key="idx">
+            {{ an }}
+          </span>
+        </div>
+        <div class="btn-wrap">
+          <button @click="sendAccept">승인</button>
+          <button @click="sendRevoke">거절</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class="makeProb-wrap">
     <div class="makeProb-title">문제만들기</div>
     <div class="">
-      <form class="makeProb-form" v-on:submit.prevent>
+      <form class="makeProb-form" v-on:submit.prevent autocomplete="off">
         <div>
           <label class="label" for="category">문제 카테고리</label>
           <select v-model="state.problem.categoryId" id="category">
@@ -87,6 +87,7 @@ export default {
     };
 
     const makeProblem = () => {
+      console.log(JSON.parse(localStorage.getItem("userInfo")).id);
       if (state.problem.categoryId == null) {
         alert("카테고리를 지정해주세요.");
       } else if (state.problem.description == null) {
@@ -100,8 +101,14 @@ export default {
             state.problem.description.length +
             "글자입니다"
         );
+      } else if (answers.value.length == 0) {
+        if (temp.value == "") {
+          alert("정답 입력은 필수입니다.");
+        } else {
+          alert("정답 추가 버튼을 눌러주세요");
+        }
       } else {
-        state.problem.userId = store.getters["root/getUser"].id;
+        state.problem.userId = JSON.parse(localStorage.getItem("userInfo")).id;
         for (var i = 0; i < answers.value.length; i++) {
           state.problem.answers.push(answers.value[i].ans);
         }
