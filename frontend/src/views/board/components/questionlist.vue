@@ -23,7 +23,6 @@ export default {
     question: { type: Object },
   },
   setup(props) {
-    console.log(props.question);
     const router = useRouter();
 
     const getBoardInfo = () => {

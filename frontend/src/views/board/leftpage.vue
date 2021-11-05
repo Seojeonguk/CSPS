@@ -32,7 +32,7 @@
               :key="index"
               :question="question"
             />
-            <template v-slot:loading>
+            <template v-if="state.search_title == ''" v-slot:loading>
               <div class="row justify-center q-my-md">
                 <q-spinner-dots color="primary" size="40px" />
               </div>
@@ -77,7 +77,10 @@ export default {
       () => state.search_title,
       (search) => {
         if (search == "") {
-          question_list.value = state.question_list;
+          question_list.value = state.question_list.slice(
+            0,
+            state.question_size
+          );
         } else {
           let list = state.question_list;
           question_list.value = list.filter((list) =>
@@ -93,8 +96,6 @@ export default {
         .then(
           (response) => {
             state.question_list = response.data;
-            // question_list.value.push(...state.question_list.slice(0, 10));
-            // state.question_size = 10;
           },
           (error) => {
             console.log(error.response.data);
@@ -109,7 +110,6 @@ export default {
       setTimeout(() => {
         var size = state.question_size;
         var max_size = state.question_list.length;
-        console.log(size, max_size, question_list.value);
         if (size + 10 <= max_size) {
           question_list.value.push(
             ...state.question_list.slice(size, size + 10)
@@ -119,6 +119,7 @@ export default {
           question_list.value.push(
             ...state.question_list.slice(size, max_size)
           );
+          state.question_size = max_size;
           done(true);
         }
         done();
