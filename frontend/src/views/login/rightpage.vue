@@ -169,7 +169,12 @@ export default {
               token: jwt_token,
             };
             store.commit("root/setUser", userinfo);
-            router.push({ name: "login-info" });
+            console.log(userinfo.email);
+            if (userinfo.email == "admin@naver.com") {
+              router.push({ name: "approve" });
+            } else {
+              router.push({ name: "login-info" });
+            }
           },
           (error) => {
             console.log(error);

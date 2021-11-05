@@ -2,7 +2,7 @@
   <div class="makeProb-wrap">
     <div class="makeProb-title">문제만들기</div>
     <div class="">
-      <form class="makeProb-form">
+      <form class="makeProb-form" v-on:submit.prevent>
         <div>
           <label class="label" for="category">문제 카테고리</label>
           <select v-model="state.problem.categoryId" id="category">
@@ -21,10 +21,27 @@
         </div>
         <div class="answer-wrap">
           <label class="label" for="answerinput">정답</label>
-          <div id="box">
-            <input id="answerinput" class="answer" />
+          <div>
+            <div>
+              <input id="answerinput" v-model="temp" />
+              <input
+                class="addBtn"
+                type="button"
+                value="추가"
+                @click="addInput"
+              />
+            </div>
+            <div
+              v-for="(answer, index) in answers"
+              :key="answer.id"
+              class="answer"
+            >
+              <div class="ans-wrap">
+                {{ answer.ans }}
+                <button @click="removeAns(index)">삭제</button>
+              </div>
+            </div>
           </div>
-          <input class="addBtn" type="button" value="추가" @click="addInput" />
         </div>
       </form>
       <button class="makeBtn" @click="makeProblem">생성하기</button>
@@ -34,13 +51,15 @@
 
 <script>
 import { useStore } from "vuex";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const temp = ref("");
+    const answers = ref([]);
     const state = reactive({
       categories: store.getters["root/getCategories"],
       problem: {
@@ -52,16 +71,22 @@ export default {
     });
 
     const addInput = () => {
-      console.log("Add");
-      const box = document.getElementById("box");
-      const newDiv = document.createElement("div");
-      newDiv.innerHTML = "<input  class='answer addinput'/>";
+      if (temp.value == "") {
+        alert("답을 입력해주세요");
+      } else {
+        answers.value.push({
+          id: Date.now(),
+          ans: temp.value,
+        });
+        temp.value = "";
+      }
+    };
 
-      box.appendChild(newDiv);
+    const removeAns = (index) => {
+      answers.value.splice(index, 1);
     };
 
     const makeProblem = () => {
-      console.log(state.problem.description);
       if (state.problem.categoryId == null) {
         alert("카테고리를 지정해주세요.");
       } else if (state.problem.description == null) {
@@ -76,18 +101,11 @@ export default {
             "글자입니다"
         );
       } else {
-        const answers = document.getElementsByClassName("answer");
-
         state.problem.userId = store.getters["root/getUser"].id;
-        for (var i = 0; i < answers.length; i++) {
-          // 빈 칸이 아닐때만 답 저장
-          if (answers[i].value != "") {
-            state.problem.answers.push(answers[i].value);
-          }
+        for (var i = 0; i < answers.value.length; i++) {
+          state.problem.answers.push(answers.value[i].ans);
         }
-        if (state.problem.answers.length == 0) {
-          alert("정답 입력은 필수입니다.");
-        }
+        console.log(state.problem.answers);
         store
           .dispatch("root/requsetProblemCreate", state.problem)
           .then((response) => {
@@ -96,6 +114,8 @@ export default {
             state.problem.categoryId = null;
             state.problem.description = null;
             state.problem.answers = [];
+            temp.value = "";
+            answers.value = [];
             document.getElementById("answerinput").value = "";
             router.push({ name: "mypage-prob" });
           })
@@ -106,10 +126,12 @@ export default {
     };
 
     return {
+      temp,
+      answers,
       state,
-      // saveIndex,
       makeProblem,
       addInput,
+      removeAns,
     };
   },
 };
