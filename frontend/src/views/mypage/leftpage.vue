@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-import { useStore } from "vuex";
 import { onBeforeMount, reactive } from "vue";
 import { useRouter } from "vue-router";
 import "../../styles/mypage.scss";
@@ -30,14 +29,13 @@ import "../../styles/mypage.scss";
 export default {
   name: "mypage-left",
   setup() {
-    const store = useStore();
     const router = useRouter();
 
     const state = reactive({
       user: null,
     });
     onBeforeMount(() => {
-      state.user = store.getters["root/getUser"];
+      state.user = JSON.parse(localStorage.getItem("userInfo"));
       console.log(state.user);
     });
 

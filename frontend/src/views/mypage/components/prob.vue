@@ -87,6 +87,7 @@ export default {
     };
 
     const makeProblem = () => {
+      console.log(JSON.parse(localStorage.getItem("userInfo")).id);
       if (state.problem.categoryId == null) {
         alert("카테고리를 지정해주세요.");
       } else if (state.problem.description == null) {
@@ -107,7 +108,7 @@ export default {
           alert("정답 추가 버튼을 눌러주세요");
         }
       } else {
-        state.problem.userId = store.getters["root/getUser"].id;
+        state.problem.userId = JSON.parse(localStorage.getItem("userInfo")).id;
         for (var i = 0; i < answers.value.length; i++) {
           state.problem.answers.push(answers.value[i].ans);
         }

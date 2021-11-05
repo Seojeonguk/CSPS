@@ -20,17 +20,13 @@
 </template>
 <script>
 import { ref, reactive } from "vue";
-// import { useRouter } from "vue-router";
-import { useStore } from "vuex";
 
 export default {
   name: "modify",
   setup() {
     const modify_form = ref(null);
-    const store = useStore();
-    // const router = useRouter();
     const state = reactive({
-      user: store.getters["root/getUser"],
+      user: JSON.parse(localStorage.getItem("userInfo")),
       imageurl: require("../../../assets/malang.png"),
       file: null,
     });
