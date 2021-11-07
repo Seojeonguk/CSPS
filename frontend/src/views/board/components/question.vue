@@ -1,12 +1,13 @@
 <template lang="">
   <div class="board-question">
     <div class="question-title">{{ title }}</div>
-    <!-- <div class="question-user">{{ user.name }} {{ user.nickName }}</div> -->
+    <div class="question-user">{{ user.name }} {{ user.nickName }}</div>
     <div class="question-createAt">{{ createdAt }}</div>
     <div class="question-description" id="viewer"></div>
   </div>
 </template>
 <script>
+import "@/styles/board.scss";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 

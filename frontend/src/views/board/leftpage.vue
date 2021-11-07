@@ -28,7 +28,7 @@
         <div class="board-title-list" ref="scrollTargetRef">
           <q-infinite-scroll
             @load="load"
-            :offset="100"
+            :offset="25"
             :scroll-target="scrollTargetRef"
           >
             <question-list
