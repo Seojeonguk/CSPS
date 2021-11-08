@@ -144,6 +144,7 @@ export default {
             .then((response) => {
               console.log("requestUserLogin", response.data);
               getUserInfo(response.data.token);
+              localStorage.setItem("token", response.data.token);
               saveProblemCategory();
             })
             .catch((error) => {
@@ -168,8 +169,9 @@ export default {
               image: response.data.image,
               token: jwt_token,
             };
+
             store.commit("root/setUser", userinfo);
-            console.log(userinfo.email);
+            console.log(userinfo);
             if (userinfo.email == "admin@naver.com") {
               router.push({ name: "approve" });
             } else {

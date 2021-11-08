@@ -16,6 +16,10 @@ export function setSelctedProblems(state, selectedProblems) {
   state.selectedProblems = selectedProblems;
 }
 
+export function setSelctedCategory(state, selectedCategory) {
+  state.selectedCategory = selectedCategory;
+}
+
 export function setProblemResults(state, problemResults) {
   state.problemResults.push(problemResults.data);
   const newData = [];

@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      standard: 0,
+      standard: 1,
     };
   },
   components: {
@@ -71,6 +71,7 @@ export default {
         .dispatch("root/requestProblemList", payload)
         .then((response) => {
           this.$store.commit("root/setProblemResultsInit");
+          this.$store.commit("root/setSelctedCategory", this.id);
           this.$store.commit("root/setSelctedProblems", response.data);
           this.$router.push({
             name: "problem-solve",

@@ -6,6 +6,10 @@ export function getCategories(state) {
   return state.categories;
 }
 
+export function getSelectedCategory(state) {
+  return state.selectedCategory;
+}
+
 export function getSelectedProblems(state) {
   return state.selectedProblems;
 }

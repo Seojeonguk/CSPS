@@ -128,6 +128,13 @@ export async function requestProblemEvaluate({ state }, payload) {
   return await axios.post(url, body);
 }
 
+// 문제결과 저장하기
+export async function requestSaveResult({ state }, payload) {
+  console.log("requestProblemEvaluate", state, payload);
+  const url = "/score";
+  return await axios.post(url, payload);
+}
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시판 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // 게시판 한개 가져오기
 export async function requsetBoardInfo({ state }, payload) {
