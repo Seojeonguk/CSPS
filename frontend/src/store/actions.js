@@ -139,7 +139,7 @@ export async function requestSaveResult({ state }, payload) {
 // 게시판 한개 가져오기
 export async function requsetBoardInfo({ state }, payload) {
   console.log("requsetBoardInfo", state, payload);
-  const url = `/board/${payload.id}`;
+  const url = `/board/${payload}`;
   return await axios.get(url);
 }
 

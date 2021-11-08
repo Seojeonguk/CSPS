@@ -19,29 +19,47 @@
   </div>
 </template>
 <script>
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
   name: "question-list",
   props: {
-    question: { type: Object },
+    question: Object,
   },
   setup(props) {
-    console.log(props.question);
     const router = useRouter();
+    const store = useStore();
 
     const mvQuestion = () => {
-      console.log(props.question.user);
-      router.push({
-        name: "board-question",
-        params: {
-          id: props.question.id,
-          title: props.question.title,
-          description: props.question.description,
-          createdAt: props.question.createdAt,
-          user: JSON.stringify(props.question.user),
-        },
-      });
+      console.log("mvQuestion", props.question.id);
+      store
+        .dispatch("root/requsetBoardInfo", props.question.id)
+        .then(
+          (response) => {
+            console.log(response.data);
+            router.push({
+              name: "board-question",
+              params: {
+                question: {
+                  id: response.data.id,
+                  title: response.data.title,
+                  description: response.data.description,
+                  createdAt: response.data.createdAt,
+                  user: response.data.user,
+                  answerComment: response.data.answerComment,
+                  coComment: response.data.coComment,
+                },
+              },
+            });
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
     };
     return {
       useRouter,
