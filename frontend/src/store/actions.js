@@ -159,3 +159,10 @@ export async function requestBoardWrite({ state }, payload) {
   // return await axios.post(url, body);
   return await axios.post(url);
 }
+
+// 사용자가 작성한 글 조회
+export async function requestUserBoardList({ state }, payload) {
+  console.log("requestUserBoardList", state, payload);
+  const url = `/board/user/${payload}`;
+  return await axios.get(url);
+}
