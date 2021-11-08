@@ -118,7 +118,7 @@ const routes = [
             component: () => import("../views/board/components/boardinfo.vue"),
           },
           {
-            path: "/home/board/question",
+            path: "/home/board/question/:id",
             name: "board-question",
             props: true,
             component: () => import("../views/board/components/question.vue"),

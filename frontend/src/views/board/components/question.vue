@@ -1,17 +1,25 @@
-<template lang="">
-  <div class="board-question">
-    <!-- <div class="question-title">{{ question.title }}</div>
-    <div class="question-createdAt">{{ question.createdAt }}</div>
-    <div class="question-user">
-      <div class="question-user-image">
-        <img :src="question.user.image" class="question-user-image-circle" />
+<template>
+  <div v-if="state.error != ''">{{ state.error }}</div>
+  <div v-else>
+    <div class="board-question" v-if="state.question != null">
+      <div class="question-title">{{ state.question.title }}</div>
+      <div class="question-createdAt">{{ state.question.createdAt }}</div>
+      <div class="question-user">
+        <div class="question-user-image">
+          <img
+            :src="state.question.user.image"
+            class="question-user-image-circle"
+          />
+        </div>
+        <div class="question-user-nickName">
+          {{ state.question.user.nickName }}
+        </div>
       </div>
-      <div class="question-user-nickName">
-        {{ question.user.nickName }}
+      <div class="question-description" id="viewer">
+        {{ state.question.description }}
       </div>
+      <!-- 코멘트 입력하기 -->
     </div>
-    <div class="question-description" id="viewer"></div> -->
-    <!-- 코멘트 입력하기 -->
   </div>
 </template>
 <script>
@@ -19,44 +27,42 @@ import "@/styles/board.scss";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 // import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 
-// import { reactive, onMounted, watch } from "vue";
 import { reactive } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+
 export default {
   name: "board-question",
-  props: {
-    question: {
-      id: Number,
-      title: String,
-      description: String,
-      user: Object,
-      createdAt: String,
-      answerComment: Array,
-      coComment: Array,
-    },
-  },
-  setup(props) {
-    console.log(props.question);
+  setup() {
+    const route = useRoute();
+    const store = useStore();
+
     const state = reactive({
-      viewer: null,
+      question: null,
+      error: "",
     });
-    // onMounted(() => {
-    //   state.viewer = new Viewer({
-    //     el: document.querySelector("#viewer"),
-    //     initialValue: props.question.description,
-    //   });
-    // });
 
-    // watch(
-    //   () => props.question.description,
-    //   () => {
-    //     state.viewer = new Viewer({
-    //       el: document.querySelector("#viewer"),
-    //       initialValue: props.question.description,
-    //     });
-    //   }
-    // );
+    const getQuestion = () => {
+      store
+        .dispatch("root/requsetBoardInfo", route.params.id)
+        .then(
+          (response) => {
+            state.question = response.data;
+          },
+          (error) => {
+            state.error = error.response.data.message;
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
-    return { state };
+    getQuestion();
+
+    return {
+      state,
+    };
   },
 };
 </script>

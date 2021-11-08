@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="question-list" @click="mvQuestion()">
+  <div class="question-list" @click="mvQuestion">
     <q-icon class="question-list-icon" name="auto_stories" />
     <div class="question-list-info">
       <div class="list-title">
@@ -19,7 +19,6 @@
   </div>
 </template>
 <script>
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
@@ -29,37 +28,9 @@ export default {
   },
   setup(props) {
     const router = useRouter();
-    const store = useStore();
 
     const mvQuestion = () => {
-      console.log("mvQuestion", props.question.id);
-      store
-        .dispatch("root/requsetBoardInfo", props.question.id)
-        .then(
-          (response) => {
-            console.log(response.data);
-            router.push({
-              name: "board-question",
-              params: {
-                question: {
-                  id: response.data.id,
-                  title: response.data.title,
-                  description: response.data.description,
-                  createdAt: response.data.createdAt,
-                  user: response.data.user,
-                  answerComment: response.data.answerComment,
-                  coComment: response.data.coComment,
-                },
-              },
-            });
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
-        .catch((error) => {
-          console.log(error);
-        });
+      router.push({ path: `/home/board/question/${props.question.id}` });
     };
     return {
       useRouter,
