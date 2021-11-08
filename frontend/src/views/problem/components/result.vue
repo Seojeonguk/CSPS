@@ -33,8 +33,8 @@
       </div>
     </teamplate>
     <br />
-    <!-- <q-btn unelevated flat @click="check()">체크</q-btn> -->
-    <q-btn unelevated flat @click="check()">뒤로가기</q-btn>
+    <q-btn unelevated flat @click="save()">저장하기</q-btn>
+    <q-btn unelevated flat @click="back()">뒤로가기</q-btn>
   </div>
 </template>
 <script>
@@ -75,6 +75,7 @@ export default {
       problemResults: computed(() => store.getters["root/getProblemResults"]),
       problems: computed(() => store.getters["root/getSelectedProblems"]),
       series: computed(() => store.getters["root/getSeries"]),
+      category: computed(() => store.getters["root/getSelectedCategory"]),
     });
 
     const backToInfo = () => {
@@ -90,8 +91,37 @@ export default {
     };
   },
   methods: {
-    check() {
+    back() {
+      //console.log(this.state.problemResults);
       this.$router.push({ name: "problem-info" });
+    },
+    save() {
+      let proper = 0;
+      for (let i = 0; i < this.state.problemResults.length; i++) {
+        if (
+          this.state.problemResults[i].proper >=
+          this.state.problemResults[i].wrong
+        ) {
+          proper++;
+        }
+      }
+      let scoreTmp = (proper * 100) / this.state.problemResults.length;
+      const payload = {
+        category_id: this.state.category,
+        score: scoreTmp,
+      };
+      console.log(payload);
+      this.$store
+        .dispatch("root/requestSaveResult", payload)
+        .then((response) => {
+          console.log(response);
+          if (response.data.message == "Success") {
+            alert("저장이 완료되었습니다.");
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     },
   },
 };

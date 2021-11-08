@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequiredArgsConstructor
@@ -75,13 +76,15 @@ public class ScoreHistoryController {
 		@ApiResponse(code=200,message="성공",response = UserResponse.class),
 		@ApiResponse(code=500,message="서버 오류",response = CommonResponse.class)
 	})
-	public ResponseEntity<?> saveScore(Authentication authentication, @RequestBody Map<String,String> map) {
-		CustomUserDetails accountDetailes = (CustomUserDetails) authentication.getDetails();
-		
-		User user = userService.findByUserEmail(accountDetailes.getUseremail());
-		
-		scoreHistoryService.saveScore(user,Long.valueOf(map.get("category_id")),Integer.valueOf(map.get("score")));
-		
+	public ResponseEntity<?> saveScore(Authentication authentication, @RequestBody Map<String,String> map) throws Exception {
+		try {
+			CustomUserDetails accountDetailes = (CustomUserDetails) authentication.getDetails();
+			User user = userService.findByUserEmail(accountDetailes.getUseremail());
+			scoreHistoryService.saveScore(user,Long.valueOf(map.get("category_id")),Integer.valueOf(map.get("score")));
+		}catch (Exception e){
+			throw new Exception("접근권한이 없습니다.");
+		}
+
 		return ResponseEntity.status(200).body(CommonResponse.of("Success"));
 	}
 }
