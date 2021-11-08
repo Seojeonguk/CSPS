@@ -47,13 +47,13 @@ export default {
     const store = useStore();
 
     const state = reactive({
+      user: null,
       admin: false,
     });
 
     onBeforeMount(() => {
-      if (
-        JSON.parse(localStorage.getItem("userInfo")).email == "admin@naver.com"
-      ) {
+      state.user = store.getters["root/getUser"];
+      if (state.user.email == "admin@naver.com") {
         state.admin = true;
       }
     });
@@ -99,7 +99,6 @@ export default {
         localStorage.removeItem("token");
         router.push({ name: "logout-cover" });
         emit("logout");
-        localStorage.removeItem("userInfo");
       }
     };
     const removeColor = () => {

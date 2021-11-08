@@ -99,8 +99,8 @@ export default {
       let proper = 0;
       for (let i = 0; i < this.state.problemResults.length; i++) {
         if (
-          this.state.problemResults[i].proper >=
-          this.state.problemResults[i].wrong
+          this.state.problemResults[i].proper.length >=
+          this.state.problemResults[i].wrong.length
         ) {
           proper++;
         }
