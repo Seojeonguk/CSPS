@@ -1,41 +1,59 @@
 <template lang="">
-  <div>
-    <div class="text-body1 text-weight-bolder title">{{ title }}</div>
-    <hr class="my-hr3" />
-    <div class="board-content">{{ description }}</div>
-    <!-- </q-splitter> -->
-    <!-- <div>
-      <div>
-        <div class="q-pa-md q-gutter-sm">
-          <q-banner rounded class="bg-grey-3">
-            <span class="text-body1 text-weight-bolder">{{ title }}</span>
-          </q-banner>
-        </div>
-        <div>
-          {{ description }}
-        </div>
-        <div>
-          {{ description }}
-        </div>
+  <div class="board-question">
+    <div class="question-title">{{ title }}</div>
+    <div class="question-createdAt">{{ createdAt }}</div>
+    <div class="question-user">
+      <div class="question-user-image">
+        <img :src="state.user.image" class="question-user-image-circle" />
       </div>
-    </div> -->
+      <div class="question-user-nickName">
+        {{ state.user.nickName }}
+      </div>
+    </div>
+    <div class="question-description" id="viewer"></div>
+    <!-- 코멘트 입력하기 -->
   </div>
 </template>
 <script>
+import "@/styles/board.scss";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
+
+import { reactive, onMounted, watch } from "vue";
+
 export default {
   name: "board-question",
   props: {
-    // item: { type: Object },
     id: Number,
     title: String,
     description: String,
     createdAt: String,
-    user: Object,
+    user: String,
   },
   setup(props) {
-    console.log("보드 뷰");
-    console.log(props.title);
-    return {};
+    console.log(props);
+    console.log(props.user);
+    const state = reactive({
+      user: JSON.parse(props.user),
+      viewer: null,
+    });
+    watch(
+      () => props.description,
+      () => {
+        state.viewer = new Viewer({
+          el: document.querySelector("#viewer"),
+          initialValue: props.description,
+        });
+      }
+    );
+    onMounted(() => {
+      state.viewer = new Viewer({
+        el: document.querySelector("#viewer"),
+        initialValue: props.description,
+      });
+    });
+
+    return { state };
   },
 };
 </script>
