@@ -1,7 +1,7 @@
 <template>
   <div class="right-wrap">
     <div class="open-right-wrap">
-      <router-view :key="route.fullPath"></router-view>
+      <router-view style="height: 100%" :key="route.fullPath"></router-view>
     </div>
   </div>
 </template>

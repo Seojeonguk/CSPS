@@ -206,7 +206,14 @@
     display: flex;
     justify-content: flex-end;
   }
-  .question-description {
+  .question-info {
+    overflow: auto;
     height: 75%;
+    .question-description {
+    }
+    .question-comment {
+      .question-comment-info {
+      }
+    }
   }
 }
