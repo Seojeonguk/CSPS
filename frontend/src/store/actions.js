@@ -136,6 +136,21 @@ export async function requestSaveResult({ state }, payload) {
   return await instance.post(url, payload);
 }
 
+// 나의 차트가져오기
+export async function requsetMyChart({ state }) {
+  console.log("requsetMyChart", state);
+  const instance = createInstance();
+  const url = "/score";
+  return await instance.get(url);
+}
+
+export async function requsetMyChartByCategory({ state }, payload) {
+  console.log("requsetMyChartByCategory", state);
+  const instance = createInstance();
+  const url = `/score/${payload}`;
+  return await instance.get(url);
+}
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시판 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // 게시판 한개 가져오기
 export async function requsetBoardInfo({ state }, payload) {
