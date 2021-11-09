@@ -10,7 +10,7 @@
       </h4>
       <div class="row">
         <div class="col" style="margin-left: 155px">
-          <h6><b>정답율</b></h6>
+          <h6 data-aos="fade-up"><b>정답율</b></h6>
           <apexchart
             width="340"
             :options="chartOptions"
@@ -19,7 +19,7 @@
           />
         </div>
         <div class="col" style="margin: 85px">
-          <h5 style="color: blue"><b>언급 단어</b></h5>
+          <h5 style="color: blue" data-aos="fade-up"><b>언급 단어</b></h5>
           <teamplate v-for="item in category.proper" v-bind:key="item">
             <b>{{ item }}</b>
             &nbsp;
