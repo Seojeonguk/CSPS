@@ -1,20 +1,18 @@
 package com.js.freeproject.domain.board.dto;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.board.domain.Board;
-import com.js.freeproject.domain.boardpicture.domain.BoardPicture;
 import com.js.freeproject.domain.comment.domain.Comment;
 import com.js.freeproject.domain.file.domain.BoardFile;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

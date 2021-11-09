@@ -1,10 +1,11 @@
 package com.js.freeproject.domain.board.dto;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.board.domain.Board;
-import lombok.Getter;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
 
 @Getter
 public class BoardUserResponse {
