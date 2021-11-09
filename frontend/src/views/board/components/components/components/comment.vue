@@ -29,13 +29,6 @@ export default {
       state.comment = props.comment;
     };
     setComment();
-    const setCreatedAt = () => {
-      state.comment.createdAt =
-        state.comment.createdAt.split("T")[0] +
-        " " +
-        state.comment.createdAt.split("T")[1];
-    };
-    setCreatedAt();
     return {
       state,
     };

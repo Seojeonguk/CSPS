@@ -6,8 +6,7 @@
         {{ question.title }}
       </div>
       <div class="list-createdAt">
-        {{ question.createdAt.split("T")[0] }}&nbsp;
-        {{ question.createdAt.split("T")[1] }}
+        {{ question.createdAt }}
       </div>
       <div class="list-userinfo">
         <div class="list-user-image">

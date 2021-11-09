@@ -15,6 +15,7 @@
           {{ state.question.user.nickName }}
         </div>
       </div>
+      <hr />
       <div class="question-info">
         <div class="question-description" id="viewer"></div>
         <!-- 코멘트 입력하기 -->
@@ -63,7 +64,6 @@ export default {
           (response) => {
             console.log(response.data);
             state.question = response.data;
-            splitDate();
           },
           (error) => {
             state.error = error.response.data.message;
@@ -74,11 +74,6 @@ export default {
         });
     };
     getQuestion();
-
-    const splitDate = () => {
-      let createdAt = state.question.createdAt.split("T");
-      state.question.createdAt = createdAt[0] + " " + createdAt[1];
-    };
 
     onUpdated(() => {
       state.viewer = new Viewer({

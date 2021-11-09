@@ -27,6 +27,7 @@
   </div>
 </template>
 <script>
+import "@/styles/question.scss";
 import AnswerComment from "./components/comment.vue";
 
 import { reactive } from "vue";
@@ -57,11 +58,6 @@ export default {
     };
     setComment();
 
-    const splitDate = () => {
-      let createdAt = state.answer.createdAt.split("T");
-      state.answer.createdAt = createdAt[0] + " " + createdAt[1];
-    };
-    splitDate();
     return {
       state,
     };
