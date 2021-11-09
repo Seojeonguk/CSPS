@@ -187,3 +187,54 @@
     margin: 1.5em 0;
   }
 }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ board.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.mypage-board-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-error {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
+.mypage-board-lists {
+  width: 95%;
+  height: 90%;
+  overflow: auto;
+}
+.mypage-board-list {
+  width: 100%;
+  display: flex;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.boardlist-1 {
+  width: 8%;
+  text-align: center;
+}
+
+.boardlist-2 {
+  width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 1.2em;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+}
+
+.boardlist-3 {
+  width: 22%;
+}

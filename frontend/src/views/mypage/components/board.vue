@@ -1,11 +1,19 @@
 <template lang="">
-  <div>
-    <div v-if="state.error != ''">{{ state.error }}</div>
-    <div v-else>
-      <div v-for="(board, idx) in state.boards" :key="board.id">
-        <span>{{ idx + 1 }}</span>
-        <span>{{ board.title }}</span>
-        <span>{{ board.createDate }}</span>
+  <div class="mypage-board-wrap">
+    <div v-if="state.error != ''" class="board-error">
+      <div>{{ state.error }}</div>
+    </div>
+    <div v-else class="mypage-board-lists">
+      <div
+        v-for="(board, idx) in state.boards"
+        :key="board.id"
+        class="mypage-board-list"
+      >
+        <span class="boardlist-1">{{ idx + 1 }}</span>
+        <span class="boardlist-2" @click="mvdetail(board.id)">
+          {{ board.title }}</span
+        >
+        <span class="boardlist-3">{{ board.createDate }}</span>
       </div>
     </div>
   </div>
@@ -13,10 +21,13 @@
 <script>
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const store = useStore();
+    const router = useRouter();
+
     const state = reactive({
       user: JSON.parse(localStorage.getItem("userInfo")),
       error: "",
@@ -40,9 +51,15 @@ export default {
 
     getUserBoard();
 
+    const mvdetail = (id) => {
+      const url = "/home/board/question/" + id;
+      router.push({ path: url });
+    };
+
     return {
       state,
       getUserBoard,
+      mvdetail,
     };
   },
 };
