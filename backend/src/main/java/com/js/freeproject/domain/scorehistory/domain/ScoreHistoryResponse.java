@@ -11,10 +11,10 @@ public class ScoreHistoryResponse {
 
 	private Integer score;
 	private String createDate;
-	static SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+	static SimpleDateFormat date = new SimpleDateFormat("MM/dd");
 
 	public ScoreHistoryResponse(ScoreHistory scoreHistory) {
 		this.score = scoreHistory.getScore();
-		this.createDate = date.format(scoreHistory.getCreatedate());
+		this.createDate = date.format(scoreHistory.getCreatedate())+"\n"+scoreHistory.getCategory().getName();
 	}
 }
