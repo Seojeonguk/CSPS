@@ -23,8 +23,9 @@ public class ScoreHistoryService {
 		return scoreHistories.stream().map(ScoreHistoryResponse::new).collect(Collectors.toList());
 	}
 	
-	public List<ScoreHistory> getScoreCategory(User user,Category category) {
-		return scoreHistoryRepo.findByCategoryAndUser(category, user);
+	public List<ScoreHistoryResponse> getScoreCategory(User user, Category category) {
+		List<ScoreHistory> scoreHistories = scoreHistoryRepo.findByCategoryAndUser(category, user);
+		return scoreHistories.stream().map(ScoreHistoryResponse::new).collect(Collectors.toList());
 	}
 	
 	public void saveScore(User user,Long cateogry_id, Integer score) {

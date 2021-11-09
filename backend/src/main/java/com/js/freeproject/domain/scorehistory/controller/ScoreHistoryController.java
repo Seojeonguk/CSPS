@@ -66,7 +66,7 @@ public class ScoreHistoryController {
 		Category category = new Category();
 		category.setId(category_id);
 		
-		List<ScoreHistory> scorehistorys = scoreHistoryService.getScoreCategory(user, category);
+		List<ScoreHistoryResponse> scorehistorys = scoreHistoryService.getScoreCategory(user, category);
 		
 		return ResponseEntity.status(200).body(scorehistorys);
 	}
