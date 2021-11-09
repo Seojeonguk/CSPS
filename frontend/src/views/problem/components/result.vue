@@ -105,12 +105,14 @@ export default {
           proper++;
         }
       }
-      let scoreTmp = (proper * 100) / this.state.problemResults.length;
+      let scoreTmp = parseInt(
+        (proper * 100) / this.state.problemResults.length
+      );
       const payload = {
         category_id: this.state.category,
         score: scoreTmp,
       };
-      console.log(payload);
+      // console.log(payload);
       this.$store
         .dispatch("root/requestSaveResult", payload)
         .then((response) => {
