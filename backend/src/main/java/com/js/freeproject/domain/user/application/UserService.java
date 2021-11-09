@@ -76,7 +76,8 @@ public class UserService {
         } else {
         	url = "https://freepjt.s3.ap-northeast-2.amazonaws.com/user/mainCharachter.png";
         }
-        user.updateUser(userRequest.toEntity(), url);
+        //user.updateUser(userRequest.toEntity(), url);
+        user.updateUser(url);
         return user;
     }
 
@@ -102,9 +103,6 @@ public class UserService {
                 .to(email)
                 .content(mailUtil.getcontent("pass", key))
                 .build();
-
-        System.out.println("email value : " + email);
-        System.out.println("key value : " + key);
 
         mailUtil.SendMail(mail);
 
