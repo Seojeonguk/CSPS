@@ -37,7 +37,7 @@ public class UserService {
     @Transactional
     public User createUser(UserRequest user) throws IOException {
         User finduser = userRepo.findByEmail(user.getEmail());
-        String userImage = "https://freepjt.s3.ap-northeast-2.amazonaws.com/board/0f62c411-d802-4a90-bc26-511fa554cd2b.png";
+        String userImage = "https://freepjt.s3.ap-northeast-2.amazonaws.com/user/mainCharachter.png";
         if (finduser != null) {
             throw new DuplicateRequestException(user.getEmail());
         }
@@ -73,6 +73,8 @@ public class UserService {
         if (userRequest.getImage() != null) {
             url = s3Service.uploadImage(userRequest.getImage(), "user");
             log.info("아마존: url = " + url);
+        } else {
+        	url = "https://freepjt.s3.ap-northeast-2.amazonaws.com/user/mainCharachter.png";
         }
         user.updateUser(userRequest.toEntity(), url);
         return user;
