@@ -63,6 +63,8 @@ export default {
     "vue3-autocounter": Vue3autocounter,
   },
   setup() {
+    window.SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const store = useStore();
     const state = reactive({
       problems: computed(() => store.getters["root/getSelectedProblems"]),
