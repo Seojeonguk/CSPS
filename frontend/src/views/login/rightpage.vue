@@ -65,12 +65,13 @@
   </div>
 </template>
 <script>
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, watch, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import FindPwDialog from "./components/findpw.vue";
 import EmailCheckDialog from "./components/emailcheck.vue";
 import UpdatePwDialog from "./components/updatepw.vue";
+import { useQuasar } from "quasar";
 import "../../styles/register.scss";
 
 export default {
@@ -81,6 +82,14 @@ export default {
     UpdatePwDialog,
   },
   setup() {
+    const $q = useQuasar();
+    let timer;
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer);
+        $q.loading.hide();
+      }
+    });
     const login_form = ref(null); // 로그인폼저장
     const store = useStore();
     const router = useRouter();
@@ -134,6 +143,7 @@ export default {
     );
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const onSubmit = () => {
+      showLoading();
       login_form.value.validate().then((success) => {
         if (success) {
           store
@@ -142,12 +152,13 @@ export default {
               pass: state.form.pass,
             })
             .then((response) => {
-              console.log("requestUserLogin", response.data);
+              $q.loading.hide();
               getUserInfo(response.data.token);
               localStorage.setItem("token", response.data.token);
               saveProblemCategory();
             })
             .catch((error) => {
+              $q.loading.hide();
               alert(error.response.data.message);
             });
         } else {
@@ -217,6 +228,14 @@ export default {
         });
     };
 
+    const showLoading = () => {
+      $q.loading.show({
+        message: "로그인 중입니다",
+        boxClass: "bg-grey-2 text-grey-9",
+        spinnerColor: "primary",
+      });
+    };
+
     return {
       login_form,
       state,
@@ -227,6 +246,7 @@ export default {
       openEmailCheckDialog,
       openUpdatePwDialog,
       mvLogin,
+      showLoading,
     };
   },
 };
