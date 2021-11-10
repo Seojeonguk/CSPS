@@ -7,10 +7,12 @@
     <h4>
       <b>CSPS의 총 문제 개수 : {{ state.problemNum }}</b>
     </h4>
+    <div @click="makeprob" class="makeprob">문제만들기</div>
   </div>
 </template>
 <script>
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { computed, reactive } from "vue";
 
 export default {
@@ -20,12 +22,18 @@ export default {
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const state = reactive({
       categories: computed(() => store.getters["root/getCategories"]),
       problemNum: computed(() => store.getters["root/getProblemNum"]),
     });
+
+    const makeprob = () => {
+      router.push({ name: "problem-make" });
+    };
     return {
       state,
+      makeprob,
     };
   },
   methods: {

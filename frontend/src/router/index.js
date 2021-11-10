@@ -69,11 +69,6 @@ const routes = [
             name: "mypage-modify",
             component: () => import("../views/mypage/components/modify.vue"),
           },
-          {
-            path: "/home/mypage/prob",
-            name: "mypage-prob",
-            component: () => import("../views/mypage/components/prob.vue"),
-          },
         ],
       },
       {
@@ -104,6 +99,11 @@ const routes = [
             path: "/home/problem/result",
             name: "problem-result",
             component: () => import("../views/problem/components/result.vue"),
+          },
+          {
+            path: "/home/problem/make",
+            name: "problem-make",
+            component: () => import("../views/problem/components/make.vue"),
           },
         ],
       },

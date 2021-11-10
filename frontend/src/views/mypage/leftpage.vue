@@ -14,8 +14,7 @@
             프로필사진 수정
           </div>
           <div id="leftBtn3" class="myleft" @click="mvBoard">나의 게시글</div>
-          <div id="leftBtn4" class="myleft" @click="mvProb">문제 작성</div>
-          <div id="leftBtn5" class="myleft" @click="mvAlarm">알림</div>
+          <div id="leftBtn4" class="myleft" @click="mvAlarm">알림</div>
         </div>
       </div>
     </div>
@@ -54,15 +53,10 @@ export default {
       addBolder("leftBtn3");
       router.push({ name: "mypage-board" });
     };
-    const mvProb = () => {
-      removeBolder();
-      addBolder("leftBtn4");
-      router.push({ name: "mypage-prob" });
-    };
 
     const mvAlarm = () => {
       removeBolder();
-      addBolder("leftBtn5");
+      addBolder("leftBtn4");
       router.push({ name: "mypage-alarm" });
     };
 
@@ -82,7 +76,6 @@ export default {
       mvChart,
       mvModify,
       mvBoard,
-      mvProb,
       mvAlarm,
     };
   },

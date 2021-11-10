@@ -67,7 +67,7 @@
 
 .problem-right-wrap {
   width: 100%;
-  height: 90%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,61 +135,6 @@
 
 .subbtn {
   margin: 0 0.5em;
-}
-
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ prob.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-.makeProb-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-
-  .makeProb-title {
-    margin: 1em 0;
-    font-size: 2em;
-  }
-
-  .makeProb-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .makeProb-form > div {
-    margin: 0.5em 0;
-  }
-
-  .label {
-    margin: 2em;
-  }
-
-  .answer-wrap {
-    display: flex;
-
-    .addBtn {
-      margin-left: 1em;
-      height: 2em;
-    }
-
-    .label {
-      margin: 0 2em;
-    }
-
-    .answer {
-      text-align: left;
-      margin: 0.3em 0;
-    }
-
-    .ans-wrap {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-  .makeBtn {
-    margin: 1.5em 0;
-  }
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ board.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */

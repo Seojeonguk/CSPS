@@ -124,7 +124,7 @@ export default {
             temp.value = "";
             answers.value = [];
             document.getElementById("answerinput").value = "";
-            router.push({ name: "mypage-prob" });
+            router.push({ name: "problem-info" });
           })
           .catch((err) => {
             console.log(err);
