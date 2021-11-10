@@ -63,8 +63,6 @@ export default {
     "vue3-autocounter": Vue3autocounter,
   },
   setup() {
-    window.SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
     const store = useStore();
     const state = reactive({
       problems: computed(() => store.getters["root/getSelectedProblems"]),
@@ -83,6 +81,8 @@ export default {
       // initialisation of voicereco
       this.$refs.counter.start();
       this.recordFlag = false;
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
       recognition.interimResults = true;
