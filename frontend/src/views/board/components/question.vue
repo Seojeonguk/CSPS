@@ -19,6 +19,7 @@
       <div class="question-info">
         <div class="question-description" id="viewer"></div>
         <!-- 코멘트 입력하기 -->
+        <hr />
         <div class="question-comment">
           <question-answer
             class="question-comment-info"
