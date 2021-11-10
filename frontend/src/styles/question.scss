@@ -1,0 +1,112 @@
+.question-answer {
+  width: 100%;
+  margin-top: 1em;
+  .answer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .answer-user-image {
+      width: 5%;
+      overflow: hidden;
+      .answer-user-image-circle {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+      }
+    }
+    .answer-top {
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      .answer-user {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5em 0.5em 0.5em 1em;
+        position: relative;
+        background: #a2b29f;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        margin-left: 0.5em;
+      }
+      .answer-user:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 1em solid transparent;
+        border-right-color: #a2b29f;
+        border-left: 0;
+        margin-top: -1em;
+        margin-left: -0.5em;
+      }
+    }
+    .answer-bottom {
+      margin-top: -1em;
+      margin-left: 0.5em;
+      padding-top: 1em;
+      border: 1px solid #a2b29f;
+      border-radius: 0.5em;
+      .answer-content {
+        padding: 0.5em 0.5em 0.5em 1em;
+      }
+    }
+  }
+}
+
+.comment {
+  width: 100%;
+  margin-top: 1em;
+  padding-left: 4em;
+  display: flex;
+  flex-direction: row;
+  .comment-user-image {
+    width: 5%;
+    overflow: hidden;
+    .comment-user-image-circle {
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+    }
+  }
+  .comment-top {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    .comment-user {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0.5em 0.5em 0.5em 1em;
+      position: relative;
+      background: #a2b29f;
+      border-top-left-radius: 0.5em;
+      margin-left: 0.5em;
+    }
+    .comment-user:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 1em solid transparent;
+      border-right-color: #a2b29f;
+      border-left: 0;
+      margin-top: -1em;
+      margin-left: -0.5em;
+    }
+    .comment-bottom {
+      margin-top: -1em;
+      margin-left: 0.5em;
+      padding-top: 1em;
+      border: 1px solid #a2b29f;
+      border-radius: 0.5em;
+      .comment-content {
+        padding: 0.5em 0.5em 0.5em 1em;
+      }
+    }
+  }
+}
