@@ -10,6 +10,8 @@ import RightPage from "./rightpage.vue";
 import { onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import "../../styles/problem.scss";
+
 export default {
   name: "problem",
   components: {

@@ -155,7 +155,7 @@ export async function requsetMyChartByCategory({ state }, payload) {
 // 게시판 한개 가져오기
 export async function requsetBoardInfo({ state }, payload) {
   console.log("requsetBoardInfo", state, payload);
-  const url = `/board/${payload.id}`;
+  const url = `/board/${payload}`;
   return await axios.get(url);
 }
 
@@ -174,4 +174,11 @@ export async function requestBoardWrite({ state }, payload) {
   // };
   // return await axios.post(url, body);
   return await axios.post(url);
+}
+
+// 사용자가 작성한 글 조회
+export async function requestUserBoardList({ state }, payload) {
+  console.log("requestUserBoardList", state, payload);
+  const url = `/board/user/${payload}`;
+  return await axios.get(url);
 }

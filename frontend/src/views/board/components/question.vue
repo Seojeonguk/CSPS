@@ -1,74 +1,93 @@
-<template lang="">
-  <div class="board-question">
-    <div class="question-title">{{ title }}</div>
-    <div class="question-createdAt">{{ createdAt }}</div>
-    <div class="question-user">
-      <div class="question-user-image">
-        <img :src="state.user.image" class="question-user-image-circle" />
+<template>
+  <div v-if="state.error != ''">{{ state.error }}</div>
+  <div v-else>
+    <div class="board-question" v-if="state.question != null">
+      <div class="question-title">{{ state.question.title }}</div>
+      <div class="question-createdAt">{{ state.question.createdAt }}</div>
+      <div class="question-user">
+        <div class="question-user-image">
+          <img
+            :src="state.question.user.image"
+            class="question-user-image-circle"
+          />
+        </div>
+        <div class="question-user-nickName">
+          {{ state.question.user.nickName }}
+        </div>
       </div>
-      <div class="question-user-nickName">
-        {{ state.user.nickName }}
+      <hr />
+      <div class="question-info">
+        <div class="question-description" id="viewer"></div>
+        <!-- 코멘트 입력하기 -->
+        <hr />
+        <div class="question-comment">
+          <question-answer
+            class="question-comment-info"
+            v-for="(answer, index) in state.question.answerComment"
+            :key="index"
+            :answer="answer"
+            :comment="state.question.coComment"
+          ></question-answer>
+        </div>
       </div>
     </div>
-    <div class="question-description" id="viewer"></div>
-    <!-- 코멘트 입력하기 -->
   </div>
 </template>
 <script>
 import "@/styles/board.scss";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
+import QuestionAnswer from "./components/answer.vue";
 
-import { reactive, onMounted, watch } from "vue";
+import { reactive, onUpdated } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   name: "board-question",
-  props: {
-    id: Number,
-    title: String,
-    description: String,
-    createdAt: String,
-    user: String,
+  components: {
+    QuestionAnswer,
   },
-  setup(props) {
-    console.log(props);
-    console.log(props.user);
+  setup() {
+    const route = useRoute();
+    const store = useStore();
+
     const state = reactive({
-      user: JSON.parse(props.user),
+      error: "",
+      question: null,
       viewer: null,
     });
-    watch(
-      () => props.description,
-      () => {
-        state.viewer = new Viewer({
-          el: document.querySelector("#viewer"),
-          initialValue: props.description,
+
+    const getQuestion = () => {
+      store
+        .dispatch("root/requsetBoardInfo", route.params.id)
+        .then(
+          (response) => {
+            console.log(response.data);
+            state.question = response.data;
+          },
+          (error) => {
+            state.error = error.response.data.message;
+          }
+        )
+        .catch((error) => {
+          console.log(error);
         });
-      }
-    );
-    onMounted(() => {
+    };
+    getQuestion();
+
+    onUpdated(() => {
       state.viewer = new Viewer({
         el: document.querySelector("#viewer"),
-        initialValue: props.description,
+        initialValue: state.question.description,
+        height: document.querySelector(".question-info").clientHeight,
       });
     });
 
-    return { state };
+    return {
+      state,
+    };
   },
 };
 </script>
-<style>
-.my-hr3 {
-  border: 0;
-  height: 3px;
-  background: #ccc;
-}
-
-.title {
-  margin: 13px;
-}
-
-.board-content {
-  margin: 10px;
-}
-</style>
+<style></style>

@@ -69,11 +69,6 @@ const routes = [
             name: "mypage-modify",
             component: () => import("../views/mypage/components/modify.vue"),
           },
-          {
-            path: "/home/mypage/prob",
-            name: "mypage-prob",
-            component: () => import("../views/mypage/components/prob.vue"),
-          },
         ],
       },
       {
@@ -105,6 +100,11 @@ const routes = [
             name: "problem-result",
             component: () => import("../views/problem/components/result.vue"),
           },
+          {
+            path: "/home/problem/make",
+            name: "problem-make",
+            component: () => import("../views/problem/components/make.vue"),
+          },
         ],
       },
       {
@@ -118,7 +118,7 @@ const routes = [
             component: () => import("../views/board/components/boardinfo.vue"),
           },
           {
-            path: "/home/board/question",
+            path: "/home/board/question/:id",
             name: "board-question",
             props: true,
             component: () => import("../views/board/components/question.vue"),
