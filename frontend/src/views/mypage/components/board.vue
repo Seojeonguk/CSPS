@@ -13,7 +13,7 @@
         <span class="boardlist-2" @click="mvdetail(board.id)">
           {{ board.title }}</span
         >
-        <span class="boardlist-3">{{ board.createDate }}</span>
+        <span class="boardlist-3">{{ board.createdAt }}</span>
       </div>
     </div>
   </div>
