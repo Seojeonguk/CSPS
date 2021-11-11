@@ -17,12 +17,28 @@
           <div class="answer-content">
             {{ state.answer.content }}
           </div>
-          <div v-if="state.comment != null">
+          <div v-if="state.comment != null" class="row justify-center">
             <answer-comment
               v-for="(comment, index) in state.comment"
               :key="index"
               :comment="comment"
             ></answer-comment>
+            <div style="max-width: 400px" class="row justify-center">
+              <q-input
+                v-model="newAnswer"
+                label="대댓글달기"
+                @keyup.enter="
+                  onSubmit();
+                  $event.target.blur();
+                "
+              ></q-input>
+              <q-btn
+                color="primary"
+                type="submit"
+                :disable="state.login_btn_disable"
+                label="입력"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +58,31 @@ export default {
   props: {
     answer: Object,
     comment: Array,
+  },
+  data() {
+    return {
+      newAnswer: "",
+    };
+  },
+  methods: {
+    onSubmit() {
+      //console.log(this.state.answer);
+      const payload = {
+        content: this.newAnswer,
+        userId: localStorage.getItem("userId"),
+        parentId: this.state.answer.id,
+        boardId: this.$route.params.id,
+      };
+      this.$store
+        .dispatch("root/requestWriteComment", payload)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      this.$router.go();
+    },
   },
   setup(props) {
     const state = reactive({

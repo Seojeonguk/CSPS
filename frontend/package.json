@@ -24,7 +24,8 @@
     "vue-simple-alert": "^1.1.1",
     "vue3-apexcharts": "^1.4.1",
     "vue3-autocounter": "^1.0.6",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
