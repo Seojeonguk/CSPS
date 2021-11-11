@@ -23,7 +23,11 @@
           <label class="label" for="answerinput">정답</label>
           <div>
             <div>
-              <input id="answerinput" v-model="temp" />
+              <input
+                id="answerinput"
+                v-model="temp"
+                @keydown.enter.prevent="addInput"
+              />
               <input
                 class="addBtn"
                 type="button"
@@ -78,6 +82,7 @@ export default {
           id: Date.now(),
           ans: temp.value,
         });
+        console.log(answers.value);
         temp.value = "";
       }
     };
