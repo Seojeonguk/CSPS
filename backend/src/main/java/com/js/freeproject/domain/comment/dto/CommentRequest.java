@@ -9,10 +9,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class CommentRequest {
     private String content;
     private Long userId;
     private Long parentId;
-
+    private Long boardId;
 }
