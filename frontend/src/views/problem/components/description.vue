@@ -14,7 +14,7 @@
           <vue3-autocounter
             ref="counter"
             :startAmount="0"
-            :endAmount="size"
+            :endAmount="Number(size)"
             :duration="0.3"
             :autoinit="true"
           />
@@ -25,7 +25,7 @@
       </h4>
     </div>
     <q-badge color="secondary">풀 문제 갯수: {{ standard }}</q-badge>
-    <q-slider v-model="standard" :min="0" :max="size" markers label />
+    <q-slider v-model="standard" :min="0" :max="Number(size)" markers label />
     <q-btn
       @click="selectProblem"
       q-btn
