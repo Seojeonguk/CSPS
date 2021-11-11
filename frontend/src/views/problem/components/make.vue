@@ -87,7 +87,6 @@ export default {
     };
 
     const makeProblem = () => {
-      console.log(JSON.parse(localStorage.getItem("userInfo")).id);
       if (state.problem.categoryId == null) {
         alert("카테고리를 지정해주세요.");
       } else if (state.problem.description == null) {
@@ -112,7 +111,6 @@ export default {
         for (var i = 0; i < answers.value.length; i++) {
           state.problem.answers.push(answers.value[i].ans);
         }
-        console.log(state.problem.answers);
         store
           .dispatch("root/requsetProblemCreate", state.problem)
           .then((response) => {
@@ -124,6 +122,9 @@ export default {
             temp.value = "";
             answers.value = [];
             document.getElementById("answerinput").value = "";
+            store.dispatch("root/requestAllProblem").then((response) => {
+              store.commit("root/setAllProblemNum", response.data);
+            });
             router.push({ name: "problem-info" });
           })
           .catch((err) => {
