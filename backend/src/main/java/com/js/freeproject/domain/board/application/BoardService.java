@@ -34,13 +34,14 @@ public class BoardService {
     private final CommentService commentService;
 
     @Transactional
-    public Board saveQuestion(final BoardRequest boardRequest, final Long userId) throws IOException {
-        User searchUser = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
-        Board boardEntity = boardRequest.toEntity();
+    public Board saveQuestion(BoardRequest boardRequest) throws IOException {
+        System.out.println("보드리퀘스트"+boardRequest.getDescription());
+        User searchUser = userRepository.findById(boardRequest.getUserId()).orElseThrow(IllegalArgumentException::new);
+        //Board boardEntity = boardRequest.toEntity();
         Board question = Board.builder()
                 .user(searchUser)
-                .title(boardEntity.getTitle())
-                .description(boardEntity.getDescription())
+                .title(boardRequest.getTitle())
+                .description(boardRequest.getDescription())
                 .build();
         Board savedBoard = boardRepository.save(question);
 

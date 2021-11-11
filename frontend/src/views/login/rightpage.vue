@@ -67,9 +67,9 @@
       <q-btn label="Alert" color="primary" @click="state.alert = true" />
       <q-dialog v-model="alert">
         <q-card>
-          <q-card-section>
+          <!-- <q-card-section>
             <div class="text-h6">Alert</div>
-          </q-card-section>
+          </q-card-section> -->
 
           <q-card-section class="q-pt-none">
             비밀번호가 다릅니다.
@@ -214,6 +214,8 @@ export default {
 
             store.commit("root/setUser", userinfo);
             localStorage.setItem("userInfo", JSON.stringify(userinfo));
+            localStorage.setItem("userId", userinfo.id);
+
             if (userinfo.email == "admin@naver.com") {
               router.push({ name: "approve" });
             } else {

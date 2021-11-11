@@ -9,7 +9,6 @@
     ></q-input>
     <div class="board-write-editor" ref="ref_editor"></div>
     <div class="board-write-btn">
-      <div @click="previewBoard">미리보기</div>
       <div @click="writeBoard">작성</div>
     </div>
     <div id="viewer"></div>
@@ -57,14 +56,16 @@ export default {
     const writeBoard = () => {
       var editor_text = state.editor.getMarkdown();
       var user = JSON.parse(localStorage.getItem("userInfo"));
+      alert(user.id);
       store
         .dispatch("root/requestBoardWrite", {
-          id: user.id,
+          userId: user.id,
           title: state.title,
           description: editor_text,
         })
         .then((response) => {
           console.log(response);
+          alert(response);
           /* 내가 작성한 글로 보내기 */
           /* 마이페이지로 보내기 */
           /* 게시판 소개 페이지로 보내기 */

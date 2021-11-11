@@ -25,8 +25,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public CommentResponse saveComment(final CommentRequest commentRequest, final Long boardId){
-        Board searchBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+    public CommentResponse saveComment(final CommentRequest commentRequest){
+        Board searchBoard = boardRepository.findById(commentRequest.getBoardId()).orElseThrow(IllegalArgumentException::new);
         User searchUser = userRepository.findById(commentRequest.getUserId()).orElseThrow(IllegalArgumentException::new);
 
         Comment insertComment = Comment.builder()

@@ -3,14 +3,9 @@ package com.js.freeproject.domain.board.controller;
 import java.io.IOException;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.js.freeproject.domain.board.application.BoardService;
 import com.js.freeproject.domain.board.domain.Board;
@@ -32,15 +27,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RequestMapping("/board")
+@Slf4j
 public class BoardControlller {
 
     private final BoardService boardService;
     private final BoardFileService boardFileService;
 
     @ApiOperation(value = "게시판 글 작성")
-    @PostMapping("/{userId}")
-    public ResponseEntity<?> saveQuestion(final BoardRequest boardRequest, @PathVariable Long userId) throws IOException {
-        Board board = boardService.saveQuestion(boardRequest, userId);
+    @PostMapping
+    public ResponseEntity<?> saveQuestion(@RequestBody BoardRequest boardRequest) throws IOException {
+        log.info("보드 {}",boardRequest.getUserId());
+        Board board = boardService.saveQuestion(boardRequest);
         final BoardSaveResponse boardSaveResponse = new BoardSaveResponse(board);
         return ResponseEntity.ok().body(boardSaveResponse);
     }

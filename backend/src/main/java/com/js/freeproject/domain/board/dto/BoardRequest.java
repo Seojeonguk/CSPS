@@ -14,8 +14,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class BoardRequest {
+
+    @JsonProperty("userId")
+    private Long userId;
 
     @JsonProperty("title")
     private String title;

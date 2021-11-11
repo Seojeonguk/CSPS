@@ -28,6 +28,23 @@
             :answer="answer"
             :comment="state.question.coComment"
           ></question-answer>
+          <div style="max-width: 400px" class="row justify-center">
+            <q-input
+              v-model="answer"
+              label="댓글달기"
+              @keyup.enter="
+                onSubmit();
+                $event.target.blur();
+              "
+            ></q-input>
+            <q-btn
+              round
+              color="brown-5"
+              icon="directions"
+              :disable="state.login_btn_disable"
+              class="register-btns horizontal-r"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +56,7 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import QuestionAnswer from "./components/answer.vue";
 
-import { reactive, onUpdated } from "vue";
+import { computed, reactive, onUpdated } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
@@ -47,6 +64,30 @@ export default {
   name: "board-question",
   components: {
     QuestionAnswer,
+  },
+  data() {
+    return {
+      answer: "",
+    };
+  },
+  methods: {
+    onSubmit() {
+      const payload = {
+        content: this.answer,
+        userId: localStorage.getItem("userId"),
+        parentId: 0,
+        boardId: this.$route.params.id,
+      };
+      this.$store
+        .dispatch("root/requestWriteComment", payload)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      this.$router.go();
+    },
   },
   setup() {
     const route = useRoute();
@@ -56,6 +97,7 @@ export default {
       error: "",
       question: null,
       viewer: null,
+      user: computed(() => store.getters["root/getUser"]),
     });
 
     const getQuestion = () => {

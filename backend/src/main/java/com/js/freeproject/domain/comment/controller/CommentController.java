@@ -19,9 +19,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @ApiOperation(value = "댓글 및 대댓글 작성 - 댓글 parentId = 0, 대댓글 parentId = commentId")
-    @PostMapping("/{boardId}")
-    public ResponseEntity<?> saveComment(@PathVariable final Long boardId, @RequestBody CommentRequest commentRequest){
-        return ResponseEntity.ok().body(commentService.saveComment(commentRequest,boardId));
+    @PostMapping
+    public ResponseEntity<?> saveComment(@RequestBody CommentRequest commentRequest){
+        return ResponseEntity.ok().body(commentService.saveComment(commentRequest));
     }
 
 //    @GetMapping("/{boardId}")

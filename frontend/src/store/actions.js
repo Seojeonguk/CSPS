@@ -128,6 +128,14 @@ export async function requestProblemEvaluate({ state }, payload) {
   return await axios.post(url, body);
 }
 
+// 게시판 댓글 작성
+export async function requestWriteComment({ state }, payload) {
+  console.log("requestProblemEvaluate", state);
+  const url = "/comment";
+  console.log(payload);
+  return await axios.post(url, payload);
+}
+
 // 문제결과 저장하기
 export async function requestSaveResult({ state }, payload) {
   console.log("requestProblemEvaluate", state, payload);
@@ -167,13 +175,10 @@ export async function requestBoardList() {
 
 export async function requestBoardWrite({ state }, payload) {
   console.log("requestBoardWrite", state, payload);
-  const url = `/board/${payload.id}?title=${payload.title}&description=${payload.description}`;
-  // const body = {
-  //   title: payload.title,
-  //   description: payload.description,
-  // };
-  // return await axios.post(url, body);
-  return await axios.post(url);
+  const url = "/board";
+  console.log(payload);
+  return await axios.post(url, payload);
+  //return await axios.post(url);
 }
 
 // 사용자가 작성한 글 조회
