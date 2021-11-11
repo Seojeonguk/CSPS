@@ -61,6 +61,25 @@
         :email="state.emailcheck.email"
         @mvlogin="mvLogin"
       ></update-pw-dialog>
+      <!-- <q-btn round size="sm" color="accent" @click="showNotif('center')">
+        <q-icon name="fullscreen_exit" />
+      </q-btn> -->
+      <q-btn label="Alert" color="primary" @click="state.alert = true" />
+      <q-dialog v-model="alert">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Alert</div>
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            비밀번호가 다릅니다.
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
@@ -83,6 +102,7 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+
     let timer;
     onBeforeUnmount(() => {
       if (timer !== void 0) {
@@ -90,10 +110,20 @@ export default {
         $q.loading.hide();
       }
     });
+    const alerts = [
+      { message: "존재하지 않는 이메일입니다.", icon: "thumb_up" },
+      {
+        color: "teal",
+        message: "비밀번호를 잘못입력하셨습니다.",
+        icon: "tag_faces",
+      },
+    ];
+
     const login_form = ref(null); // 로그인폼저장
     const store = useStore();
     const router = useRouter();
     const state = reactive({
+      alert: ref(false),
       form: {
         email: "",
         pass: "",
@@ -159,6 +189,7 @@ export default {
             })
             .catch((error) => {
               $q.loading.hide();
+              state.alert = ref(true);
               alert(error.response.data.message);
             });
         } else {
@@ -247,6 +278,52 @@ export default {
       openUpdatePwDialog,
       mvLogin,
       showLoading,
+      alert: ref(false),
+      showNotif(position) {
+        const { color, textColor, multiLine, icon, message, avatar } =
+          alerts[Math.floor(Math.random(alerts.length) * 10) % alerts.length];
+        const random = Math.random() * 100;
+        const twoActions = random > 70;
+        const buttonColor = color ? "white" : void 0;
+        $q.notify({
+          color,
+          textColor,
+          icon: random > 30 ? icon : null,
+          message,
+          position,
+          avatar,
+          multiLine,
+          actions: twoActions
+            ? [
+                {
+                  label: "Reply",
+                  color: buttonColor,
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+                {
+                  label: "Dismiss",
+                  color: "yellow",
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+              ]
+            : random > 40
+            ? [
+                {
+                  label: "Reply",
+                  color: buttonColor,
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+              ]
+            : null,
+          timeout: Math.random() * 5000 + 3000,
+        });
+      },
     };
   },
 };
