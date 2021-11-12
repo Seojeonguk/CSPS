@@ -145,7 +145,10 @@
             </div>
             <hr />
             <div class="information-question-info">
-              <div class="question-description" id="information-viewer"></div>
+              <div id="information-viewer">
+                내가 죽일놈이지 뭐~ 우리가 코딩할때면~ 전부 리엑트 탓이지 뭐~
+                마치 죄인인 것처럼~
+              </div>
               <!-- 코멘트 입력하기 -->
               <hr />
               <div class="question-information-comment">
@@ -211,23 +214,12 @@
   </div>
 </template>
 <script>
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
-import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
-import { reactive, onUpdated } from "vue";
+import { reactive } from "vue";
 export default {
   name: "info-information-board-question",
   setup() {
     const state = reactive({
       script: "아 진짜 모르겠다",
-      viewer: null,
-    });
-    onUpdated(() => {
-      state.viewer = new Viewer({
-        el: document.querySelector("#information-viewer"),
-        initialValue: "여기가 성지인가요?",
-        height: document.querySelector(".information-question-info")
-          .clientHeight,
-      });
     });
     return { state };
   },
@@ -238,6 +230,7 @@ export default {
   text-align: start !important;
   height: 100%;
   padding: 2em 4em;
+  font-size: 15px;
 
   hr {
     border-top: 1px double #a2b29f;
@@ -263,8 +256,8 @@ export default {
       margin-right: 0.25em;
       .information-question-user-image-circle {
         display: block;
-        width: 36px;
-        height: 36px;
+        width: 18px;
+        height: 18px;
       }
     }
     .information-question-user-nicnName {
@@ -283,17 +276,12 @@ export default {
     overflow: auto;
     height: 75%;
     margin-right: 0.5em;
-    .question-description {
-    }
-    .question-information-comment {
-      .question-information-comment-info {
-      }
-    }
   }
 }
 .information-question-information-answer {
   width: 100%;
   margin-top: 1em;
+  font-size: 15px;
   .information-answer {
     width: 100%;
     display: flex;
@@ -303,14 +291,15 @@ export default {
       overflow: hidden;
       .information-answer-user-image-circle {
         border-radius: 50%;
-        width: 36px;
-        height: 36px;
+        width: 18px;
+        height: 18px;
       }
     }
     .information-answer-top {
       width: 95%;
       display: flex;
       flex-direction: column;
+      font-size: 12px;
       .information-answer-user {
         display: flex;
         flex-direction: row;
@@ -360,12 +349,13 @@ export default {
     overflow: hidden;
     .information-comment-user-image-circle {
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 18px;
+      height: 18px;
     }
   }
   .information-comment-top {
     width: 95%;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     .information-comment-user {
