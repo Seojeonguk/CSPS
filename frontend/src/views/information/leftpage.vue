@@ -118,11 +118,11 @@ export default {
 .information-main {
   font-size: 28px;
 }
-.information-btn {
+.information-btn-service {
   font-size: 21px;
 }
 .information-main:hover,
-.information-btn:hover {
+.information-btn-service:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
