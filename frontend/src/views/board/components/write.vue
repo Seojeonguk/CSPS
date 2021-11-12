@@ -24,7 +24,7 @@ import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 
 import { ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
-//import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 export default {
   name: "board-write",
@@ -37,7 +37,7 @@ export default {
     });
 
     const ref_editor = ref(null);
-    //const router = useRouter();
+    const router = useRouter();
 
     onMounted(() => {
       state.editor = new Editor({
@@ -68,29 +68,29 @@ export default {
     };
 
     const writeBoard = () => {
-      //var editor_text = state.editor.getMarkdown();
-      //var user = JSON.parse(localStorage.getItem("userInfo"));
+      var editor_text = state.editor.getMarkdown();
+      var user = JSON.parse(localStorage.getItem("userInfo"));
       if (state.title == "") {
         alert("제목이 입력되지 않았습니다.");
         return;
       }
-      // store
-      //   .dispatch("root/requestBoardWrite", {
-      //     userId: user.id,
-      //     title: state.title,
-      //     description: editor_text,
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //     alert("작성이 완료되었습니다.");
-      //     router.push({ name: "board-info" });
-      //     /* 내가 작성한 글로 보내기 */
-      //     /* 마이페이지로 보내기 */
-      //     /* 게시판 소개 페이지로 보내기 */
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      store
+        .dispatch("root/requestBoardWrite", {
+          userId: user.id,
+          title: state.title,
+          description: editor_text,
+        })
+        .then((response) => {
+          console.log(response);
+          alert("작성이 완료되었습니다.");
+          router.push({ name: "problem" });
+          /* 내가 작성한 글로 보내기 */
+          /* 마이페이지로 보내기 */
+          /* 게시판 소개 페이지로 보내기 */
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     const uploadImage = async (blob) => {
