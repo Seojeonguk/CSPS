@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { onBeforeMount, reactive } from "vue";
+import { onBeforeMount, onUpdated, reactive } from "vue";
 import { useRouter } from "vue-router";
 import "../../styles/mypage.scss";
 
@@ -33,7 +33,9 @@ export default {
     const state = reactive({
       user: null,
     });
-    onBeforeMount(() => {
+    state.user = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(state.user);
+    onUpdated(() => {
       state.user = JSON.parse(localStorage.getItem("userInfo"));
       console.log(state.user);
     });
