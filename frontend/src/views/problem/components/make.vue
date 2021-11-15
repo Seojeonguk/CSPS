@@ -30,11 +30,19 @@
                 v-model="temp"
                 @keydown.enter.prevent="addInput"
               />
-              <input
+              <!-- <input
                 class="addBtn"
                 type="button"
                 value="추가"
                 @click="addInput"
+              /> -->
+              <q-btn
+                flat
+                class="subbtn"
+                type="submit"
+                @click="addInput"
+                color="brown-5"
+                label="추가"
               />
             </div>
             <div
@@ -50,7 +58,13 @@
           </div>
         </div>
       </form>
-      <button class="makeBtn" @click="makeProblem">생성하기</button>
+      <q-btn
+        class="subbtn"
+        type="submit"
+        @click="makeProblem"
+        color="brown-5"
+        label="생성하기"
+      />
     </div>
   </div>
 </template>
