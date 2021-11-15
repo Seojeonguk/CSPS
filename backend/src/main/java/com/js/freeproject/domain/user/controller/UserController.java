@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.js.freeproject.domain.model.CommonResponse;
 import com.js.freeproject.domain.user.application.UserService;
 import com.js.freeproject.domain.user.domain.User;
@@ -63,15 +64,12 @@ public class UserController {
 		String pass = reqUser.getPass();
 		
 		try {
-			User dbUser = userService.findByUserEmail(email);
+			User dbUser = userService.login(email);
 			
-			if(dbUser==null) {
-				log.info("사용자 정보가 없습니다.");
-				return ResponseEntity.status(404).body(CommonResponse.of("존재하지 않는 계정입니다.")); 
-			} else if(!passwordEncoder.matches(pass,dbUser.getPass())) {
+			if(!passwordEncoder.matches(pass,dbUser.getPass())) {
 				log.info("비밀번호가 일치하지 않습니다.");
 				return ResponseEntity.status(401).body(CommonResponse.of("비밀번호가 일치하지 않습니다."));
-			}
+			} 
 			
 			String token = TokenProvider.generateToken(email);
 			String refreshToken = TokenProvider.generateRefreshToken(email);
@@ -79,7 +77,11 @@ public class UserController {
 			redisUtil.setDataExpire(token, refreshToken, TokenProvider.getRefreshExpiration()/100);
 			
 			return ResponseEntity.ok(LoginResponse.of("Success", token));
-		} catch(Exception e) {
+		} catch(NotFoundException e) {
+			log.info("사용자 정보가 없습니다.");
+			return ResponseEntity.status(404).body(CommonResponse.of("존재하지 않는 계정입니다."));
+		}
+		catch(Exception e) {
 			log.info("사용자 로그인 중 오류 발생");
 			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류가 발생했습니다."));
 		}
@@ -183,6 +185,7 @@ public class UserController {
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
 		} catch(Exception e) {
 			log.info("{} 비밀번호 찾는 도중 오류가 발생하였습니다.",map.get("email"));
+			log.info("{}",e);
 			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류"));
 		}
 	}
