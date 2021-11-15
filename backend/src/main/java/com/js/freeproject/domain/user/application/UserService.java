@@ -9,12 +9,16 @@ import javax.transaction.Transactional;
 
 import com.js.freeproject.domain.amazonS3.S3Service;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.js.freeproject.domain.mail.domain.Mail;
 import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
 import com.js.freeproject.domain.user.dto.UserRequest;
+import com.js.freeproject.global.jwt.CustomUserDetails;
 import com.js.freeproject.global.util.MailUtil;
 import com.js.freeproject.global.util.RedisUtil;
 import com.sun.jdi.request.DuplicateRequestException;
@@ -54,9 +58,28 @@ public class UserService {
 
         return userRepo.save(userEntity);
     }
+    
+    public User login(String email) throws NotFoundException {
+    	User user = userRepo.findByEmail(email);
+    	
+    	if (user == null) {
+            throw new NotFoundException(email + "를 찾을 수 없습니다.");
+        }
+		
+		CustomUserDetails accountDetails = new CustomUserDetails(user);
+		UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(email, null,
+				accountDetails.getAuthorities());
+		jwtAuthentication.setDetails(accountDetails);
+		
+		SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+		
+		log.info("Security Context에 {} 인증정보를 저장했습니다.", jwtAuthentication.getName());
+    	
+        return user;
+    }
 
     public User findByUserEmail(String email) {
-        return userRepo.findByEmail(email);
+    	return userRepo.findByEmail(email);
     }
 
     public boolean findByUserNickName(String nickName) {
