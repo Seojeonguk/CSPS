@@ -7,7 +7,8 @@
       </div>
       <div class="bottom-wrap">
         <div class="ans-wrap">
-          <span v-for="(an, idx) in prob.answers" :key="idx">
+          답 :
+          <span v-for="(an, idx) in prob.answers" :key="idx" class="anss">
             {{ an }}
           </span>
         </div>

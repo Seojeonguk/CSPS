@@ -2,13 +2,15 @@
   <div class="right-wrap">
     <div class="inner-wrap">
       <div class="approve-title">문제리스트</div>
-      <Probs
-        v-for="(prob, idx) in problems"
-        :key="idx"
-        :prob="prob"
-        @send-accept="sendAccept"
-        @send-revoke="sendRevoke"
-      />
+      <div class="approve-list-wrap">
+        <Probs
+          v-for="(prob, idx) in problems"
+          :key="idx"
+          :prob="prob"
+          @send-accept="sendAccept"
+          @send-revoke="sendRevoke"
+        />
+      </div>
     </div>
   </div>
 </template>

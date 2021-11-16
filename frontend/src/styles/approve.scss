@@ -1,6 +1,12 @@
 .approve-title {
   font-size: 1.5em;
-  margin: 10px 0;
+  height: 5%;
+  margin: 0.5em 0;
+}
+
+.approve-list-wrap {
+  height: 90%;
+  overflow: auto;
 }
 
 .approve-wrap {
@@ -42,4 +48,10 @@
       }
     }
   }
+}
+
+.anss {
+  background-color: #c0c0c0;
+  margin-right: 0.7em;
+  padding: 0 0.3em;
 }
