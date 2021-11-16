@@ -246,23 +246,27 @@ export default {
 
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const nickNameCheck = () => {
-      store
-        .dispatch("root/requestUserNickNameCheck", state.form.nickName)
-        .then(
-          (response) => {
-            console.log(response);
-            state.form.nickName_yet = state.form.nickName;
-            state.form.nickName_success = true;
-            nickNameSuccess();
-          },
-          (error) => {
-            console.log(error.response.data);
-            nickNameError();
-          }
-        )
-        .catch((error) => {
-          console.log(error);
-        });
+      if (state.form.nickName == null || state.form.nickName.length < 2) {
+        nickNameError("닉네임을 입력해주세요.");
+      } else {
+        store
+          .dispatch("root/requestUserNickNameCheck", state.form.nickName)
+          .then(
+            (response) => {
+              console.log(response);
+              state.form.nickName_yet = state.form.nickName;
+              state.form.nickName_success = true;
+              nickNameSuccess();
+            },
+            (error) => {
+              console.log(error.response.data);
+              nickNameError("중복된 닉네임입니다.");
+            }
+          )
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     };
 
     const emailCheck = () => {
@@ -271,13 +275,21 @@ export default {
         .dispatch("root/requestUserSendEmail", {
           email: state.form.email,
         })
-        .then((response) => {
-          console.log(state.form.email, response.data, typeof response.data);
-          state.email.email = state.form.email;
-          state.email.authNumber = response.data.message;
-          hideLoading();
-          state.email.dialog = true;
-        })
+        .then(
+          (response) => {
+            console.log(response.data);
+            emailError("이미 가입된 이메일입니다.");
+          },
+          (error) => {
+            console.log(error);
+            if (error.response.status == "404") {
+              state.email.email = state.form.email;
+              state.email.authNumber = response.data.message;
+              hideLoading();
+              state.email.dialog = true;
+            }
+          }
+        )
         .catch((error) => {
           console.log(error);
         });
@@ -300,7 +312,7 @@ export default {
                 name: state.form.name,
                 nickName: state.form.nickName,
                 pass: state.form.pass,
-                email: state.email.email,
+                email: state.form.email,
               })
               .then(
                 (response) => {
@@ -362,11 +374,11 @@ export default {
           console.log("I am triggered on both OK and Cancel");
         });
     };
-    const nickNameError = () => {
+    const nickNameError = (msg) => {
       quasar
         .dialog({
           title: "닉네임 중복확인",
-          message: "중복된 닉네임입니다.",
+          message: msg,
         })
         .onOk(() => {
           console.log("OK");

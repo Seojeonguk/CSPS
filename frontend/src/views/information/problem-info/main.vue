@@ -124,7 +124,8 @@ export default {
   font-size: 15px;
   padding: 0.8em 2em;
   border-radius: 2em;
-  background-color: #a2b29f;
+  background-color: #696969;
+  color: #dcdcdc;
   transition: all 0.7s ease-out;
   &:hover {
     background: none;

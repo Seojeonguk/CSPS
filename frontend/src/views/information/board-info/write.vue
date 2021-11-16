@@ -240,7 +240,7 @@ export default {
 .information-question-list:hover {
   cursor: pointer;
   color: black;
-  background: #ccd8c8;
+  background: rgba(105, 105, 105, 0.3);
   opacity: 0.7;
 }
 .information-question-list-info {

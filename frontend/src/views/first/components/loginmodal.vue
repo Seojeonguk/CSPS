@@ -297,7 +297,7 @@ export default {
       $q.loading.show({
         message: "로그인 중입니다",
         boxClass: "bg-grey-2 text-grey-9",
-        spinnerColor: "primary",
+        spinnerColor: "#495057",
       });
     };
 

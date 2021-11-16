@@ -8,9 +8,9 @@
   font-size: 21px;
   font-weight: bold;
   span {
-    text-shadow: 4px 4px 0 #a2b29f, 4px -4px 0 #a2b29f, -4px 4px 0 #a2b29f,
-      -4px -4px 0 #a2b29f, 4px 0 0 #a2b29f, -4px 0 0 #a2b29f, 0 4px 0 #a2b29f,
-      0 -4px 0 #a2b29f;
+    text-shadow: 4px 4px 0 #696969, 4px -4px 0 #696969, -4px 4px 0 #696969,
+      -4px -4px 0 #696969, 4px 0 0 #696969, -4px 0 0 #696969, 0 4px 0 #696969,
+      0 -4px 0 #696969;
     color: black;
   }
   &.box {
@@ -20,7 +20,7 @@
     width: 50%;
     height: 2em;
     margin: 0 auto;
-    border: 2px solid #a2b29f;
+    border: 2px solid #696969;
     border-radius: 1em;
   }
   &.first {
@@ -33,7 +33,7 @@
   }
   &.third {
     margin: 2em 0em 1em 0em;
-    color: #a2b29f;
+    color: #696969;
   }
 }
 .board-nav {
@@ -121,9 +121,9 @@
   height: 50%;
   margin: 0 0.25em;
   padding: auto;
-  border: #a2b29f 1px solid;
+  border: #696969 1px solid;
   border-radius: 7.5px;
-  background-color: #a2b29f;
+  background-color: #696969;
   color: white;
   transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -210,7 +210,7 @@
   padding: 2em 4em;
 
   hr {
-    border-top: 1px double #a2b29f;
+    border-top: 1px double #696969;
   }
 
   .question-title {
