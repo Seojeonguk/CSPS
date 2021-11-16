@@ -1,5 +1,12 @@
 <template>
   <div class="info-wrap">
+    <div class="info-add">
+      <q-icon
+        class="script-icon"
+        name="help_outline"
+        @click="addQuestionScript"
+      ></q-icon>
+    </div>
     <div class="info-mini-wrap">
       <div class="left-wrap">
         <div class="open-left-wrap">
@@ -12,114 +19,120 @@
                 게시판소개
               </div>
               <div class="row">
-                <div class="information-btn-board-write">
-                  <q-icon
-                    class="information-write-icon write-icon"
-                    name="border_color"
-                  />
-                  글작성
+                <div class="script-board-write script">
+                  <div class="information-btn-board-write">
+                    <q-icon
+                      class="information-write-icon write-icon"
+                      name="border_color"
+                    />
+                    글작성
+                  </div>
                 </div>
               </div>
             </div>
             <div class="information-board-search">
               <q-input label="제목검색" dense>
-                <template v-slot:before lang="">
+                <template v-slot:before>
                   <q-icon name="search" />
                 </template>
               </q-input>
             </div>
-            <div class="information-board-title-list">
-              <div class="information-board-title-list-item">
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">React 질문있어요</div>
-                    <div class="information-list-createdAt">2021-11-12</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">
-                        React뿌수기
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      Vue3 는 Vue2 라이브러리 지원 안되나요?
-                    </div>
-                    <div class="information-list-createdAt">2021-11-01</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">지원</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      How to use join query in database
-                    </div>
-                    <div class="information-list-createdAt">2021-10-31</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">디비장인</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      docker환경설정좀 봐주세요
-                    </div>
-                    <div class="information-list-createdAt">2021-10-21</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">
-                        배포실패자
+            <div class="script-board-title-list script">
+              <div class="information-board-title-list">
+                <div class="information-board-title-list-item">
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">React 질문있어요</div>
+                      <div class="information-list-createdAt">2021-11-12</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          React뿌수기
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      Fonrtend Javascript animation is not working
-                    </div>
-                    <div class="information-list-createdAt">2021-10-15</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        Vue3 는 Vue2 라이브러리 지원 안되나요?
                       </div>
-                      <div class="information-list-user-nickName">
-                        Front Master
+                      <div class="information-list-createdAt">2021-11-01</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">지원</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        How to use join query in database
+                      </div>
+                      <div class="information-list-createdAt">2021-10-31</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          디비장인
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        docker환경설정좀 봐주세요
+                      </div>
+                      <div class="information-list-createdAt">2021-10-21</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          배포실패자
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        Fonrtend Javascript animation is not working
+                      </div>
+                      <div class="information-list-createdAt">2021-10-15</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          Front Master
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -151,49 +164,55 @@
               </div>
               <!-- 코멘트 입력하기 -->
               <hr />
-              <div class="question-information-comment">
-                <div class="information-question-information-answer">
-                  <div class="information-answer">
-                    <div class="information-answer-user-image">
-                      <img
-                        :src="require('@/assets/malang.png')"
-                        class="information-answer-user-image-circle"
-                      />
-                    </div>
-                    <div class="information-answer-top">
-                      <div class="information-answer-user">
-                        <div class="information-answer-user-nickname">
-                          React뿌수기
-                        </div>
-                        <div class="information-answer-user-createdAt">
-                          2021-11-13
-                        </div>
+              <div class="script-comment script">
+                <div class="question-information-comment">
+                  <div class="information-question-information-answer">
+                    <div class="information-answer">
+                      <div class="information-answer-user-image">
+                        <img
+                          :src="require('@/assets/malang.png')"
+                          class="information-answer-user-image-circle"
+                        />
                       </div>
-                      <div class="information-answer-bottom">
-                        <div class="information-answer-content">
-                          아무도 댓글 안달아 주시나요...?
+                      <div class="information-answer-top">
+                        <div class="information-answer-user">
+                          <div class="information-answer-user-nickname">
+                            React뿌수기
+                          </div>
+                          <div class="information-answer-user-createdAt">
+                            2021-11-13
+                          </div>
                         </div>
-                        <div class="row justify-center">
-                          <div class="information-comment">
-                            <div class="information-comment-user-image">
-                              <img
-                                :src="require('@/assets/fin0.jpg')"
-                                class="information-comment-user-image-circle"
-                              />
-                            </div>
-                            <div class="information-comment-top">
-                              <div class="information-comment-user">
-                                <div class="information-comment-user-nickname">
-                                  React한테 당한사람
-                                </div>
-                                <div class="information-comment-user-createdAt">
-                                  2021-11-13
-                                </div>
+                        <div class="information-answer-bottom">
+                          <div class="information-answer-content">
+                            아무도 댓글 안달아 주시나요...?
+                          </div>
+                          <div class="row justify-center">
+                            <div class="information-comment">
+                              <div class="information-comment-user-image">
+                                <img
+                                  :src="require('@/assets/fin0.jpg')"
+                                  class="information-comment-user-image-circle"
+                                />
                               </div>
-                              <div class="information-comment-bottom">
-                                <div class="information-comment-content">
-                                  진짜 리엑트 너무 어려운 것같아요
-                                  해결방법찾으면 공유 부탁드립니다.
+                              <div class="information-comment-top">
+                                <div class="information-comment-user">
+                                  <div
+                                    class="information-comment-user-nickname"
+                                  >
+                                    React한테 당한사람
+                                  </div>
+                                  <div
+                                    class="information-comment-user-createdAt"
+                                  >
+                                    2021-11-13
+                                  </div>
+                                </div>
+                                <div class="information-comment-bottom">
+                                  <div class="information-comment-content">
+                                    진짜 리엑트 너무 어려운 것같아요
+                                    해결방법찾으면 공유 부탁드립니다.
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -210,7 +229,6 @@
       </div>
     </div>
     <div class="info-script">{{ state.script }}</div>
-    <div class="info-warn">상기 모든 내용은 임의로 작성되었습니다.</div>
   </div>
 </template>
 <script>
@@ -219,9 +237,28 @@ export default {
   name: "info-information-board-question",
   setup() {
     const state = reactive({
-      script: "아 진짜 모르겠다",
+      script: "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.",
+      add: true,
     });
-    return { state };
+    const addQuestionScript = () => {
+      let addBtn = document.querySelector(".script-icon");
+      let comment = document.querySelector(".script-comment");
+      if (state.add) {
+        addBtn.classList.add("add-after");
+        comment.classList.remove("script");
+        comment.classList.add("add-script");
+        comment.addEventListener("click", () => {
+          state.script = "댓글 및 대댓글 작성이 가능합니다.";
+        });
+      } else {
+        state.script = "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.";
+        addBtn.classList.remove("add-after");
+        comment.classList.remove("add-script");
+        comment.classList.add("script");
+      }
+      state.add = !state.add;
+    };
+    return { state, addQuestionScript };
   },
 };
 </script>
@@ -393,7 +430,6 @@ export default {
     }
   }
 }
-
 .information-board-btn {
   width: 100%;
   height: 15%;
@@ -416,15 +452,13 @@ export default {
 .information-board-search {
   width: 100%;
   height: 5%;
-  margin-bottom: 2em;
+  margin-bottom: 0.125em;
   font-size: 12px;
 }
 
 .information-board-title-list {
   width: 100%;
   height: 75%;
-  overflow: auto;
-  padding: 0em 0em 2em 0em;
 }
 .information-board-title-list-item {
   width: 100%;

@@ -50,12 +50,6 @@ const routes = [
             component: () => import("../views/information/information.vue"),
           },
           {
-            path: "/home/info/service/main",
-            name: "info-service-main",
-            component: () =>
-              import("../views/information/service-info/main.vue"),
-          },
-          {
             path: "/home/info/board/main",
             name: "info-board-main",
             component: () => import("../views/information/board-info/main.vue"),
@@ -77,12 +71,6 @@ const routes = [
             name: "info-mypage-main",
             component: () =>
               import("../views/information/mypage-info/main.vue"),
-          },
-          {
-            path: "/home/info/mypage/chart",
-            name: "info-mypage-chart",
-            component: () =>
-              import("../views/information/mypage-info/chart.vue"),
           },
           {
             path: "/home/info/problem/main",

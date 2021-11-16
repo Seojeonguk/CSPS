@@ -1,21 +1,32 @@
 <template>
   <div class="info-wrap">
+    <div class="info-add">
+      <q-icon
+        class="script-icon"
+        name="help_outline"
+        @click="addWriteScript"
+      ></q-icon>
+    </div>
     <div class="info-mini-wrap">
       <div class="left-wrap">
         <div class="open-left-wrap">
-          <div class="info-action-btn" @click="addInfoAction">
+          <div class="information-info-action-btn" @click="addInfoAction">
             <q-icon></q-icon>
           </div>
-          <div class="board-nav">
+          <div class="information-board-nav">
             <div class="information-board-btn">
-              <div class="information-btn-board-info">게시판소개</div>
+              <div class="information-btn-information-board-info">
+                게시판소개
+              </div>
               <div class="row">
-                <div class="information-btn-board-write">
-                  <q-icon
-                    class="information-write-icon write-icon"
-                    name="border_color"
-                  />
-                  글작성
+                <div class="script-board-write script">
+                  <div class="information-btn-board-write">
+                    <q-icon
+                      class="information-write-icon write-icon"
+                      name="border_color"
+                    />
+                    글작성
+                  </div>
                 </div>
               </div>
             </div>
@@ -26,98 +37,102 @@
                 </template>
               </q-input>
             </div>
-            <div class="information-board-title-list">
-              <div class="information-board-title-list-item">
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">React 질문있어요</div>
-                    <div class="information-list-createdAt">2021-11-12</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">
-                        React뿌수기
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      Vue3 는 Vue2 라이브러리 지원 안되나요?
-                    </div>
-                    <div class="information-list-createdAt">2021-11-01</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">지원</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      How to use join query in database
-                    </div>
-                    <div class="information-list-createdAt">2021-10-31</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">디비장인</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      docker환경설정좀 봐주세요
-                    </div>
-                    <div class="information-list-createdAt">2021-10-21</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
-                      </div>
-                      <div class="information-list-user-nickName">
-                        배포실패자
+            <div class="script-board-title-list script">
+              <div class="information-board-title-list">
+                <div class="information-board-title-list-item">
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">React 질문있어요</div>
+                      <div class="information-list-createdAt">2021-11-12</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          React뿌수기
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="information-question-list">
-                  <q-icon class="information-question-list-icon" />
-                  <div class="information-question-list-info">
-                    <div class="information-list-title">
-                      Fonrtend Javascript animation is not working
-                    </div>
-                    <div class="information-list-createdAt">2021-10-15</div>
-                    <div class="information-list-userinfo">
-                      <div class="information-list-user-image">
-                        <img
-                          class="information-user-image-circle"
-                          :src="require('@/assets/malang.png')"
-                        />
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        Vue3 는 Vue2 라이브러리 지원 안되나요?
                       </div>
-                      <div class="information-list-user-nickName">
-                        Front Master
+                      <div class="information-list-createdAt">2021-11-01</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">지원</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        How to use join query in database
+                      </div>
+                      <div class="information-list-createdAt">2021-10-31</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          디비장인
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        docker환경설정좀 봐주세요
+                      </div>
+                      <div class="information-list-createdAt">2021-10-21</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          배포실패자
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="information-question-list">
+                    <q-icon class="information-question-list-icon" />
+                    <div class="information-question-list-info">
+                      <div class="information-list-title">
+                        Fonrtend Javascript animation is not working
+                      </div>
+                      <div class="information-list-createdAt">2021-10-15</div>
+                      <div class="information-list-userinfo">
+                        <div class="information-list-user-image">
+                          <img
+                            class="information-user-image-circle"
+                            :src="require('@/assets/malang.png')"
+                          />
+                        </div>
+                        <div class="information-list-user-nickName">
+                          Front Master
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -130,7 +145,7 @@
       <div class="right-wrap">
         <div class="open-right-wrap">
           <div
-            class="column justify-center items-center"
+            class="column justify-center items-center script-write script"
             style="width: 100%; height: 100%"
           >
             <img
@@ -142,7 +157,6 @@
       </div>
     </div>
     <div class="info-script">{{ state.script }}</div>
-    <div class="info-warn">상기 모든 내용은 임의로 작성되었습니다.</div>
   </div>
 </template>
 <script>
@@ -152,9 +166,29 @@ export default {
   setup() {
     const state = reactive({
       editor: null,
-      script: "아 진짜 모르겠다",
+      script: "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.",
+      add: true,
     });
-    return { state };
+    const addWriteScript = () => {
+      let addBtn = document.querySelector(".script-icon");
+      let toast = document.querySelector(".script-write");
+      if (state.add) {
+        addBtn.classList.add("add-after");
+        toast.classList.remove("script");
+        toast.classList.add("add-script");
+        toast.addEventListener("click", () => {
+          state.script =
+            "친근감있는 MarkDown형식으로 게시판을 작성할 수 있습니다.";
+        });
+      } else {
+        state.script = "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.";
+        addBtn.classList.remove("add-after");
+        toast.classList.remove("add-script");
+        toast.classList.add("script");
+      }
+      state.add = !state.add;
+    };
+    return { state, addWriteScript };
   },
 };
 </script>
@@ -164,7 +198,7 @@ export default {
   height: 15%;
   font-size: 21px;
 
-  .information-btn-board-info {
+  .information-btn-information-board-info {
     font-weight: bold;
     margin: 0.5em;
   }
@@ -172,7 +206,7 @@ export default {
     margin: 0;
     font-size: 12px;
     text-align: left;
-    .information-write-icon {
+    .write-icon {
       margin-right: 0.15em;
       font-size: 18px;
     }
@@ -181,15 +215,13 @@ export default {
 .information-board-search {
   width: 100%;
   height: 5%;
-  margin-bottom: 2em;
+  margin-bottom: 0.125em;
   font-size: 12px;
 }
 
 .information-board-title-list {
   width: 100%;
   height: 75%;
-  overflow: auto;
-  padding: 0em 0em 2em 0em;
 }
 .information-board-title-list-item {
   width: 100%;

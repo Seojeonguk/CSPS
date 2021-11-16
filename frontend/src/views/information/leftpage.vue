@@ -6,15 +6,9 @@
           <div class="information-main-title" @click="mvInformation">
             CS의 정석
           </div>
-          <div class="information-main" @click="mvServiceMain">서비스 소개</div>
         </div>
         <div class="information-mypage">
           <div class="information-main" @click="mvMypageMain">마이페이지</div>
-          <div class="information-btn">
-            <div class="information-btn-service" @click="mvMypageChart">
-              차트
-            </div>
-          </div>
         </div>
         <div class="information-board">
           <div class="information-main" @click="mvBoardMain">게시판</div>
@@ -55,14 +49,8 @@ export default {
     const mvInformation = () => {
       router.push({ name: "info-information" });
     };
-    const mvServiceMain = () => {
-      router.push({ name: "info-service-main" });
-    };
     const mvMypageMain = () => {
       router.push({ name: "info-mypage-main" });
-    };
-    const mvMypageChart = () => {
-      router.push({ name: "info-mypage-chart" });
     };
     const mvBoardMain = () => {
       router.push({ name: "info-board-main" });
@@ -87,9 +75,7 @@ export default {
     };
     return {
       mvInformation,
-      mvServiceMain,
       mvMypageMain,
-      mvMypageChart,
       mvBoardMain,
       mvBoardWrite,
       mvBoardQuestion,
