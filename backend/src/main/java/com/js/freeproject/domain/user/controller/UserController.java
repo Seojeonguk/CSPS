@@ -183,7 +183,7 @@ public class UserController {
 			String key = userService.findpassword(map.get("email"));
 			return ResponseEntity.status(200).body(CommonResponse.of(key));
 		} catch(SendFailedException e) {
-			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",email);
+			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",map.get("email"));
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
 		} catch (MessagingException e) {
 			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",map.get("email"));
