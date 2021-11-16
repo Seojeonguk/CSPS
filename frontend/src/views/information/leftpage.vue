@@ -107,6 +107,7 @@ export default {
 .information-btn-service {
   font-size: 21px;
 }
+.information-main-title:hover,
 .information-main:hover,
 .information-btn-service:hover {
   cursor: pointer;
