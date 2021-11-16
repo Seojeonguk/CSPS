@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
@@ -181,6 +182,9 @@ public class UserController {
 		try {
 			String key = userService.findpassword(map.get("email"));
 			return ResponseEntity.status(200).body(CommonResponse.of(key));
+		} catch(SendFailedException e) {
+			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",email);
+			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
 		} catch (MessagingException e) {
 			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",map.get("email"));
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
@@ -233,10 +237,13 @@ public class UserController {
 		} catch(NullPointerException e) {
 			log.info("{} 사용자가 존재합니다.",email);
 			return ResponseEntity.status(404).body(CommonResponse.of("존재하는 사용자"));
+		} catch(SendFailedException e) {
+			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",email);
+			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
 		} catch(MessagingException e) {
 			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",email);
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
-		} catch(Exception e) {
+		}  catch(Exception e) {
 			log.info("{} 조회 중 오류 발생",email);
 			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류가 발생했습니다."));
 		}	

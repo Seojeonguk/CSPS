@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.transaction.Transactional;
 
 import com.js.freeproject.domain.amazonS3.S3Service;
@@ -109,7 +110,7 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public String findpassword(String email) throws MessagingException {
+    public String findpassword(String email) throws MessagingException,SendFailedException {
     	User user = userRepo.findByEmail(email);
     	if(user==null) {
     		log.info("{} 미존재",email);
@@ -119,12 +120,17 @@ public class UserService {
     	String key = randomkey();
 
         Mail mail = Mail.builder()
-                .title("SCPC 비밀번호 인증입니다.")
+                .title("CSPS 비밀번호 인증입니다.")
                 .to(email)
                 .content(mailUtil.getcontent("pass", key))
                 .build();
 
-        mailUtil.SendMail(mail);
+        try {
+        	mailUtil.SendMail(mail);
+        } catch(Exception e) {
+        	throw new SendFailedException();
+        }
+        
         redisUtil.setDataExpire(key, email, 500);
 
         return key;
@@ -148,7 +154,7 @@ public class UserService {
     }
 
     
-    public String duplemail(String email) throws MessagingException {
+    public String duplemail(String email) throws MessagingException,SendFailedException {
     	User user = userRepo.findByEmail(email);
     	if(user!=null) {
     		log.info("{} 존재",email);
@@ -158,12 +164,17 @@ public class UserService {
     	String key = randomkey();
 
         Mail mail = Mail.builder()
-                .title("SCPC 이메일 인증입니다.")
+                .title("CSPS 이메일 인증입니다.")
                 .to(email)
                 .content(mailUtil.getcontent("mail", key))
                 .build();
 
-        mailUtil.SendMail(mail);
+        try {
+        	mailUtil.SendMail(mail);
+        } catch(Exception e) {
+        	throw new SendFailedException();
+        }
+        
         redisUtil.setDataExpire(key, email, 500);
         
         return key;
