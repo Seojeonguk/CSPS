@@ -89,10 +89,11 @@ public class UserService {
     @Transactional
     public User modifyUser(UserRequest userRequest) throws NotFoundException, IOException {
         User user = userRepo.findByEmail(userRequest.getEmail());
-        String url = user.getImage();
         if (user == null) {
             throw new NotFoundException(userRequest.getEmail() + "를 찾을 수 없습니다.");
         }
+        String url = user.getImage();
+        
         if (userRequest.getImage() != null) {
             url = s3Service.uploadImage(userRequest.getImage(), "user");
             log.info("아마존: url = " + url);
@@ -115,17 +116,7 @@ public class UserService {
     		throw new NullPointerException();
     	}
     	
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
-        Random random = new Random();
-
-        String key = random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
+    	String key = randomkey();
 
         Mail mail = Mail.builder()
                 .title("SCPC 비밀번호 인증입니다.")
@@ -134,7 +125,6 @@ public class UserService {
                 .build();
 
         mailUtil.SendMail(mail);
-
         redisUtil.setDataExpire(key, email, 500);
 
         return key;
@@ -157,4 +147,40 @@ public class UserService {
         return user;
     }
 
+    
+    public String duplemail(String email) throws MessagingException {
+    	User user = userRepo.findByEmail(email);
+    	if(user!=null) {
+    		log.info("{} 존재",email);
+    		throw new NullPointerException();
+    	}
+    	
+    	String key = randomkey();
+
+        Mail mail = Mail.builder()
+                .title("SCPC 이메일 인증입니다.")
+                .to(email)
+                .content(mailUtil.getcontent("mail", key))
+                .build();
+
+        mailUtil.SendMail(mail);
+        redisUtil.setDataExpire(key, email, 500);
+        
+        return key;
+    }
+    
+    public String randomkey() {
+    	int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String key = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        
+        return key;
+    }
 }

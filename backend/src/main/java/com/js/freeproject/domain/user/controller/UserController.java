@@ -217,4 +217,28 @@ public class UserController {
 			return ResponseEntity.status(502).body(CommonResponse.of("키 값 없음")); 
 		}
 	}
+	
+	@GetMapping("dupl/{email}")
+	@ApiOperation(value="이메일 중복검사",notes="존재하는 이메일인지 확인한다.")
+	@ApiResponses({
+		@ApiResponse(code=200,message="성공", response = CommonResponse.class),
+		@ApiResponse(code=404,message="사용자 존재", response = CommonResponse.class),
+		@ApiResponse(code=500,message="서버 오류",response=CommonResponse.class),
+		@ApiResponse(code=501,message="메일 전송 오류",response=CommonResponse.class)
+	})
+	public ResponseEntity<?> duplicateEmail(@PathVariable String email) {
+		try {
+			String key = userService.duplemail(email);
+			return ResponseEntity.ok(CommonResponse.of(key));
+		} catch(NullPointerException e) {
+			log.info("{} 사용자가 존재합니다.",email);
+			return ResponseEntity.status(404).body(CommonResponse.of("존재하는 사용자"));
+		} catch(MessagingException e) {
+			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",email);
+			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
+		} catch(Exception e) {
+			log.info("{} 조회 중 오류 발생",email);
+			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류가 발생했습니다."));
+		}	
+	}
 }
