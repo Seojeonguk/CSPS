@@ -20,7 +20,7 @@
         class="subbtn"
         type="submit"
         @click="modify"
-        color="brown-5"
+        style="background: #696969; color: #ffffff"
         label="수정하기"
       />
     </div>
