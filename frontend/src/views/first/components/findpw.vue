@@ -1,5 +1,5 @@
 <template lang="">
-  <q-dialog class="bookstyle-dialog">
+  <q-dialog class="bookstyle-dialog" persistent>
     <div class="book">
       <div class="left-card-top row justify-end">
         <div class="left-card-top-left"></div>
@@ -101,7 +101,6 @@ export default {
         })
         .then(
           (response) => {
-            console.log(response.data);
             requsetAuth(response.data);
           },
           (error) => {

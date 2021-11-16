@@ -1,33 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "main-logout",
-  //   component: () => import("../views/main/logout.vue"),
-  //   children: [
-  //     {
-  //       path: "/",
-  //       name: "logout-cover",
-  //       component: () => import("../views/logout-cover/cover.vue"),
-  //     },
-  //     {
-  //       path: "/info",
-  //       name: "logout-info",
-  //       component: () => import("../views/logout-info/info.vue"),
-  //     },
-  //     {
-  //       path: "/login",
-  //       name: "login",
-  //       component: () => import("../views/login/login.vue"),
-  //     },
-  //     {
-  //       path: "/register",
-  //       name: "register",
-  //       component: () => import("../views/register/register.vue"),
-  //     },
-  //   ],
-  // },
   {
     path: "/",
     name: "first-main",
@@ -38,12 +11,6 @@ const routes = [
     name: "main-login",
     component: () => import("../views/main/login.vue"),
     children: [
-      {
-        //children의 맨 처음 상위 페이지는, 부모의 path를 따라가야함
-        path: "/home",
-        name: "login-cover",
-        component: () => import("../views/login-cover/cover.vue"),
-      },
       {
         path: "/home/info",
         name: "information",
@@ -117,11 +84,6 @@ const routes = [
             path: "/home/mypage/board",
             name: "mypage-board",
             component: () => import("../views/mypage/components/board.vue"),
-          },
-          {
-            path: "/home/mypage/alarm",
-            name: "mypage-alarm",
-            component: () => import("../views/mypage/components/alarm.vue"),
           },
           {
             path: "/home/mypage/modify",

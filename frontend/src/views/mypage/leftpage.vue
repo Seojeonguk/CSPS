@@ -4,7 +4,9 @@
       <div class="mypage-left">
         <div class="profile-wrap">
           <img class="profile-img" :src="state.user.image" />
-          <span class="user-name text-h4 text-bold">{{ state.user.name }}</span>
+          <span class="user-name text-h4 text-bold">{{
+            state.user.nickname
+          }}</span>
         </div>
         <div class="mypage-menu text-h6">
           <div id="leftBtn1" class="myleft click-myleft" @click="mvChart">

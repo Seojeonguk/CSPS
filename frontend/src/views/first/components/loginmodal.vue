@@ -1,5 +1,5 @@
 <template>
-  <q-dialog class="bookstyle-dialog">
+  <q-dialog class="bookstyle-dialog" persistent>
     <div class="dialog-position">
       <div class="dialog-design">
         <div class="book">
@@ -251,7 +251,7 @@ export default {
             if (userinfo.email == "admin@naver.com") {
               router.push({ name: "approve" });
             } else {
-              router.push({ name: "information" });
+              router.push({ name: "info-information" });
             }
           },
           (error) => {
@@ -297,7 +297,7 @@ export default {
       $q.loading.show({
         message: "로그인 중입니다",
         boxClass: "bg-grey-2 text-grey-9",
-        spinnerColor: "primary",
+        spinnerColor: "#495057",
       });
     };
 

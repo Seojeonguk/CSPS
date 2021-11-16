@@ -32,7 +32,7 @@
       </div>
       <div class="right-wrap">
         <div class="open-right-wrap">
-          <div class="information-problem-right-wrap">
+          <div class="information-problem-solve-right-wrap">
             <div class="information-solve-title">
               <b>
                 1.<br />
@@ -138,17 +138,13 @@ export default {
   animation: arrow-wave 1s infinite;
   animation-direction: alternate;
 }
-.information-problem-right-wrap {
+.information-problem-solve-right-wrap {
   display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 28px;
-
-  & > div {
-    margin: 0.25em;
-  }
 }
 .information-solve-title {
 }

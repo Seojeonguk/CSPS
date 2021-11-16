@@ -191,7 +191,7 @@
                             <div class="information-comment">
                               <div class="information-comment-user-image">
                                 <img
-                                  :src="require('@/assets/fin0.jpg')"
+                                  :src="require('@/assets/malang.png')"
                                   class="information-comment-user-image-circle"
                                 />
                               </div>
@@ -270,7 +270,7 @@ export default {
   font-size: 15px;
 
   hr {
-    border-top: 1px double #a2b29f;
+    border-top: 1px double #696969;
   }
 
   .information-question-title {
@@ -343,10 +343,11 @@ export default {
         justify-content: space-between;
         padding: 0.5em 0.5em 0.5em 1em;
         position: relative;
-        background: #a2b29f;
+        background: #696969;
         border-top-left-radius: 0.5em;
         border-top-right-radius: 0.5em;
         margin-left: 0.5em;
+        color: #dcdcdc;
       }
       .information-answer-user:after {
         content: "";
@@ -356,7 +357,7 @@ export default {
         width: 0;
         height: 0;
         border: 1em solid transparent;
-        border-right-color: #a2b29f;
+        border-right-color: #696969;
         border-left: 0;
         margin-top: -1em;
         margin-left: -0.5em;
@@ -366,7 +367,7 @@ export default {
       margin-top: -1em;
       margin-left: 0.5em;
       padding-top: 1em;
-      border: 1px solid #a2b29f;
+      border: 1px solid #696969;
       border-radius: 0.5em;
       .information-answer-content {
         padding: 0.5em 0.5em 0.5em 1em;
@@ -401,9 +402,10 @@ export default {
       justify-content: space-between;
       padding: 0.5em 0.5em 0.5em 1em;
       position: relative;
-      background: #a2b29f;
+      background: #696969;
       border-top-left-radius: 0.5em;
       margin-left: 0.5em;
+      color: #dcdcdc;
     }
     .information-comment-user:after {
       content: "";
@@ -413,7 +415,7 @@ export default {
       width: 0;
       height: 0;
       border: 1em solid transparent;
-      border-right-color: #a2b29f;
+      border-right-color: #696969;
       border-left: 0;
       margin-top: -1em;
       margin-left: -0.5em;
@@ -422,7 +424,7 @@ export default {
       margin-top: -1em;
       margin-left: 0.5em;
       padding-top: 1em;
-      border: 1px solid #a2b29f;
+      border: 1px solid #696969;
       border-radius: 0.5em;
       .information-comment-content {
         padding: 0.5em 0.5em 0.5em 1em;
@@ -477,7 +479,7 @@ export default {
 .information-question-list:hover {
   cursor: pointer;
   color: black;
-  background: #ccd8c8;
+  background: rgba(105, 105, 105, 0.3);
   opacity: 0.7;
 }
 .information-question-list-info {

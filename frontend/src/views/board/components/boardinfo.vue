@@ -5,7 +5,9 @@
       만들었습니다
     </div>
     <div class="info-content second">CS지식을 서로 질문하고 공유해 주세요!</div>
-    <div class="info-content box">게시판 사용에 대한 소개보러가기</div>
+    <div class="info-content box" @click="mvBoardInfo">
+      게시판 사용에 대한 소개보러가기
+    </div>
     <div class="info-content third">
       <div>무분별한 욕설 및 비방글은 허용하지 않습니다.</div>
       <div>타인에게 불쾌감을 불러 일으키는 글은 자제해주세요.</div>
@@ -14,8 +16,16 @@
 </template>
 <script>
 import "@/styles/board.scss";
+import { useRouter } from "vue-router";
 export default {
   name: "board-info",
+  setup() {
+    const router = useRouter();
+    const mvBoardInfo = () => {
+      router.push({ name: "info-board-main" });
+    };
+    return { mvBoardInfo };
+  },
 };
 </script>
 <style lang=""></style>

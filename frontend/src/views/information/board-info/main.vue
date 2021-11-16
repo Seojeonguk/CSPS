@@ -259,7 +259,7 @@ export default {
 .information-question-list:hover {
   cursor: pointer;
   color: black;
-  background: #ccd8c8;
+  background: rgba(105, 105, 105, 0.3);
   opacity: 0.7;
 }
 .information-question-list-info {
@@ -313,10 +313,10 @@ export default {
   font-size: 12px;
   font-weight: bold;
   .information-span {
-    text-shadow: 2px 2px 0 #a2b29f, 2px -2px 0 #a2b29f, -2px 2px 0 #a2b29f,
-      -2px -2px 0 #a2b29f, 2px 0 0 #a2b29f, -2px 0 0 #a2b29f, 0 2px 0 #a2b29f,
-      0 -2px 0 #a2b29f;
-    color: black;
+    text-shadow: 2px 2px 0 #696969, 2px -2px 0 #696969, -2px 2px 0 #696969,
+      -2px -2px 0 #696969, 2px 0 0 #696969, -2px 0 0 #696969, 0 2px 0 #696969,
+      0 -2px 0 #696969;
+    color: #dcdcdc;
   }
   &.information-box {
     display: flex;
@@ -325,7 +325,7 @@ export default {
     width: 50%;
     height: 2em;
     margin: 0 auto;
-    border: 2px solid #a2b29f;
+    border: 2px solid #696969;
     border-radius: 1em;
   }
   &.information-first {
@@ -338,7 +338,7 @@ export default {
   }
   &.information-third {
     margin: 2em 0em 1em 0em;
-    color: #a2b29f;
+    color: #696969;
   }
 }
 </style>
