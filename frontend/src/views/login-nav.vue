@@ -86,7 +86,7 @@ export default {
         .then(
           (response) => {
             console.log(response);
-            router.push({ name: "problem" });
+            router.push({ name: "problem-info" });
           },
           (error) => {
             console.log(error);

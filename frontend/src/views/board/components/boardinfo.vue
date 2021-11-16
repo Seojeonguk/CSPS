@@ -16,10 +16,22 @@
 </template>
 <script>
 import "@/styles/board.scss";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 export default {
   name: "board-info",
   setup() {
+    onMounted(() => {
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn3");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
+    });
+
     const router = useRouter();
 
     if (localStorage.getItem("reload")) {
@@ -30,7 +42,7 @@ export default {
     const mvBoardInfo = () => {
       router.push({ name: "info-board-main" });
     };
-    return { mvBoardInfo };
+    return { mvBoardInfo, onMounted };
   },
 };
 </script>
