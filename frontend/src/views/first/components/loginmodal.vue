@@ -27,6 +27,7 @@
               <q-btn
                 class="self-end btnz"
                 v-close-popup
+                @click="onReset"
                 flat
                 round
                 dense
