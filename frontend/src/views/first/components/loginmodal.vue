@@ -1,5 +1,5 @@
 <template>
-  <q-dialog class="bookstyle-dialog">
+  <q-dialog class="bookstyle-dialog" persistent>
     <div class="dialog-position">
       <div class="dialog-design">
         <div class="book">

@@ -1,5 +1,5 @@
 <template lang="">
-  <q-dialog>
+  <q-dialog persistent>
     <q-card>
       <q-card-section>
         <div>🎉회원가입이 완료되었습니다🎉</div>

@@ -1,5 +1,5 @@
 <template>
-  <q-dialog class="bookstyle-dialog">
+  <q-dialog class="bookstyle-dialog" @hide="onReset" persistent>
     <div class="dialog-position-r">
       <div class="dialog-design-r">
         <div class="book-r">
@@ -140,7 +140,6 @@
 <script>
 import "@/styles/registdialog.scss";
 import { ref, reactive, watch } from "vue";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useQuasar } from "quasar";
 
@@ -153,10 +152,9 @@ export default {
     CompleteDialog,
     EmailDialog,
   },
-  setup() {
+  setup(props, { emit }) {
     const regist_form = ref(null);
     const store = useStore();
-    const router = useRouter();
     const quasar = useQuasar();
     const state = reactive({
       emailduplicate: true,
@@ -333,7 +331,10 @@ export default {
       state.form.email = null;
       state.form.email_check = false;
       state.form.email_success = false;
+      state.email.email = null;
+      state.email.authNumber = null;
     };
+
     /*ㅡㅡㅡㅡㅡ 다이얼로그 ㅡㅡㅡㅡㅡ*/
     const showLoading = () => {
       quasar.loading.show({
@@ -428,12 +429,7 @@ export default {
 
     /*ㅡㅡㅡㅡㅡ MoVe ㅡㅡㅡㅡㅡ*/
     const mvLogin = () => {
-      router.push({
-        name: "login",
-        params: {
-          email: state.form.email,
-        },
-      });
+      emit("mvlogin");
     };
 
     return {
