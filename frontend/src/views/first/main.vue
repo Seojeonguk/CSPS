@@ -9,7 +9,7 @@
       </div>
     </div>
     <loginmodal v-model="state.loginmodal"></loginmodal>
-    <registmodal v-model="state.registmodal"></registmodal>
+    <registmodal v-model="state.registmodal" @mvlogin="mvLogin"></registmodal>
   </div>
 </template>
 <script>
@@ -39,10 +39,16 @@ export default {
       state.registmodal = true;
     };
 
+    const mvLogin = () => {
+      state.registmodal = false;
+      state.loginmodal = true;
+    };
+
     return {
       state,
       showLogin,
       showRegist,
+      mvLogin,
     };
   },
 };
