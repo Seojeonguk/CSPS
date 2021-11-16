@@ -173,6 +173,7 @@ public class UserController {
 	@ApiOperation(value="사용자 비밀번호 찾기(이메일 발송)",notes="랜덤문자열 메일로 발송")
 	@ApiResponses({
 		@ApiResponse(code=200,message="성공", response = CommonResponse.class),
+		@ApiResponse(code=404,message="사용자 찾을 수 없음", response = CommonResponse.class),
 		@ApiResponse(code=500,message="서버 오류",response=CommonResponse.class),
 		@ApiResponse(code=501,message="메일 전송 오류",response=CommonResponse.class)
 	})
@@ -183,7 +184,11 @@ public class UserController {
 		} catch (MessagingException e) {
 			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",map.get("email"));
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
-		} catch(Exception e) {
+		} catch(NotFoundException e) {
+			log.info("{} 사용자가 존재하지 않습니다.",map.get("email"));
+			return ResponseEntity.status(404).body(CommonResponse.of("사용자 찾을 수 없음"));
+		}
+		catch(Exception e) {
 			log.info("{} 비밀번호 찾는 도중 오류가 발생하였습니다.",map.get("email"));
 			log.info("{}",e);
 			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류"));

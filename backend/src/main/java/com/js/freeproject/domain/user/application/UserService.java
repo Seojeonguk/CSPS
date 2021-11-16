@@ -108,7 +108,12 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public String findpassword(String email) throws MessagingException {
+    public String findpassword(String email) throws MessagingException, NotFoundException {
+    	User user = userRepo.findByEmail(email);
+    	if(user==null) {
+    		throw new NotFoundException(email + "사용자가 존재하지 않습니다.");
+    	}
+    	
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;
