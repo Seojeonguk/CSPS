@@ -153,7 +153,7 @@ public class JwtFilter extends OncePerRequestFilter {
 				email = TokenProvider.getSubject(refresh_token);
 				log.info("{} 사용자가 token을 재발급 받았습니다.",email);
 			} catch (Exception e) {
-				log.info(e.toString());
+				log.info("JWT Filter Error : {}",e.toString());
 			}
 		}
 
