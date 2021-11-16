@@ -96,7 +96,10 @@
                   type="email"
                   label="이메일 *"
                 />
-                <div @click="emailCheck()" class="register-btns horizontal-r">
+                <div
+                  class="auth-email register-btns horizontal-r disabled-check"
+                  @click="emailCheck"
+                >
                   인증하기
                 </div>
               </div>
@@ -122,6 +125,12 @@
             v-model="state.regist_complete"
             @mvlogin="mvLogin"
           ></complete-dialog>
+          <email-dialog
+            v-model="state.email.dialog"
+            :email="state.email.email"
+            :authNumber="state.email.authNumber"
+            @emailsuccess="emailSuccess"
+          ></email-dialog>
         </div>
       </div>
     </div>
@@ -136,11 +145,13 @@ import { useStore } from "vuex";
 import { useQuasar } from "quasar";
 
 import CompleteDialog from "./complete-dialog.vue";
+import EmailDialog from "./email.vue";
 
 export default {
   name: "register-right",
   components: {
     CompleteDialog,
+    EmailDialog,
   },
   setup() {
     const regist_form = ref(null);
@@ -150,6 +161,11 @@ export default {
     const state = reactive({
       emailduplicate: true,
       regist_complete: false,
+      email: {
+        dialog: false,
+        email: "",
+        authNumber: "",
+      },
       form: {
         name: "",
         nickName: "",
@@ -186,6 +202,7 @@ export default {
           (val) => isValidPassCheck(val) || "입력한 비밀번호와 맞지 않습니다.",
         ],
         email: [
+          (val) => isDisabledEmail(val),
           (val) => (val !== null && val.length > 0) || "필수입력 항목입니다.",
           (val) => isValidEmail(val) || "이메일형식에 맞지 않습니다.",
         ],
@@ -196,6 +213,14 @@ export default {
       // eslint-disable-next-line
       const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
       return emailPattern.test(val);
+    };
+    const isDisabledEmail = (val) => {
+      let auth_email = document.querySelector(".auth-email");
+      if (val !== null && val.length > 0 && isValidEmail(val)) {
+        auth_email.classList.remove("disabled-check");
+      } else {
+        auth_email.classList.add("disabled-check");
+      }
     };
     const isValidPass = (val) => {
       const passPattern =
@@ -243,6 +268,24 @@ export default {
     };
 
     const emailCheck = () => {
+      showLoading();
+      store
+        .dispatch("root/requestUserSendEmail", {
+          email: state.form.email,
+        })
+        .then((response) => {
+          console.log(state.form.email, response.data, typeof response.data);
+          state.email.email = state.form.email;
+          state.email.authNumber = response.data.message;
+          hideLoading();
+          state.email.dialog = true;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    const emailSuccess = () => {
+      state.email = false;
       state.form.email_success = true;
     };
 
@@ -259,7 +302,7 @@ export default {
                 name: state.form.name,
                 nickName: state.form.nickName,
                 pass: state.form.pass,
-                email: state.form.email,
+                email: state.email.email,
               })
               .then(
                 (response) => {
@@ -292,6 +335,16 @@ export default {
       state.form.email_success = false;
     };
     /*ㅡㅡㅡㅡㅡ 다이얼로그 ㅡㅡㅡㅡㅡ*/
+    const showLoading = () => {
+      quasar.loading.show({
+        message: "요청 중입니다",
+        boxClass: "bg-grey-2 text-grey-9",
+        spinnerColor: "#495057",
+      });
+    };
+    const hideLoading = () => {
+      quasar.loading.hide();
+    };
     const nickNameSuccess = () => {
       quasar
         .dialog({
@@ -391,7 +444,10 @@ export default {
       onReset,
       nickNameCheck,
       emailCheck,
+      emailSuccess,
       /* 다이얼로그 */
+      showLoading,
+      hideLoading,
       nickNameSuccess,
       nickNameError,
       nickNameSuccessError,

@@ -101,7 +101,6 @@ export default {
         })
         .then(
           (response) => {
-            console.log(response.data);
             requsetAuth(response.data);
           },
           (error) => {
