@@ -59,11 +59,11 @@ public class UserService {
         return userRepo.save(userEntity);
     }
     
-    public User login(String email) throws NotFoundException {
+    public User login(String email) {
     	User user = userRepo.findByEmail(email);
     	
     	if (user == null) {
-            throw new NotFoundException(email + "를 찾을 수 없습니다.");
+            throw new NullPointerException(email + "를 찾을 수 없습니다.");
         }
 		
 		CustomUserDetails accountDetails = new CustomUserDetails(user);
@@ -108,10 +108,11 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public String findpassword(String email) throws MessagingException, NotFoundException {
+    public String findpassword(String email) throws MessagingException {
     	User user = userRepo.findByEmail(email);
     	if(user==null) {
-    		throw new NotFoundException(email + "사용자가 존재하지 않습니다.");
+    		log.info("{} 미존재",email);
+    		throw new NullPointerException();
     	}
     	
         int leftLimit = 48; // numeral '0'

@@ -77,7 +77,7 @@ public class UserController {
 			redisUtil.setDataExpire(token, refreshToken, TokenProvider.getRefreshExpiration()/100);
 			
 			return ResponseEntity.ok(LoginResponse.of("Success", token));
-		} catch(NotFoundException e) {
+		} catch(NullPointerException e) {
 			log.info("사용자 정보가 없습니다.");
 			return ResponseEntity.status(404).body(CommonResponse.of("존재하지 않는 계정입니다."));
 		}
@@ -177,20 +177,19 @@ public class UserController {
 		@ApiResponse(code=500,message="서버 오류",response=CommonResponse.class),
 		@ApiResponse(code=501,message="메일 전송 오류",response=CommonResponse.class)
 	})
-	public ResponseEntity<?> findPassword(@RequestBody Map<String,String> map) {
+	public ResponseEntity<?> findPassword(@RequestBody Map<String,String> map) throws Exception {
 		try {
 			String key = userService.findpassword(map.get("email"));
 			return ResponseEntity.status(200).body(CommonResponse.of(key));
 		} catch (MessagingException e) {
 			log.info("{} 사용자에게 메일을 보내는 중 오류가 발생하였습니다.",map.get("email"));
 			return ResponseEntity.status(501).body(CommonResponse.of("메일 오류"));
-		} catch(NotFoundException e) {
+		} catch(NullPointerException e) {
 			log.info("{} 사용자가 존재하지 않습니다.",map.get("email"));
 			return ResponseEntity.status(404).body(CommonResponse.of("사용자 찾을 수 없음"));
-		}
-		catch(Exception e) {
+		} catch(Exception e) {
 			log.info("{} 비밀번호 찾는 도중 오류가 발생하였습니다.",map.get("email"));
-			log.info("{}",e);
+			e.printStackTrace();
 			return ResponseEntity.status(500).body(CommonResponse.of("서버 오류"));
 		}
 	}
