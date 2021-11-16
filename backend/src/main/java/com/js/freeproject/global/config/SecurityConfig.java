@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.js.freeproject.global.handler.AuthenticationEntryPoint;
+import com.js.freeproject.global.handler.CustomAccessDeniedHandler;
 import com.js.freeproject.global.jwt.JwtFilter;
 
 @Configuration
@@ -28,6 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.exceptionHandling()
+			.accessDeniedHandler(new CustomAccessDeniedHandler())
+			.authenticationEntryPoint(new AuthenticationEntryPoint())
+			.and()
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/user/me").authenticated()
@@ -41,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors()
 			.and()
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+			
 	}
 	
 	@Bean
