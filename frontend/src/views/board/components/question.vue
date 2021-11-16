@@ -2,18 +2,18 @@
   <div v-if="state.error != ''">{{ state.error }}</div>
   <div v-else>
     <div class="board-question" v-if="state.question != null">
-      <div class="row">
-        <div align="left" class="question-title">
+      <div class="question-header">
+        <div class="question-title">
           {{ state.question.title }}
         </div>
-        <div align="right" style="margin-left: auto; margin-right: 0">
-          <q-btn
-            class="subbtn"
-            flat
-            type="submit"
+        <div class="question-delete">
+          <div
+            class="question-delete-btn"
+            v-if="state.question.user.id == state.user.id"
             @click="deleteBoard()"
-            label="삭제"
-          />
+          >
+            삭제
+          </div>
         </div>
       </div>
       <div class="question-createdAt">{{ state.question.createdAt }}</div>
@@ -95,11 +95,6 @@ export default {
       this.$router.go();
     },
     deleteBoard() {
-      let userId = localStorage.getItem("userId");
-      if (userId != this.state.question.user.id) {
-        alert("본인 글만 삭제할 수 있습니다.");
-        return;
-      }
       //console.log(this.$route.params.id);
       this.$store
         .dispatch("root/requestDelete", this.$route.params.id)
@@ -122,7 +117,7 @@ export default {
       error: "",
       question: null,
       viewer: null,
-      user: computed(() => store.getters["root/getUser"]),
+      user: computed(() => JSON.parse(localStorage.getItem("userInfo"))),
     });
 
     const getQuestion = () => {
