@@ -21,6 +21,12 @@ export default {
   name: "board-info",
   setup() {
     const router = useRouter();
+
+    if (localStorage.getItem("reload")) {
+      localStorage.removeItem("reload");
+      router.go();
+    }
+
     const mvBoardInfo = () => {
       router.push({ name: "info-board-main" });
     };

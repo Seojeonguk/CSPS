@@ -62,8 +62,8 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import QuestionAnswer from "./components/answer.vue";
 
-import { computed, reactive, onUpdated } from "vue";
-import { useRoute } from "vue-router";
+import { computed, reactive, onUpdated, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
@@ -101,7 +101,8 @@ export default {
         .then((response) => {
           if (response.data == "success") {
             alert("삭제되었습니다.");
-            this.$router.push({ name: "problem" });
+            localStorage.setItem("reload", true);
+            this.$router.push({ name: "board-info" });
           }
         })
         .catch((error) => {
@@ -112,12 +113,29 @@ export default {
   setup() {
     const route = useRoute();
     const store = useStore();
+    const router = useRouter();
 
     const state = reactive({
       error: "",
       question: null,
       viewer: null,
       user: computed(() => JSON.parse(localStorage.getItem("userInfo"))),
+    });
+
+    if (localStorage.getItem("reload")) {
+      localStorage.removeItem("reload");
+      router.go();
+    }
+
+    onMounted(() => {
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn3");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
     });
 
     const getQuestion = () => {
@@ -148,6 +166,7 @@ export default {
 
     return {
       state,
+      onMounted,
     };
   },
 };

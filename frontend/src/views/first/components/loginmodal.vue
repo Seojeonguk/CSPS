@@ -219,6 +219,7 @@ export default {
               $q.loading.hide();
               getUserInfo(response.data.token);
               localStorage.setItem("token", response.data.token);
+              localStorage.setItem("menu", "menuBtn1");
               saveProblemCategory();
             })
             .catch((error) => {
