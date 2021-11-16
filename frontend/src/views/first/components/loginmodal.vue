@@ -106,6 +106,7 @@
             <update-pw-dialog
               v-model="state.dialog.updatepw"
               :email="state.emailcheck.email"
+              :authNumber="state.updateAuth"
               @mvlogin="mvLogin"
             ></update-pw-dialog>
           </div>
@@ -183,6 +184,7 @@ export default {
         email: "",
         authNumber: "",
       },
+      updateAuth: "",
     });
     /*ㅡㅡㅡㅡㅡ 검증 ㅡㅡㅡㅡㅡ*/
     const isValidEmail = (val) => {
@@ -273,13 +275,14 @@ export default {
       state.emailcheck = data;
       state.dialog.emailcheck = true;
     };
-    const openUpdatePwDialog = () => {
+    const openUpdatePwDialog = (updateauth) => {
+      console.log(updateauth);
       state.dialog.emailcheck = false;
+      state.updateAuth = updateauth;
       state.dialog.updatepw = true;
     };
     const mvLogin = () => {
       state.dialog.updatepw = false;
-      router.push({ name: "login" });
     };
 
     const saveProblemCategory = () => {
