@@ -191,7 +191,7 @@
                             <div class="information-comment">
                               <div class="information-comment-user-image">
                                 <img
-                                  :src="require('@/assets/fin0.jpg')"
+                                  :src="require('@/assets/malang.png')"
                                   class="information-comment-user-image-circle"
                                 />
                               </div>
