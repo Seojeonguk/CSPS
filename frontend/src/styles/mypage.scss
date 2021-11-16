@@ -183,14 +183,27 @@
 }
 .mypage-board-list {
   width: 100%;
+  height: 5%;
   display: flex;
-  text-align: left;
-  margin-bottom: 1em;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0.5em 0;
+  border: 2.5px solid #696969;
+  border-radius: 15px;
+  transition: all 0.7s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #696969;
+
+    color: white;
+    transition: all 0.3s ease-out;
+  }
 }
 
 .boardlist-1 {
   width: 8%;
-  text-align: center;
 }
 
 .boardlist-2 {
@@ -198,7 +211,6 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: center;
   font-size: 1.2em;
   &:hover {
     cursor: pointer;
