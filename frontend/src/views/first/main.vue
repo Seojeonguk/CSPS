@@ -7,6 +7,7 @@
         <div class="login-btn" @click="showLogin">로그인</div>
         <div class="regist-btn" @click="showRegist">회원가입</div>
       </div>
+      <div class="logo"></div>
     </div>
     <loginmodal v-model="state.loginmodal"></loginmodal>
     <registmodal v-model="state.registmodal" @mvlogin="mvLogin"></registmodal>
