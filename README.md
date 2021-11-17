@@ -74,7 +74,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ## ❔ 서비스 아키텍쳐
 
-![image-20211007113705334](README.assets/image-20211007113705334.png)
+![image-20211007113705334](README.assets/cs_architecture.JPG)
 
 
 
