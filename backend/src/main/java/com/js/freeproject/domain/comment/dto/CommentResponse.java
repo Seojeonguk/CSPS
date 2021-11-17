@@ -1,13 +1,14 @@
 package com.js.freeproject.domain.comment.dto;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.comment.domain.Comment;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
