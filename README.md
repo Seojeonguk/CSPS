@@ -45,31 +45,20 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ### OOOO 서비스 
 
-> 회원가입시 단 6개의 추천으로 나와 맞는 최고의 지역을 추천해드립니다.  
+> 간략주제  
 
-- 한국관광공사의 `국민여행조사 2020 국내여행` 을 기반으로 데이터 전처리 
-- 상관 관계 분석으로 6개의 주요 변수 추출 
-- 랜덤 포레스트 기반 모델
+- 내용1 
+- 내용2 
+- 내용3
 
-### 리뷰로 분석하는 최고의 관광지 추천 서비스  
+### OOOO 서비스  
 
-> 1개만의 리뷰로도 빅데이터 기반 맞춤형 관광지를 추천해드립니다.
+> 간략주제
 
-- 한국관광공사의 `국문 관광정보 데이터 ` 에 존재하는 관광지 리뷰를 카카오에서 크롤링
-- Cosine Similarity를 통한 유저간의 유사도 측정
-- 98명의 페르소나로 차원 축소 
-- SVD(특이값 분해) 모델 
-
-### 나만의 여행경로
-
-> 여행가기전에 경로를 미리 짜볼 수 있습니다. 
-
-- kakao map API 를 사용하여 지도를 보여줌
-- 5가지 테마로 분류해 마커로 표시 
-- 선택한 관광지를 기반으로 경로를 표시하고 저장
-
-
-
+- 내용1
+- 내용2
+- 내용3 
+ 
 <br>
 
 ## ❔ 서비스 아키텍쳐
@@ -93,7 +82,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 ### ✨Front-End 
 
 - **지원 환경** : Web
-- **담당자** : 김용재, 이조순, 차범희
+- **담당자** : 박지수, 진해진
 
 <details>
     <summary>Front 자세히 살펴보기 🌈</summary>
@@ -103,7 +92,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
     <ul>
         <li>JS, HTML, CSS</li>
         <li>SCSS</li>
-        <li>Vue.js @2.6.11</li>
+        <li>Vue.js @3.6.11</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
     <ul>
@@ -122,24 +111,12 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
         <li>bootstrap-vue</li>
         <li>jwt-decode</li>
         <li>less-loader</li>
-        <li>v-calendar</li>
-        <li>vue-compare-image</li>
-        <li>vue-easy-range-date-picker</li>
-        <li>vue-google-login</li>
         <li>vue-infinite-loading</li>   
-        <li>vue-typer</li>
-        <li>vue2-datepicker</li>
-        <li>vue2-daterange-picker</li>
         <li>vuejs-countdown</li>
         <li>vuelendar</li>
         <li>vuelidate</li>
-        <li>vuetify</li>
-        <li>vuetify-image-input</li>
         <li>vuex</li>
         <li>vuex-persistedstate</li>
-        <li>webstomp-client</li>
-        <li>d3</li>
-        <li>jquery</li>
     </ul>
 </details>
 
@@ -147,43 +124,24 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ### 💻Back-End
 
-- **담당자** : 김윤빈, 임광훈
+- **담당자** : 서정욱, 이조순
 <details>
-    <summary>Front 자세히 살펴보기 🌈</summary>
+    <summary>Back 자세히 살펴보기 🌈</summary>
     <ul>
         <li>기술스택 ⚙</li>
     </ul>   
     <ul>
-        <li>Django</li>
+        <li>Spring Boot</li>
+        <li>Spring Data JPA</li>
+        <li>Spring Security</li>
         <li>AWS EC2</li>
-        <li>Docker</li>
-        <li>Jenkins</li>
-        <li>Mariadb</li>
         <li>AWS S3</li>
+        <li>Jenkins</li>
+        <li>MySQL</li>
+        <li>Redis</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
-    <ul>
-        <li>라이브러리 📚</li>
-    </ul>   
-    <ul>
-        <li>Scikit-learn</li>
-        <li>djangorestframework-jwt</li>
-        <li>gunicorn</li>
-        <li>numpy</li>
-        <li>pandas</li>
-        <li>django-rest-authtoken</li>
-        <li>pymongo</li>
-        <li>python-dateutil</li>
-        <li>pytz</li>
-        <li>requests</li>
-        <li>scipy</li>
-        <li>six</li>
-        <li>sqlparse</li>
-        <li>threadpoolctl</li>
-        <li>urllib3</li>
-        <li>TruncatedSVD</li>
-        <li>svds</li>
-    </ul>
+    
 </details>
 
 
