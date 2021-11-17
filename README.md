@@ -43,7 +43,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ## ⭐️주요 기능
 
-### 개인에 맞춘 지역 만족 추천 서비스 
+### OOOO 서비스 
 
 > 회원가입시 단 6개의 추천으로 나와 맞는 최고의 지역을 추천해드립니다.  
 
@@ -82,7 +82,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ## 🎞 최종산출물
 
-- [시연 영상](https://www.youtube.com/watch?v=eiS_HoIL0Sg)
+- [시연 영상](https://youtu.be/qct8XHwHFrs)
 
 - [발표영상 pdf]
 
@@ -96,54 +96,14 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 $ cd frontend
 $ npm i
 $ npm run serve
-```
-
-- Backend
-
-```bash
-$ cd Backend
-$ python -m venv venv
-$ source venv/Scripts/activate
-$ pip install requirements.txt
-$ python manage.py loaddata init.json
-$ python manage.py makemigrations
-$ python manage.py migrate
-$ python manage.py runserver
-
-```
-
-
 
 ## ⚙ 개발 환경 및 IDE
 
-- python : 3.8.10
-- Django: 3.2.7
-- Docker : 20.10.8
-- node.js : 10.19.0
-
-
-
-## 🐤 Server Description
-
-- port (nginx)
-
-  - 
-
-    | 443  | server default(https)     |
-    | ---- | ------------------------- |
-    | 80   | server default(http)      |
-    | 3306 | mariaDB                   |
-    | 8000 | REST API (django running) |
-    | 8082 | Jenkins                   |
-
-
-
----
+- Java : 11
+- Spring Boot
+- Vue3
 
 ### ✨Front-End 
-
-- **지원 환경** : Web
-- **담당자** : 김용재, 이조순, 차범희
 
 <details>
     <summary>Front 자세히 살펴보기 🌈</summary>
@@ -153,7 +113,7 @@ $ python manage.py runserver
     <ul>
         <li>JS, HTML, CSS</li>
         <li>SCSS</li>
-        <li>Vue.js @2.6.11</li>
+        <li>Vue.js @3.6.11</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
     <ul>
@@ -175,11 +135,7 @@ $ python manage.py runserver
         <li>v-calendar</li>
         <li>vue-compare-image</li>
         <li>vue-easy-range-date-picker</li>
-        <li>vue-google-login</li>
         <li>vue-infinite-loading</li>   
-        <li>vue-typer</li>
-        <li>vue2-datepicker</li>
-        <li>vue2-daterange-picker</li>
         <li>vuejs-countdown</li>
         <li>vuelendar</li>
         <li>vuelidate</li>
@@ -188,7 +144,6 @@ $ python manage.py runserver
         <li>vuex</li>
         <li>vuex-persistedstate</li>
         <li>webstomp-client</li>
-        <li>d3</li>
         <li>jquery</li>
     </ul>
 </details>
@@ -197,43 +152,24 @@ $ python manage.py runserver
 
 ### 💻Back-End
 
-- **담당자** : 김윤빈, 임광훈
 <details>
-    <summary>Front 자세히 살펴보기 🌈</summary>
+    <summary>BACK 자세히 살펴보기 🌈</summary>
     <ul>
         <li>기술스택 ⚙</li>
     </ul>   
     <ul>
-        <li>Django</li>
+        <li>Spring Boot</li>
+        <li>Spring Security</li>
         <li>AWS EC2</li>
-        <li>Docker</li>
         <li>Jenkins</li>
-        <li>Mariadb</li>
+        <li>MySQL</li>
         <li>AWS S3</li>
+        <li>Redis</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
     <ul>
         <li>라이브러리 📚</li>
     </ul>   
-    <ul>
-        <li>Scikit-learn</li>
-        <li>djangorestframework-jwt</li>
-        <li>gunicorn</li>
-        <li>numpy</li>
-        <li>pandas</li>
-        <li>django-rest-authtoken</li>
-        <li>pymongo</li>
-        <li>python-dateutil</li>
-        <li>pytz</li>
-        <li>requests</li>
-        <li>scipy</li>
-        <li>six</li>
-        <li>sqlparse</li>
-        <li>threadpoolctl</li>
-        <li>urllib3</li>
-        <li>TruncatedSVD</li>
-        <li>svds</li>
-    </ul>
 </details>
 
 
