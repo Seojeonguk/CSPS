@@ -1,4 +1,4 @@
- <p align="center"><img src="README.assets/cs_main.JPG" width="400" height="200" /></p>
+ <p align="center"><img src="README.assets/cs_main.JPG"/></p>
 
 
 
