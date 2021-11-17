@@ -25,9 +25,9 @@
    - 이전 자신의 데이터와 비교하여 실력을 분석할 수 있다.
    - 게시판을 제작하여 사용자들끼리 의견을 공유할 수 있다.
 
-- [와이어프레임]
+- [와이어프레임][@Wire Frame](https://framer.com/projects/cs--qxjc9e432DFiUf7FBgcR-3BK0I?node=PaTegxmm0-page)
 - [ERD]![image-20211007113705334](README.assets/Free_ERD.png)
-- [API]
+- [API][@Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 
 <br>
 
@@ -73,7 +73,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 - [시연 영상](https://youtu.be/qct8XHwHFrs)
 
-- [발표영상 pdf]
+- [PDF]
 
 
 
