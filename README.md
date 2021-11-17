@@ -90,20 +90,10 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ## 😋 Installation
 
-- Frontend
-
-```bash
-$ cd frontend
-$ npm i
-$ npm run serve
-
-## ⚙ 개발 환경 및 IDE
-
-- Java : 11
-- Spring Boot
-- Vue3
-
 ### ✨Front-End 
+
+- **지원 환경** : Web
+- **담당자** : 김용재, 이조순, 차범희
 
 <details>
     <summary>Front 자세히 살펴보기 🌈</summary>
@@ -113,7 +103,7 @@ $ npm run serve
     <ul>
         <li>JS, HTML, CSS</li>
         <li>SCSS</li>
-        <li>Vue.js @3.6.11</li>
+        <li>Vue.js @2.6.11</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
     <ul>
@@ -135,7 +125,11 @@ $ npm run serve
         <li>v-calendar</li>
         <li>vue-compare-image</li>
         <li>vue-easy-range-date-picker</li>
+        <li>vue-google-login</li>
         <li>vue-infinite-loading</li>   
+        <li>vue-typer</li>
+        <li>vue2-datepicker</li>
+        <li>vue2-daterange-picker</li>
         <li>vuejs-countdown</li>
         <li>vuelendar</li>
         <li>vuelidate</li>
@@ -144,6 +138,7 @@ $ npm run serve
         <li>vuex</li>
         <li>vuex-persistedstate</li>
         <li>webstomp-client</li>
+        <li>d3</li>
         <li>jquery</li>
     </ul>
 </details>
@@ -152,24 +147,43 @@ $ npm run serve
 
 ### 💻Back-End
 
+- **담당자** : 김윤빈, 임광훈
 <details>
-    <summary>BACK 자세히 살펴보기 🌈</summary>
+    <summary>Front 자세히 살펴보기 🌈</summary>
     <ul>
         <li>기술스택 ⚙</li>
     </ul>   
     <ul>
-        <li>Spring Boot</li>
-        <li>Spring Security</li>
+        <li>Django</li>
         <li>AWS EC2</li>
+        <li>Docker</li>
         <li>Jenkins</li>
-        <li>MySQL</li>
+        <li>Mariadb</li>
         <li>AWS S3</li>
-        <li>Redis</li>
     </ul>
     <li>--------------------------------------------------------------------------------------</li>
     <ul>
         <li>라이브러리 📚</li>
     </ul>   
+    <ul>
+        <li>Scikit-learn</li>
+        <li>djangorestframework-jwt</li>
+        <li>gunicorn</li>
+        <li>numpy</li>
+        <li>pandas</li>
+        <li>django-rest-authtoken</li>
+        <li>pymongo</li>
+        <li>python-dateutil</li>
+        <li>pytz</li>
+        <li>requests</li>
+        <li>scipy</li>
+        <li>six</li>
+        <li>sqlparse</li>
+        <li>threadpoolctl</li>
+        <li>urllib3</li>
+        <li>TruncatedSVD</li>
+        <li>svds</li>
+    </ul>
 </details>
 
 
