@@ -46,16 +46,14 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ### 음성인식 서비스 
 
-> 간략주제  
+> Web Speech API를 활용한 음성인식
 
-- Web Speech API를 활용한 음성인식
 - 이용자가 문제를 풀이할 때 사용하는 방식
 
 ### 게시판 서비스  
 
-> 간략주제
+> Toast UI Editor를 활용한 게시판
 
-- Toast UI Editor를 활용한 게시판
 - 글작성 시 개발자에게 친숙한 MarkDown 및 HTML 작성 환경 제공
  
 <br>
