@@ -256,7 +256,6 @@ export default {
             } else {
               router.push({ name: "info-information" });
             }
-            onReset();
           },
           (error) => {
             console.log(error);
