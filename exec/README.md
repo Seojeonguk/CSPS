@@ -4,6 +4,8 @@
 
 - Java : 11.0.10
 - Spring Boot
+- Vue3
+- Quasar
 - node.js : 10.19.0
 
 
@@ -20,5 +22,6 @@
     | 8080 | Spring Boot               |
     | 8082 | Jenkins                   |
 
+## DB DumpData
 ![db접속정보](README.assets/db_connect.JPG)
 
