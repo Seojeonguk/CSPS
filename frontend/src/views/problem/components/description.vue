@@ -62,7 +62,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const selectProblem = () => {
-      if (this.standard == 0) {
+      if (props.standard == 0) {
         selectProblemError();
         return;
       }
