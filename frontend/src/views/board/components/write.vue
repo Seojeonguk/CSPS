@@ -56,7 +56,7 @@ export default {
             callback(response.data, "그림");
           })
           .catch((error) => {
-            alert(error.response.data);
+            console.log(error.response.data);
           });
       });
     });
@@ -71,7 +71,7 @@ export default {
       var editor_text = state.editor.getMarkdown();
       var user = JSON.parse(localStorage.getItem("userInfo"));
       if (state.title == "") {
-        alert("제목이 입력되지 않았습니다.");
+        boardWriteError();
         return;
       }
       store
@@ -82,10 +82,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          alert("작성이 완료되었습니다.");
-          const url = "/home/board/question/" + response.data.id;
-          localStorage.setItem("reload", true);
-          router.push({ path: url });
+          boardWriteSuccess();
         })
         .catch((error) => {
           console.log(error);
@@ -99,12 +96,11 @@ export default {
       await store
         .dispatch("root/requestImageSave", formData)
         .then((response) => {
-          alert("안쪽" + response);
           url = response.data;
           return url;
         })
         .catch((error) => {
-          alert(error.response.data);
+          console.log(error.response.data);
         });
     };
 
@@ -116,12 +112,47 @@ export default {
           hooks={{
             addImageBlobHook: (blob, callback) => {
               const img_url = uploadImage(blob);
-              alert("방가");
               callback(img_url, "alt_text");
             },
           }}
         />
       );
+    };
+    const boardWriteError = () => {
+      quasar
+        .dialog({
+          title: "게시판 작성",
+          message: "제목이 입력되지 않았습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
+
+    const boardWriteSuccess = () => {
+      quasar
+        .dialog({
+          title: "게시판 작성",
+          message: "작성이 완료되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+          const url = "/home/board/question/" + response.data.id;
+          localStorage.setItem("reload", true);
+          router.push({ path: url });
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
     };
 
     return {
