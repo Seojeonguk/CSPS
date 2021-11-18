@@ -247,7 +247,6 @@ export default {
               image: response.data.image,
               token: jwt_token,
             };
-
             store.commit("root/setUser", userinfo);
             localStorage.setItem("userInfo", JSON.stringify(userinfo));
             localStorage.setItem("userId", userinfo.id);
@@ -257,6 +256,7 @@ export default {
             } else {
               router.push({ name: "info-information" });
             }
+            onReset();
           },
           (error) => {
             console.log(error);
@@ -278,7 +278,6 @@ export default {
       state.dialog.emailcheck = true;
     };
     const openUpdatePwDialog = (updateauth) => {
-      console.log(updateauth);
       state.dialog.emailcheck = false;
       state.updateAuth = updateauth;
       state.dialog.updatepw = true;

@@ -42,7 +42,7 @@ export default {
 
     const mvLogin = () => {
       state.registmodal = false;
-      state.loginmodal = true;
+      showLogin();
     };
 
     return {
