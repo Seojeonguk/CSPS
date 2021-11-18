@@ -181,8 +181,6 @@ export default {
         .then((response) => {
           if (response.data == "success") {
             boardDeleteSuccess();
-            localStorage.setItem("reload", true);
-            router.push({ name: "board-info" });
           }
         })
         .catch((error) => {
@@ -197,6 +195,8 @@ export default {
         })
         .onOk(() => {
           console.log("OK");
+          localStorage.setItem("reload", true);
+          router.push({ name: "board-info" });
         })
         .onCancel(() => {
           console.log("Cancel");
