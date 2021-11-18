@@ -54,7 +54,10 @@
             <div class="emailcheck-card-right-info-bottom">
               <q-input dense v-model="state.auth" label="인증번호 *"> </q-input>
               <div class="emailcheck-card-right-info-bottom-btns">
-                <div class="emailcheck-card-btn" @click="emailAuthentication">
+                <div
+                  class="emailcheck-card-btn re-auth-btn disabled-check"
+                  @click="emailAuthentication"
+                >
                   재요청
                 </div>
                 <div class="emailcheck-card-btn" @click="authentication">
@@ -77,7 +80,7 @@
 <script>
 import "@/styles/logindialog.scss";
 import "@/styles/emailcheck.scss";
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import { useStore } from "vuex";
 import { useQuasar } from "quasar";
 export default {
@@ -90,7 +93,9 @@ export default {
     const quasar = useQuasar();
     const store = useStore();
     const state = reactive({
+      timer_content: "",
       auth: "",
+      auth_yet: props.authNumber,
     });
     const emailAuthentication = () => {
       showLoading();
@@ -101,8 +106,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          state.auth = response.data.message;
-          countDown("emailcheck-timer", 300);
+          state.auth_yet = response.data.message;
           hideLoading();
           ResendAuthSuccess();
         })
@@ -111,8 +115,8 @@ export default {
         });
     };
     const authentication = () => {
-      console.log(props.authNumber, state.auth);
-      if (props.authNumber === state.auth) {
+      console.log(state.auth_yet, state.auth);
+      if (state.auth_yet === state.auth) {
         authSuccess();
       } else {
         authFail();
@@ -159,6 +163,7 @@ export default {
           message: "인증번호를 재요청 했습니다.",
         })
         .onOk(() => {
+          countDown("emailcheck-timer", 180);
           console.log("OK");
         })
         .onCancel(() => {
@@ -191,11 +196,31 @@ export default {
         var minutes = Math.floor(distDt / 60);
         var seconds = distDt % 60;
         console.log(minutes, seconds);
-        document.getElementById(id).textContent = minutes + ":" + seconds;
+        state.timer_content = minutes + ":" + seconds;
+        document.getElementById(id).textContent = state.timer_content;
       }
       timer = setInterval(showRemaining, 1000);
     };
-    countDown("emailcheck-timer", 300);
+    watch(
+      () => state.timer_content,
+      () => {
+        let re_auth_btn = document.querySelector(".re-auth-btn");
+        if (state.timer_content == "0:0") {
+          re_auth_btn.classList.remove("disabled-check");
+        } else {
+          re_auth_btn.classList.add("disabled-check");
+        }
+      }
+    );
+
+    watch(
+      () => props.email,
+      () => {
+        if (props.email != "") {
+          countDown("emailcheck-timer", 180);
+        }
+      }
+    );
     return {
       state,
       emailAuthentication,
