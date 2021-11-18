@@ -160,7 +160,6 @@ export default {
     const store = useStore();
     const quasar = useQuasar();
     const state = reactive({
-      emailduplicate: true,
       regist_complete: false,
       email: {
         dialog: false,
@@ -184,7 +183,6 @@ export default {
           (val) => val.length > 0 || "필수입력 항목입니다.",
         ],
         nickName: [
-          (val) => isDisabledNickName(val),
           (val) => val != null || "필수입력 항목입니다.",
           (val) =>
             (val.length >= 2 && val.length <= 16) ||
@@ -208,14 +206,6 @@ export default {
       },
     });
     /*ㅡㅡㅡㅡㅡ 검증 ㅡㅡㅡㅡㅡ*/
-    const isDisabledNickName = (val) => {
-      let auth_nickname = document.querySelector(".auth-nickname");
-      if (val !== null && val.length > 0) {
-        auth_nickname.classList.remove("disabled-check");
-      } else {
-        auth_nickname.classList.add("disabled-check");
-      }
-    };
     const isValidEmail = (val) => {
       // eslint-disable-next-line
       const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
@@ -250,6 +240,17 @@ export default {
           state.form.nickName_success = false;
         } else {
           state.form.nickName_success = true;
+        }
+      }
+    );
+    watch(
+      () => [state.form.email],
+      () => {
+        console.log(state.form.email, state.form.email_yet);
+        if (state.form.email_yet != state.form.email) {
+          state.form.email_success = false;
+        } else {
+          state.form.email_success = true;
         }
       }
     );
@@ -306,6 +307,7 @@ export default {
         });
     };
     const emailSuccess = () => {
+      state.form.email_yet = state.form.email;
       state.email.dialog = false;
       state.form.email_success = true;
     };
