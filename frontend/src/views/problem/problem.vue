@@ -35,14 +35,7 @@ export default {
           console.log(error);
         });
     });
-    const mikeRecognition = () => {
-      window.SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new window.SpeechRecognition();
-      recognition.lang = "ko-KR";
-      recognition.start();
-    };
-    mikeRecognition();
+
     return {
       onBeforeMount,
     };
