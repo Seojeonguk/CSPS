@@ -68,7 +68,12 @@
                 />
                 <div
                   @click="nickNameCheck"
-                  class="auth-nickname register-btns horizontal-r"
+                  class="
+                    auth-nickname
+                    register-btns
+                    horizontal-r
+                    disabled-check
+                  "
                 >
                   중복확인
                 </div>
@@ -183,6 +188,7 @@ export default {
           (val) => val.length > 0 || "필수입력 항목입니다.",
         ],
         nickName: [
+          (val) => isDisabledNickName(val),
           (val) => val != null || "필수입력 항목입니다.",
           (val) =>
             (val.length >= 2 && val.length <= 16) ||
@@ -206,6 +212,14 @@ export default {
       },
     });
     /*ㅡㅡㅡㅡㅡ 검증 ㅡㅡㅡㅡㅡ*/
+    const isDisabledNickName = (val) => {
+      let auth_nickname = document.querySelector(".auth-nickname");
+      if (val !== null && val.length >= 2 && val.length <= 16) {
+        auth_nickname.classList.remove("disabled-check");
+      } else {
+        auth_nickname.classList.add("disabled-check");
+      }
+    };
     const isValidEmail = (val) => {
       // eslint-disable-next-line
       const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
