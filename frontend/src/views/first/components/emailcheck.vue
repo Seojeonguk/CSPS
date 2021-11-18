@@ -60,7 +60,10 @@
                 >
                   재요청
                 </div>
-                <div class="emailcheck-card-btn" @click="authentication">
+                <div
+                  class="emailcheck-card-btn auth-btn"
+                  @click="authentication"
+                >
                   인증
                 </div>
               </div>
@@ -95,7 +98,7 @@ export default {
     const state = reactive({
       timer_content: "",
       auth: "",
-      auth_yet: props.authNumber,
+      auth_yet: "",
     });
     const emailAuthentication = () => {
       showLoading();
@@ -115,11 +118,19 @@ export default {
         });
     };
     const authentication = () => {
-      console.log(state.auth_yet, state.auth);
-      if (state.auth_yet === state.auth) {
-        authSuccess();
+      console.log(props.authNumber, state.auth_yet, state.auth);
+      if (state.auth_yet == "") {
+        if (props.authNumber == state.auth) {
+          authSuccess();
+        } else {
+          authFail();
+        }
       } else {
-        authFail();
+        if (state.auth_yet == state.auth) {
+          authSuccess();
+        } else {
+          authFail();
+        }
       }
     };
     /*ㅡㅡㅡㅡㅡ 다이얼로그 ㅡㅡㅡㅡㅡ*/
@@ -132,6 +143,8 @@ export default {
         .onOk(() => {
           emit("openupdatepw", state.auth);
           state.auth = "";
+          state.auth_yet = "";
+          state.timer_content = "";
         })
         .onCancel(() => {
           console.log("Cancel");
@@ -197,6 +210,10 @@ export default {
         var seconds = distDt % 60;
         console.log(minutes, seconds);
         state.timer_content = minutes + ":" + seconds;
+        if (document.getElementById(id) == null) {
+          clearInterval(timer);
+          return;
+        }
         document.getElementById(id).textContent = state.timer_content;
       }
       timer = setInterval(showRemaining, 1000);
@@ -205,10 +222,15 @@ export default {
       () => state.timer_content,
       () => {
         let re_auth_btn = document.querySelector(".re-auth-btn");
-        if (state.timer_content == "0:0") {
-          re_auth_btn.classList.remove("disabled-check");
-        } else {
-          re_auth_btn.classList.add("disabled-check");
+        let auth_btn = document.querySelector(".auth-btn");
+        if (re_auth_btn != null && auth_btn != null) {
+          if (state.timer_content == "0:0") {
+            auth_btn.classList.add("disabled-check");
+            re_auth_btn.classList.remove("disabled-check");
+          } else {
+            re_auth_btn.classList.add("disabled-check");
+            auth_btn.classList.remove("disabled-check");
+          }
         }
       }
     );
