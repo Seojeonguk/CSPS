@@ -37,9 +37,7 @@
 </template>
 <script>
 import Vue3autocounter from "vue3-autocounter";
-import { useQuasar } from "quasar";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+
 export default {
   name: "problem-description",
   props: {
@@ -57,26 +55,25 @@ export default {
     "vue3-autocounter": Vue3autocounter,
   },
 
-  setup(props) {
-    const quasar = useQuasar();
-    const store = useStore();
-    const router = useRouter();
-    const selectProblem = () => {
-      if (props.standard == 0) {
-        selectProblemError();
+  setup() {},
+
+  methods: {
+    selectProblem() {
+      if (this.standard == 0) {
+        alert("문제가 선택되지 않았습니다.");
         return;
       }
       const payload = {
-        id: props.id,
-        page: props.standard,
+        id: this.id,
+        page: this.standard,
       };
-      store
+      this.$store
         .dispatch("root/requestProblemList", payload)
         .then((response) => {
-          store.commit("root/setProblemResultsInit");
-          store.commit("root/setSelctedCategory", props.id);
-          store.commit("root/setSelctedProblems", response.data);
-          router.push({
+          this.$store.commit("root/setProblemResultsInit");
+          this.$store.commit("root/setSelctedCategory", this.id);
+          this.$store.commit("root/setSelctedProblems", response.data);
+          this.$router.push({
             name: "problem-solve",
             query: { num: 0, id: response.data[0].id },
           });
@@ -84,26 +81,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    };
-    const selectProblemError = () => {
-      quasar
-        .dialog({
-          title: "문제 풀이",
-          message: "문제가 선택되지 않았습니다.",
-        })
-        .onOk(() => {
-          console.log("OK");
-        })
-        .onCancel(() => {
-          console.log("Cancel");
-        })
-        .onDismiss(() => {
-          console.log("I am triggered on both OK and Cancel");
-        });
-    };
-    return {
-      selectProblem,
-    };
+    },
   },
 };
 </script>
