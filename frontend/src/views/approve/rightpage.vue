@@ -53,7 +53,6 @@ export default {
         .then((response) => {
           console.log(response);
           evaluateAccept();
-          router.go();
         })
         .catch((error) => {
           console.log(error);
@@ -66,7 +65,6 @@ export default {
         .then((response) => {
           console.log(response);
           evaluateRevoke();
-          router.go();
         })
         .catch((error) => {
           console.log(error);
@@ -80,6 +78,7 @@ export default {
         })
         .onOk(() => {
           console.log("OK");
+          router.go();
         })
         .onCancel(() => {
           console.log("Cancel");
@@ -96,6 +95,7 @@ export default {
         })
         .onOk(() => {
           console.log("OK");
+          router.go();
         })
         .onCancel(() => {
           console.log("Cancel");
