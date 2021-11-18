@@ -180,13 +180,29 @@ export default {
         .dispatch("root/requestDelete", route.params.id)
         .then((response) => {
           if (response.data == "success") {
-            alert("삭제되었습니다.");
+            boardDeleteSuccess();
             localStorage.setItem("reload", true);
             router.push({ name: "board-info" });
           }
         })
         .catch((error) => {
           console.log(error.response.data);
+        });
+    };
+    const boardDeleteSuccess = () => {
+      quasar
+        .dialog({
+          title: "게시판 삭제",
+          message: "삭제되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
         });
     };
 
