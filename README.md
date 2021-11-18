@@ -4,13 +4,12 @@
 
 
 ## 👨‍👩‍👦팀원 소개
-**이조순**
+**박지수 서정욱 이조순 진해진**
 
+- 🐣Github: [@PARK JI SU](https://github.com/jisup)
+- 🦝Github: [@SEO JEONG UK](https://github.com/Seojeonguk)
 - 🌰Github: [@LEE JO SUN](https://github.com/KingBlackCow)
-
-
-
-
+- 🐣Github: [@LEE HAE JINN](https://github.com/HAEJINN)
 
 
 
@@ -25,9 +24,12 @@
    - 이전 자신의 데이터와 비교하여 실력을 분석할 수 있다.
    - 게시판을 제작하여 사용자들끼리 의견을 공유할 수 있다.
 
+
+- [커뮤니케이션][@Notion](https://www.notion.so/invite/2a06daf8c238e1101ca338a241b4fb14c5752f19)
 - [와이어프레임][@Wire Frame](https://framer.com/projects/cs--qxjc9e432DFiUf7FBgcR-3BK0I?node=PaTegxmm0-page)
 - [ERD]![image-20211007113705334](README.assets/Free_ERD.png)
 - [API][@Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+- [API_SUB][@Toast UI Editor](https://ui.toast.com/tui-editor)
 
 <br>
 
@@ -43,21 +45,19 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 ## ⭐️주요 기능
 
-### OOOO 서비스 
+### 음성인식 서비스 
 
 > 간략주제  
 
-- 내용1 
-- 내용2 
-- 내용3
+- Web Speech API를 활용한 음성인식
+- 이용자가 문제를 풀이할 때 사용하는 방식
 
-### OOOO 서비스  
+### 게시판 서비스  
 
 > 간략주제
 
-- 내용1
-- 내용2
-- 내용3 
+- Toast UI Editor를 활용한 게시판
+- 글작성 시 개발자에게 친숙한 MarkDown 및 HTML 작성 환경 제공
  
 <br>
 
@@ -100,23 +100,21 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
     </ul>   
     <ul>
         <li>axios</li>
-        <li>eslint & prettier</li>
+        <li>vuex</li>
+        <li>vuex-persistedstate</li>
         <li>node-sass</li>
-        <li>sass-loader</li>
-        <li>@fortawesome/fontawesome-svg-core</li>
-        <li>@fortawesome/free-regular-svg-icons</li>
-        <li>ant-design-vue</li>
-        <li>aos</li>
-        <li>bootstrap</li>
-        <li>bootstrap-vue</li>
-        <li>jwt-decode</li>
-        <li>less-loader</li>
-        <li>vue-infinite-loading</li>   
+        <li>eslint & prettier</li>
+        <li>quasar</li>
         <li>vuejs-countdown</li>
         <li>vuelendar</li>
         <li>vuelidate</li>
-        <li>vuex</li>
-        <li>vuex-persistedstate</li>
+        <li>aos</li>
+        <li>jwt-decode</li>
+        <li>less-loader</li>
+        <li>sass-loader</li>
+        <li>ant-design-vue</li>
+        <li>@fortawesome/fontawesome-svg-core</li>
+        <li>@fortawesome/free-regular-svg-icons</li>
     </ul>
 </details>
 
