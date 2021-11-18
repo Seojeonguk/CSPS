@@ -168,7 +168,6 @@ export default {
         name: "",
         nickName: "",
         nickName_yet: "",
-        nickName_check: false,
         nickName_success: false,
         pass: "",
         passcheck: "",
@@ -236,10 +235,11 @@ export default {
     watch(
       () => [state.form.nickName],
       () => {
-        if (state.form.nickName != null && state.form.nickName != "") {
-          state.form.nickName_check = false;
+        console.log(state.form.nickName, state.form.nickName_yet);
+        if (state.form.nickName_yet != state.form.nickName) {
+          state.form.nickName_success = false;
         } else {
-          state.form.nickName_check = true;
+          state.form.nickName_success = true;
         }
       }
     );
@@ -337,7 +337,6 @@ export default {
       state.form.name = null;
       state.form.nickName = null;
       state.form.nickName_yet = "";
-      state.form.nickName_check = false;
       state.form.nickName_success = false;
       state.form.pass = null;
       state.form.passcheck = null;
@@ -442,6 +441,7 @@ export default {
 
     /*ㅡㅡㅡㅡㅡ MoVe ㅡㅡㅡㅡㅡ*/
     const mvLogin = () => {
+      onReset();
       emit("mvlogin");
     };
 
