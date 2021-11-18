@@ -57,7 +57,7 @@ export default {
     "vue3-autocounter": Vue3autocounter,
   },
 
-  setup() {
+  setup(props) {
     const quasar = useQuasar();
     const store = useStore();
     const router = useRouter();
@@ -67,14 +67,14 @@ export default {
         return;
       }
       const payload = {
-        id: this.id,
-        page: this.standard,
+        id: props.id,
+        page: props.standard,
       };
       store
         .dispatch("root/requestProblemList", payload)
         .then((response) => {
           store.commit("root/setProblemResultsInit");
-          store.commit("root/setSelctedCategory", this.id);
+          store.commit("root/setSelctedCategory", props.id);
           store.commit("root/setSelctedProblems", response.data);
           router.push({
             name: "problem-solve",
