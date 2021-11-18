@@ -19,6 +19,7 @@
 import { onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 import Probs from "./components/problem.vue";
 
 export default {
@@ -29,6 +30,7 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const quasar = useQuasar();
     const problems = ref([]);
 
     onBeforeMount(() => {

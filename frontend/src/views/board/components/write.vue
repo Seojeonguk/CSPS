@@ -25,11 +25,13 @@ import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import { ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 
 export default {
   name: "board-write",
   setup() {
     const store = useStore();
+    const quasar = useQuasar();
     const state = reactive({
       title: "",
       editor: null,
@@ -82,7 +84,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          boardWriteSuccess();
+          boardWriteSuccess(response);
         })
         .catch((error) => {
           console.log(error);
@@ -135,7 +137,7 @@ export default {
         });
     };
 
-    const boardWriteSuccess = () => {
+    const boardWriteSuccess = (response) => {
       quasar
         .dialog({
           title: "게시판 작성",

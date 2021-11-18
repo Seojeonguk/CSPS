@@ -37,7 +37,9 @@
 </template>
 <script>
 import Vue3autocounter from "vue3-autocounter";
-
+import { useQuasar } from "quasar";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "problem-description",
   props: {
@@ -56,6 +58,9 @@ export default {
   },
 
   setup() {
+    const quasar = useQuasar();
+    const store = useStore();
+    const router = useRouter();
     const selectProblem = () => {
       if (this.standard == 0) {
         selectProblemError();
@@ -65,13 +70,13 @@ export default {
         id: this.id,
         page: this.standard,
       };
-      this.$store
+      store
         .dispatch("root/requestProblemList", payload)
         .then((response) => {
-          this.$store.commit("root/setProblemResultsInit");
-          this.$store.commit("root/setSelctedCategory", this.id);
-          this.$store.commit("root/setSelctedProblems", response.data);
-          this.$router.push({
+          store.commit("root/setProblemResultsInit");
+          store.commit("root/setSelctedCategory", this.id);
+          store.commit("root/setSelctedProblems", response.data);
+          router.push({
             name: "problem-solve",
             query: { num: 0, id: response.data[0].id },
           });

@@ -74,6 +74,7 @@ import QuestionAnswer from "./components/answer.vue";
 import { computed, reactive, onUpdated, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useQuasar } from "quasar";
 
 export default {
   name: "board-question",
@@ -98,6 +99,7 @@ export default {
     const route = useRoute();
     const store = useStore();
     const router = useRouter();
+    const quasar = useQuasar();
 
     const state = reactive({
       newAnswer: "",

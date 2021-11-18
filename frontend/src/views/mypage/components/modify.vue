@@ -30,6 +30,7 @@
 import { reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 
 export default {
   name: "modify",
@@ -46,7 +47,7 @@ export default {
         .getElementById(localStorage.getItem("menu"))
         .classList.add("click-menu");
     });
-
+    const quasar = useQuasar();
     const router = useRouter();
     const store = useStore();
     const state = reactive({
