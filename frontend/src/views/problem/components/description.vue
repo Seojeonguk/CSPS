@@ -55,12 +55,10 @@ export default {
     "vue3-autocounter": Vue3autocounter,
   },
 
-  setup() {},
-
-  methods: {
-    selectProblem() {
+  setup() {
+    const selectProblem = () => {
       if (this.standard == 0) {
-        alert("문제가 선택되지 않았습니다.");
+        selectProblemError();
         return;
       }
       const payload = {
@@ -81,7 +79,26 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    },
+    };
+    const selectProblemError = () => {
+      quasar
+        .dialog({
+          title: "문제 풀이",
+          message: "문제가 선택되지 않았습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
+    return {
+      selectProblem,
+    };
   },
 };
 </script>
