@@ -92,7 +92,7 @@ export default {
 
     const addInput = () => {
       if (temp.value == "") {
-        alert("답을 입력해주세요");
+        makeAnswerError();
       } else {
         answers.value.push({
           id: Date.now(),
@@ -109,23 +109,19 @@ export default {
 
     const makeProblem = () => {
       if (state.problem.categoryId == null) {
-        alert("카테고리를 지정해주세요.");
+        makeCategoryError();
       } else if (state.problem.description == null) {
-        alert("문제설명은 필수입니다.");
+        makeDescriptionError();
       } else if (
         state.problem.description.length <= 4 ||
         state.problem.description.length > 400
       ) {
-        alert(
-          "문제 길이는 5글자 이상 400글자 이하입니다. 현재 글자는" +
-            state.problem.description.length +
-            "글자입니다"
-        );
+        makeProblemLengthError(state.problem.description.length);
       } else if (answers.value.length == 0) {
         if (temp.value == "") {
-          alert("정답 입력은 필수입니다.");
+          makeCorrectError("정답 입력은 필수입니다.");
         } else {
-          alert("정답 추가 버튼을 눌러주세요");
+          makeCorrectError("정답 추가 버튼을 눌러주세요");
         }
       } else {
         state.problem.userId = JSON.parse(localStorage.getItem("userInfo")).id;
@@ -136,22 +132,85 @@ export default {
           .dispatch("root/requsetProblemCreate", state.problem)
           .then((response) => {
             console.log(response);
-            alert("문제 생성이 완료되었습니다. 승인 후 등록됩니다.");
-            state.problem.categoryId = null;
-            state.problem.description = null;
-            state.problem.answers = [];
-            temp.value = "";
-            answers.value = [];
-            document.getElementById("answerinput").value = "";
-            store.dispatch("root/requestAllProblem").then((response) => {
-              store.commit("root/setAllProblemNum", response.data);
-            });
-            router.push({ name: "problem-info" });
+            makeProblemSuccess();
           })
           .catch((err) => {
             console.log(err);
           });
       }
+    };
+    const makeAnswerError = () => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message: "답을 입력해주세요.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        });
+    };
+    const makeCategoryError = () => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message: "카테고리를 지정해주세요.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        });
+    };
+    const makeDescriptionError = () => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message: "문제설명은 필수입니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        });
+    };
+    const makeProblemLengthError = (val) => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message:
+            "문제 길이는 5글자 이상 400글자 이하입니다. 현재 글자는" +
+            val +
+            "글자입니다",
+        })
+        .onOk(() => {
+          console.log("OK");
+        });
+    };
+    const makeCorrectError = (val) => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message: val,
+        })
+        .onOk(() => {
+          console.log("OK");
+        });
+    };
+    const makeProblemSuccess = () => {
+      quasar
+        .dialog({
+          title: "문제 만들기",
+          message: "문제 생성이 완료되었습니다. 승인 후 등록됩니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+          state.problem.categoryId = null;
+          state.problem.description = null;
+          state.problem.answers = [];
+          temp.value = "";
+          answers.value = [];
+          document.getElementById("answerinput").value = "";
+          store.dispatch("root/requestAllProblem").then((response) => {
+            store.commit("root/setAllProblemNum", response.data);
+          });
+          router.push({ name: "problem-info" });
+        });
     };
 
     return {
