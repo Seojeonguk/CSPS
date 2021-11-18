@@ -62,7 +62,7 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 ### 게시판 서비스  
 
 > Toast UI Editor를 활용한 게시판
-
+- ![main](README.assets/cs_board.gif)
 - 글작성 시 개발자에게 친숙한 MarkDown 및 HTML 작성 환경 제공
  
 <br>
