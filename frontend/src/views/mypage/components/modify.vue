@@ -69,7 +69,7 @@ export default {
       const img = document.getElementById("chooseFile").files[0];
       formData.append("email", state.user.email);
       if (img == null) {
-        alert("이미지가 첨부되지 않아 기본이미지로 변경합니다");
+        profilePictureChange();
       } else {
         formData.append("image", img);
       }
@@ -77,31 +77,63 @@ export default {
         .dispatch("root/requestUserModify", formData)
         .then((response) => {
           if (response.data.message === "Success") {
-            alert("변경이 완료되었습니다.");
-            store
-              .dispatch("root/requsetUserInfo", state.user.token)
-              .then((response) => {
-                var userinfo = {
-                  id: response.data.id,
-                  name: response.data.name,
-                  nickname: response.data.nickname,
-                  email: response.data.email,
-                  image: response.data.image,
-                  token: state.user.token,
-                };
-                localStorage.removeItem("userInfo");
-                localStorage.setItem("userInfo", JSON.stringify(userinfo));
-                state.user = JSON.parse(localStorage.getItem("userInfo"));
-                router.go();
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+            profileChangeSuccess();
           }
           // router.push({ name: "mypage-chart" });
         })
         .catch((error) => {
           console.log(error);
+        });
+    };
+    const profilePictureChange = () => {
+      quasar
+        .dialog({
+          title: "프로필 사진",
+          message: "이미지가 첨부되지 않아 기본이미지로 변경합니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
+    const profileChangeSuccess = () => {
+      quasar
+        .dialog({
+          title: "프로필 사진",
+          message: "변경이 완료되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+          store
+            .dispatch("root/requsetUserInfo", state.user.token)
+            .then((response) => {
+              var userinfo = {
+                id: response.data.id,
+                name: response.data.name,
+                nickname: response.data.nickname,
+                email: response.data.email,
+                image: response.data.image,
+                token: state.user.token,
+              };
+              localStorage.removeItem("userInfo");
+              localStorage.setItem("userInfo", JSON.stringify(userinfo));
+              state.user = JSON.parse(localStorage.getItem("userInfo"));
+              router.go();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
         });
     };
 
