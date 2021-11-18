@@ -41,6 +41,7 @@
 import { useStore } from "vuex";
 import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 export default {
   name: "problem-result",
   data() {
@@ -71,12 +72,44 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const quasar = useQuasar();
     const state = reactive({
       problemResults: computed(() => store.getters["root/getProblemResults"]),
       problems: computed(() => store.getters["root/getSelectedProblems"]),
       series: computed(() => store.getters["root/getSeries"]),
       category: computed(() => store.getters["root/getSelectedCategory"]),
     });
+    const back = () => {
+      //console.log(this.state.problemResults);
+      router.push({ name: "problem-info" });
+    };
+    const save = () => {
+      let proper = 0;
+      for (let i = 0; i < state.problemResults.length; i++) {
+        if (
+          state.problemResults[i].proper.length >=
+          state.problemResults[i].wrong.length
+        ) {
+          proper++;
+        }
+      }
+      let scoreTmp = parseInt((proper * 100) / state.problemResults.length);
+      const payload = {
+        category_id: state.category,
+        score: scoreTmp,
+      };
+      store
+        .dispatch("root/requestSaveResult", payload)
+        .then((response) => {
+          console.log(response);
+          if (response.data.message == "Success") {
+            saveSuccess();
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    };
 
     const backToInfo = () => {
       store.commit("root/setProblemResultsInit");
@@ -84,47 +117,29 @@ export default {
         name: "problem",
       });
     };
+    const saveSuccess = () => {
+      quasar
+        .dialog({
+          title: "문제 풀기 결과",
+          message: "저장이 완료되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
 
     return {
       state,
+      save,
+      back,
       backToInfo,
     };
-  },
-  methods: {
-    back() {
-      //console.log(this.state.problemResults);
-      this.$router.push({ name: "problem-info" });
-    },
-    save() {
-      let proper = 0;
-      for (let i = 0; i < this.state.problemResults.length; i++) {
-        if (
-          this.state.problemResults[i].proper.length >=
-          this.state.problemResults[i].wrong.length
-        ) {
-          proper++;
-        }
-      }
-      let scoreTmp = parseInt(
-        (proper * 100) / this.state.problemResults.length
-      );
-      const payload = {
-        category_id: this.state.category,
-        score: scoreTmp,
-      };
-      // console.log(payload);
-      this.$store
-        .dispatch("root/requestSaveResult", payload)
-        .then((response) => {
-          console.log(response);
-          if (response.data.message == "Success") {
-            alert("저장이 완료되었습니다.");
-          }
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
-    },
   },
 };
 </script>
