@@ -52,7 +52,7 @@ export default {
         .dispatch("root/requestProblemEvaluate", data)
         .then((response) => {
           console.log(response);
-          alert("문제가 승인되었습니다.");
+          evaluateAccept();
           router.go();
         })
         .catch((error) => {
@@ -65,19 +65,52 @@ export default {
         .dispatch("root/requestProblemEvaluate", data)
         .then((response) => {
           console.log(response);
-          alert("문제 승인이 거절되었습니다.");
+          evaluateRevoke();
           router.go();
         })
         .catch((error) => {
           console.log(error);
         });
     };
-
+    const evaluateAccept = () => {
+      quasar
+        .dialog({
+          title: "문제 승인 처리",
+          message: "문제가 승인되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
+    const evaluateRevoke = () => {
+      quasar
+        .dialog({
+          title: "문제 승인 처리",
+          message: "문제 승인이 거절되었습니다.",
+        })
+        .onOk(() => {
+          console.log("OK");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
+    };
     return {
       onBeforeMount,
       problems,
       sendAccept,
       sendRevoke,
+      evaluateAccept,
+      evaluateRevoke,
     };
   },
 };
