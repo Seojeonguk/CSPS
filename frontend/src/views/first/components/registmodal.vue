@@ -66,7 +66,10 @@
                   :rules="state.rules.nickName"
                   label="닉네임 *"
                 />
-                <div @click="nickNameCheck" class="register-btns horizontal-r">
+                <div
+                  @click="nickNameCheck"
+                  class="auth-nickname register-btns horizontal-r"
+                >
                   중복확인
                 </div>
               </div>
@@ -172,7 +175,7 @@ export default {
         pass: "",
         passcheck: "",
         email: "",
-        email_check: false,
+        email_yet: "",
         email_success: false,
       },
       rules: {
@@ -181,12 +184,11 @@ export default {
           (val) => val.length > 0 || "필수입력 항목입니다.",
         ],
         nickName: [
+          (val) => isDisabledNickName(val),
           (val) => val != null || "필수입력 항목입니다.",
           (val) =>
             (val.length >= 2 && val.length <= 16) ||
             "2~16자리의 닉네임을 설정해주세요.",
-          // (val) =>
-          //   val == state.form.nickName_yet || "닉네임 중복검사가 필요합니다!",
         ],
         pass: [
           (val) => val !== null || "필수입력 항목입니다.",
@@ -206,6 +208,14 @@ export default {
       },
     });
     /*ㅡㅡㅡㅡㅡ 검증 ㅡㅡㅡㅡㅡ*/
+    const isDisabledNickName = (val) => {
+      let auth_nickname = document.querySelector(".auth-nickname");
+      if (val !== null && val.length > 0) {
+        auth_nickname.classList.remove("disabled-check");
+      } else {
+        auth_nickname.classList.add("disabled-check");
+      }
+    };
     const isValidEmail = (val) => {
       // eslint-disable-next-line
       const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
@@ -341,7 +351,6 @@ export default {
       state.form.pass = null;
       state.form.passcheck = null;
       state.form.email = null;
-      state.form.email_check = false;
       state.form.email_success = false;
       state.email.email = "";
       state.email.authNumber = "";
