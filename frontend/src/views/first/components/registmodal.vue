@@ -452,6 +452,7 @@ export default {
 
     /*ㅡㅡㅡㅡㅡ MoVe ㅡㅡㅡㅡㅡ*/
     const mvLogin = () => {
+      state.regist_complete = false;
       onReset();
       emit("mvlogin");
     };
