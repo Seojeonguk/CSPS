@@ -164,7 +164,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 16px;
 
   & > div {
     margin: 1em;

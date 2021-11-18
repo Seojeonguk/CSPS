@@ -78,8 +78,8 @@ export default {
       // initialisation of voicereco
       this.$refs.counter.start();
       this.recordFlag = false;
-      window.SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+      // window.SpeechRecognition =
+      //   window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
       recognition.interimResults = true;
