@@ -121,11 +121,12 @@ export default {
       quasar
         .dialog({
           title: "문제 풀기 결과",
-          message: "저장이 완료되었습니다. OK를 누르면 메인으로 돌아갑니다.",
+          message:
+            "저장이 완료되었습니다. 저장된 결과는 마이페이지에서 확인가능합니다.",
         })
         .onOk(() => {
           console.log("OK");
-          router.push({ name: "problem-info" });
+          // router.push({ name: "problem-info" });
         })
         .onCancel(() => {
           console.log("Cancel");
