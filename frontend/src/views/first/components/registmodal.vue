@@ -222,7 +222,7 @@ export default {
     };
     const isValidEmail = (val) => {
       // eslint-disable-next-line
-      const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
+      const emailPattern = /^[a-zA-Z0-9_]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
       return emailPattern.test(val);
     };
     const isDisabledEmail = (val) => {
