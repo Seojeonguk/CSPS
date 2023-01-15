@@ -80,60 +80,42 @@ Computer Science를 제대로 공부하지 못하여 기술면접에 어려움�
 
 - **지원 환경** : Web
 - **담당자** : 박지수, 진해진
-
-<details>
-    <summary>Front 자세히 살펴보기 🌈</summary>
-    <ul>
-        <li>기술스택 ⚙</li>
-    </ul>   
-    <ul>
-        <li>JS, HTML, CSS</li>
-        <li>SCSS</li>
-        <li>Vue.js @3.6.11</li>
-    </ul>
-    <li>--------------------------------------------------------------------------------------</li>
-    <ul>
-        <li>라이브러리 📚</li>
-    </ul>   
-    <ul>
-        <li>axios</li>
-        <li>vuex</li>
-        <li>vuex-persistedstate</li>
-        <li>node-sass</li>
-        <li>eslint & prettier</li>
-        <li>quasar</li>
-        <li>vuejs-countdown</li>
-        <li>vuelendar</li>
-        <li>vuelidate</li>
-        <li>aos</li>
-        <li>jwt-decode</li>
-        <li>less-loader</li>
-        <li>sass-loader</li>
-        <li>ant-design-vue</li>
-        <li>@fortawesome/fontawesome-svg-core</li>
-        <li>@fortawesome/free-regular-svg-icons</li>
-    </ul>
-</details>
+- **⚙ 기술스택**
+  - HTML, JS, CSS
+  - SCSS
+  - Vue.js @3.6.11
+- 라이브러리
+  - axios
+  - vuex
+  - vuex-persistedstate
+  - node-sass
+  - quasar
+  - vuejs-countdown
+  - vuelendar
+  - vuelidate
+  - aos
+  - jwt-decode
+  - less-loader
+  - sass-loader
+  - ant-design-vue
+  - @fortawesome/fontawesome-svg-core
+  - @fortawesome/free-regular-svg-icons
 
 ### 💻Back-End
 
 - **담당자** : 서정욱, 이조순
-<details>
-    <summary>Back 자세히 살펴보기 🌈</summary>
-    <ul>
-        <li>기술스택 ⚙</li>
-    </ul>   
-    <ul>
-        <li>Spring Boot</li>
-        <li>Spring Data JPA</li>
-        <li>Spring Security</li>
-        <li>AWS EC2</li>
-        <li>AWS S3</li>
-        <li>Jenkins</li>
-        <li>MySQL</li>
-        <li>Redis</li>
-    </ul>
-    <li>--------------------------------------------------------------------------------------</li>
-
-
-</details>
+- **⚙기술스택**
+  - Java
+  - SpringBoot
+  - Spring Data JPA
+  - Spring Security
+  - SMTP
+  - JWT
+  - SWAGGER
+  - Jenkins
+  - MySQL
+  - Redis
+  - Nginx
+  - AWS
+    - EC2
+    - S3
