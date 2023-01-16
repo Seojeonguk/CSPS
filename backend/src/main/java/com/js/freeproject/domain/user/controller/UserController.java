@@ -27,7 +27,6 @@ import com.js.freeproject.domain.user.dto.UserResponse;
 import com.js.freeproject.global.jwt.CustomUserDetails;
 import com.js.freeproject.global.jwt.TokenProvider;
 import com.js.freeproject.global.util.RedisUtil;
-import com.sun.jdi.request.DuplicateRequestException;
 
 import io.lettuce.core.RedisCommandExecutionException;
 import io.swagger.annotations.Api;
@@ -96,7 +95,7 @@ public class UserController {
 		try {
 			user.setPass(passwordEncoder.encode(user.getPass()));
 			userService.createUser(user);
-		} catch(DuplicateRequestException e) {
+		} catch(IllegalArgumentException e) {
 			log.info("이미 가입된 이메일입니다.");
 			return ResponseEntity.status(401).body(CommonResponse.of("이미 가입된 이메일입니다."));
 		} catch(Exception e) {

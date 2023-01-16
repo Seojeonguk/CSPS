@@ -20,7 +20,6 @@ import com.js.freeproject.domain.user.dto.UserRequest;
 import com.js.freeproject.global.jwt.CustomUserDetails;
 import com.js.freeproject.global.util.MailUtil;
 import com.js.freeproject.global.util.RedisUtil;
-import com.sun.jdi.request.DuplicateRequestException;
 
 import io.lettuce.core.RedisCommandExecutionException;
 import javassist.NotFoundException;
@@ -42,7 +41,7 @@ public class UserService {
         User finduser = userRepo.findByEmail(user.getEmail());
         String userImage = "https://freepjt.s3.ap-northeast-2.amazonaws.com/user/mainCharachter.png";
         if (finduser != null) {
-            throw new DuplicateRequestException(user.getEmail());
+            throw new IllegalArgumentException(user.getEmail());
         }
         if (user.getImage() != null) {
             userImage = s3Service.uploadImage(user.getImage(), "user");
