@@ -68,12 +68,7 @@
                 />
                 <div
                   @click="nickNameCheck"
-                  class="
-                    auth-nickname
-                    register-btns
-                    horizontal-r
-                    disabled-check
-                  "
+                  class="auth-nickname register-btns horizontal-r disabled-check"
                 >
                   중복확인
                 </div>

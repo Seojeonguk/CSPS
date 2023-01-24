@@ -18,13 +18,7 @@
             <div class="scroll-arrow"></div>
           </div>
           <div
-            class="
-              column
-              justify-center
-              item-center
-              q-mt-lg
-              script-category script
-            "
+            class="column justify-center item-center q-mt-lg script-category script"
           >
             <q-btn unelevated flat><b>Vue</b> </q-btn>
             <q-btn unelevated flat><b>React</b> </q-btn>
